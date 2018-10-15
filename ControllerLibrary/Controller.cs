@@ -24,6 +24,18 @@ namespace ControllerLibrary
             mBitmap = new Bitmap(FormSize.BITMAP_WIDTH, FormSize.WINDOW_HEIGHT);
         }
 
+        public void Add(Shape shape)
+        {
+            mList.Add(shape);
+        }
+
+        public Shape RemoveAt(int index)
+        {
+            Shape shape = mList[index];
+            mList.RemoveAt(index);
+            return shape;
+        }
+
         public Shape GetSelectedShape()
         {
             if (mIndex >= 0 && mIndex < mList.Count)
