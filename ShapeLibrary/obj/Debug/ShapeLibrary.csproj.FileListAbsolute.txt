@@ -1,0 +1,9 @@
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.csprojAssemblyReference.cache
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.csproj.CoreCompileInputs.cache
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\bin\Debug\ShapeLibrary.dll
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\bin\Debug\ShapeLibrary.pdb
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.dll
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.pdb
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\bin\Debug\IOLibrary.cs.dll
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\bin\Debug\IOLibrary.cs.pdb
+D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.csproj.CopyComplete
