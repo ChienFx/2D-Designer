@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Controller.cs" />
     <Compile Include="FormSize.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

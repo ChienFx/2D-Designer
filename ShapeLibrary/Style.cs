@@ -11,14 +11,14 @@ namespace ShapeLibrary
     {
         Color mColor;
     }
-    public class DrawStyle : Style
+    public class BorderStyle : Style
     {
         public void SetDefault()
         {
             throw new NotImplementedException();
         }
     }
-    public class PaintStyle : Style
+    public class FillPattern : Style
     {
         public void SetDefault()
         {

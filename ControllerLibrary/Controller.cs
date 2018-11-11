@@ -7,86 +7,150 @@ using Point = ShapeLibrary.Point;
 
 namespace ControllerLibrary
 {
-    public class Controller:InterfaceIO
+    public class Controller:IInputOutput//, ITransformer
     {
-        List<Shape> mList;
-        int  mIndex;
-        PaintStyle mPaintStyle;
-        DrawStyle mDrawStyle;
+        List<Shape> mShapes;
+        List<Group> mGroups;
+        int mSelectedShapeIndex;
+        int mSelectedGroupIndex;
+
+        FillPattern fillPattern;
+        BorderStyle borderStyle;
+
         Bitmap mBitmap;
 
         public Controller()
         {
-            mList = new List<Shape>();
-            mIndex = -1;
-            mPaintStyle.SetDefault();
-            mDrawStyle.SetDefault();
+            mShapes = new List<Shape>();
+            mGroups = new List<Group>();
+            mSelectedShapeIndex = -1;
+            mSelectedGroupIndex = -1;
+
+            fillPattern.SetDefault();
+            borderStyle.SetDefault();
+
             mBitmap = new Bitmap(FormSize.BITMAP_WIDTH, FormSize.WINDOW_HEIGHT);
         }
 
+
         public Shape GetSelectedShape()
         {
-            if (mIndex >= 0 && mIndex < mList.Count)
-                return mList[mIndex];
+            if (mSelectedShapeIndex >= 0 && mSelectedShapeIndex < mShapes.Count)
+                return mShapes[mSelectedShapeIndex];
+            else
+                return null;
+        }
+        public Group GetSelectedGroup()
+        {
+            if (mSelectedGroupIndex >= 0 && mSelectedGroupIndex < mGroups.Count)
+                return mGroups[mSelectedGroupIndex];
             else
                 return null;
         }
 
-        public void SendSelectedShapeToBack()
+
+        //Send selected shape/group to back
+        public void SendObjectToBack()
         {
-            Shape tmp = GetSelectedShape();
-            if (tmp!=null)
-            {
-                mList.RemoveAt(mIndex);
-                mList.Insert(0, tmp);
-                mIndex = 0;
-            }
+           
+        }
+        //Send selected shape/group to forward
+        public void SendObjectToForward()
+        {
+            
         }
 
-        public void SendSelectedShapeToForward()
+        //Send selected shape/group to backward
+        public void SendObjectToBackward()
         {
-            Shape tmp = GetSelectedShape();
-            if (tmp != null)
-            {
-                mList.RemoveAt(mIndex);
-                mList.Insert(mList.Count,tmp);
-                mIndex = 0;
-            }
+        
+        }
+
+        //Send selected shape/group to front
+        public void SendObjectToFront()
+        {
+            
+        }
+
+        
+
+
+        //Find with shape or group is selected by mouse click
+        public void DetectWhichObjectIsSelected(Point point)
+        {
+         
+        }
+
+        //Draw all shapes
+        public void DrawAll()
+        {
+
+        }
+
+        //Delete selected shape/group
+        public void DeleteSelectedObject()
+        {
+
+        }
+
+        //Change selected object's border style (redraw)
+        public void ChangeObjectBorderStyle()
+        {
+
+        }
+
+        //Fill the shape (no group) with the given pattern
+        public void fillShape()
+        {
+
+        }
+
+        //Rotate the selected shape/group
+        public void RotateObject(float radian)
+        {
+
+        }
+
+        //Scale the selected shape/group
+        public void ScaleObject(int xRatio, int yRatio)
+        {
+
+        }
+
+        //Shift the selected shape/group
+        public void ShiftObject(Point newPoint)
+        {
+
+        }
+
+        //Undo the last step
+        public void Undo()
+        {
+
+        }
+
+        //Redo the last step
+        public void Redo()
+        {
+
+        }
+
+        //Zoom the monitor with ratio in range of 0-1 (default is 0.5)
+        public void Zoom(float ratio)
+        {
+
         }
 
 
-        public Shape GetShapeContainPoint(Point point)
-        {
-            for (int i = 0; i < mList.Count; i++)
-                if (mList[i].CheckShapeContainPoint(point) == true)
-                    return mList[i];
-            return null;
-        }
 
-        public void Draw()
-        {
-            if (GetSelectedShape() != null)
-                GetSelectedShape().Draw(ref mBitmap, mDrawStyle);
-        }
 
+
+
+        //---------------------------------------------------
+        //                IO Implementations
         public bool Load(string path, ulong offset)
         {
             throw new NotImplementedException();
-        }
-
-        public void Paint()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Rotate()
-        {
-            if (GetSelectedShape() != null)
-            {
-                float radian = 0.4f;
-                GetSelectedShape().Rotate(ref mBitmap, radian);
-            }
-                
         }
 
         public bool Save(string path, ulong offset)
@@ -94,24 +158,22 @@ namespace ControllerLibrary
             throw new NotImplementedException();
         }
 
-        public void Scale()
+        public bool SaveAs(string newName, string path, ulong offset)
         {
-            if (GetSelectedShape() != null)
-            {
-                int xRate = 10;
-                int yRate = 12;
-                GetSelectedShape().Scale(ref mBitmap, xRate, yRate);
-            }
-                
+            throw new NotImplementedException();
         }
 
-        public void Shift()
+        public bool CopyBitmapToClipboard()
         {
-            if (GetSelectedShape() != null)
-            {
-                Point newPosition = new Point(10, 10);
-                GetSelectedShape().Shift(ref mBitmap, newPosition);
-            }
+            throw new NotImplementedException();
         }
+
+        public Bitmap ExportToBitmap()
+        {
+            throw new NotImplementedException();
+        }
+
+
+
     }
 }
