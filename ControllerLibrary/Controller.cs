@@ -32,7 +32,6 @@ namespace ControllerLibrary
             mBitmap = new Bitmap(FormSize.BITMAP_WIDTH, FormSize.WINDOW_HEIGHT);
         }
 
-
         public Shape GetSelectedShape()
         {
             if (mSelectedShapeIndex >= 0 && mSelectedShapeIndex < mShapes.Count)
