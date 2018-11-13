@@ -59,9 +59,13 @@ namespace ControllerLibrary
                 this.border.setBorder(color);
         }
 
-        public void setBorder(int thickness)
+        public void setBorder(int weight)
         {
-            this.GetSelectedShape().setBorder(thickness);
+            Shape ins = GetSelectedShape();
+            if (ins != null)
+                ins.setBorder(weight);
+            else
+                this.border.setBorder(weight);
         }
 
         public void setBorder(BorderStyle borderStyle)

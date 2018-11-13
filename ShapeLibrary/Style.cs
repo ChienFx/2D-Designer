@@ -14,26 +14,26 @@ namespace ShapeLibrary
 
     public class Border : Style
     {
-        float mThickness;//độ dày
+        float mWeight;//độ dày
         BorderStyle mBorderStyle;
 
-        public Border(Color color, float thickness, BorderStyle borderStyle )
+        public Border(Color color, float weight, BorderStyle borderStyle )
         {
-            mColor = color; mThickness = thickness; mBorderStyle = borderStyle;
+            mColor = color; mWeight = weight; mBorderStyle = borderStyle;
         }
 
         public Border()
         {
             mColor = Color.Black;
-            mThickness = 1;
-            mBorderStyle = BorderStyle.BORDER_SOLID;
+            mWeight = 2;
+            mBorderStyle = BorderStyle.BORDER_STYLE_0;
         }
 
         public Border(Border border)
         {
             this.mColor = border.mColor;
             this.mBorderStyle = border.mBorderStyle;
-            this.mThickness = border.mThickness;
+            this.mWeight = border.mWeight;
         }
 
         public Color getColor()
@@ -41,9 +41,9 @@ namespace ShapeLibrary
             return this.mColor;
         }
 
-        public float getThickness()
+        public float getWeight()
         {
-            return this.mThickness;
+            return this.mWeight;
         }
 
         public BorderStyle getBorderStyle()
@@ -62,9 +62,9 @@ namespace ShapeLibrary
             this.mColor = color;
         }
 
-        public void setBorder(float thickness)
+        public void setBorder(float weight)
         {
-            this.mThickness = thickness;
+            this.mWeight = weight;
         }
 
         public void setBorder(BorderStyle borderStyle)
@@ -75,7 +75,7 @@ namespace ShapeLibrary
         public void setBorder(Border border)
         {
             this.mColor = border.mColor;
-            this.mThickness = border.mThickness;
+            this.mWeight = border.mWeight;
             this.mBorderStyle = border.mBorderStyle;
         }
     }
@@ -92,9 +92,18 @@ namespace ShapeLibrary
 public class BorderStyle
 {
     float[] mValues;
-    public static BorderStyle BORDER_STYLE_1 = new BorderStyle(new float[]{ 1, 1} );
-    public static BorderStyle BORDER_STYLE_2 = new BorderStyle(new float[] { 1, 2, 3, 2, 1 });
-    public static BorderStyle BORDER_SOLID = new BorderStyle(new float[] { 1 });
+
+    public static BorderStyle BORDER_STYLE_0 = new BorderStyle(new float[] { 1 });
+    public static BorderStyle BORDER_STYLE_1 = new BorderStyle(new float[] { 8, 8});
+    public static BorderStyle BORDER_STYLE_2 = new BorderStyle(new float[] { 1, 3 });
+    public static BorderStyle BORDER_STYLE_3 = new BorderStyle(new float[] { 1, 2});
+    public static BorderStyle BORDER_STYLE_4 = new BorderStyle(new float[] { 1, 2, 1 });
+    public static BorderStyle BORDER_STYLE_5 = new BorderStyle(new float[] { 1, 2, 3 });
+    public static BorderStyle BORDER_STYLE_6 = new BorderStyle(new float[] { 1, 2, 3, 4 });
+    public static BorderStyle BORDER_STYLE_7 = new BorderStyle(new float[] { 1, 2,1,3 });
+
+
+    public static int AmountOfBorderStyle = 8;
 
     private BorderStyle(float[] values)
     {
@@ -106,4 +115,19 @@ public class BorderStyle
         return mValues;
     }
 
+    public static BorderStyle getPattern(int index)
+    {
+        switch (index)
+        {
+            case 0: return BORDER_STYLE_0; 
+            case 1: return BORDER_STYLE_1; 
+            case 2: return BORDER_STYLE_2; 
+            case 3: return BORDER_STYLE_3; 
+            case 4: return BORDER_STYLE_4; 
+            case 5: return BORDER_STYLE_5; 
+            case 6: return BORDER_STYLE_6; 
+            case 7: return BORDER_STYLE_7; 
+            default: return BORDER_STYLE_0;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 ﻿namespace _2DDesigner
 {
-    partial class Form1
+    partial class Form
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,11 +63,21 @@
             this.sentToBackwardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorPickerFill = new System.Windows.Forms.ColorDialog();
-            this.btnFillColor = new System.Windows.Forms.Button();
             this.colorPickerBorder = new System.Windows.Forms.ColorDialog();
             this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.toolbarHolder = new System.Windows.Forms.ToolStripContainer();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnFillColorPicker = new System.Windows.Forms.Button();
+            this.btnBorderColorPicker = new System.Windows.Forms.Button();
+            this.borderSelector = new _2DDesigner.BorderSelector();
+            this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbBorderValue = new System.Windows.Forms.Label();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.toolbarHolder.ContentPanel.SuspendLayout();
+            this.toolbarHolder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
             this.SuspendLayout();
             // 
             // menu
@@ -79,7 +90,7 @@
             this.aboutToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(904, 24);
+            this.menu.Size = new System.Drawing.Size(892, 24);
             this.menu.TabIndex = 1;
             this.menu.Text = "menuStrip2";
             // 
@@ -315,20 +326,6 @@
             this.colorPickerFill.AnyColor = true;
             this.colorPickerFill.Color = System.Drawing.Color.DarkRed;
             // 
-            // btnFillColor
-            // 
-            this.btnFillColor.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnFillColor.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnFillColor.Location = new System.Drawing.Point(314, 25);
-            this.btnFillColor.Margin = new System.Windows.Forms.Padding(1);
-            this.btnFillColor.MaximumSize = new System.Drawing.Size(20, 20);
-            this.btnFillColor.MinimumSize = new System.Drawing.Size(20, 20);
-            this.btnFillColor.Name = "btnFillColor";
-            this.btnFillColor.Size = new System.Drawing.Size(20, 20);
-            this.btnFillColor.TabIndex = 2;
-            this.btnFillColor.UseVisualStyleBackColor = false;
-            this.btnFillColor.Click += new System.EventHandler(this.button1_Click);
-            // 
             // colorPickerBorder
             // 
             this.colorPickerBorder.AnyColor = true;
@@ -336,25 +333,130 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pictureBox.Location = new System.Drawing.Point(12, 62);
+            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.Location = new System.Drawing.Point(3, 142);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(880, 429);
+            this.pictureBox.Size = new System.Drawing.Size(889, 349);
             this.pictureBox.TabIndex = 3;
             this.pictureBox.TabStop = false;
             this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
-            // Form1
+            // toolbarHolder
+            // 
+            // 
+            // toolbarHolder.ContentPanel
+            // 
+            this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolbarHolder.ContentPanel.Controls.Add(this.lbBorderValue);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.label2);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.sliderBorderWeight);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.borderSelector);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.label1);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnFillColorPicker);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnBorderColorPicker);
+            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 86);
+            this.toolbarHolder.Location = new System.Drawing.Point(3, 25);
+            this.toolbarHolder.Name = "toolbarHolder";
+            this.toolbarHolder.Size = new System.Drawing.Size(784, 111);
+            this.toolbarHolder.TabIndex = 4;
+            this.toolbarHolder.Text = "toolStripContainer1";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(288, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Border Style";
+            // 
+            // btnFillColorPicker
+            // 
+            this.btnFillColorPicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnFillColorPicker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFillColorPicker.BackgroundImage")));
+            this.btnFillColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFillColorPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnFillColorPicker.Location = new System.Drawing.Point(512, 35);
+            this.btnFillColorPicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnFillColorPicker.Name = "btnFillColorPicker";
+            this.btnFillColorPicker.Size = new System.Drawing.Size(110, 32);
+            this.btnFillColorPicker.TabIndex = 7;
+            this.btnFillColorPicker.Text = "Shape Fill     ";
+            this.btnFillColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFillColorPicker.UseVisualStyleBackColor = false;
+            this.btnFillColorPicker.Click += new System.EventHandler(this.pickFillColor);
+            // 
+            // btnBorderColorPicker
+            // 
+            this.btnBorderColorPicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnBorderColorPicker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBorderColorPicker.BackgroundImage")));
+            this.btnBorderColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBorderColorPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnBorderColorPicker.Location = new System.Drawing.Point(512, 1);
+            this.btnBorderColorPicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnBorderColorPicker.Name = "btnBorderColorPicker";
+            this.btnBorderColorPicker.Size = new System.Drawing.Size(110, 32);
+            this.btnBorderColorPicker.TabIndex = 2;
+            this.btnBorderColorPicker.Text = "Shape border";
+            this.btnBorderColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBorderColorPicker.UseVisualStyleBackColor = false;
+            this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
+            // 
+            // borderSelector
+            // 
+            this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.borderSelector.FormattingEnabled = true;
+            this.borderSelector.Location = new System.Drawing.Point(358, 8);
+            this.borderSelector.Name = "borderSelector";
+            this.borderSelector.Size = new System.Drawing.Size(114, 21);
+            this.borderSelector.TabIndex = 10;
+            this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
+            // 
+            // sliderBorderWeight
+            // 
+            this.sliderBorderWeight.LargeChange = 2;
+            this.sliderBorderWeight.Location = new System.Drawing.Point(358, 41);
+            this.sliderBorderWeight.Minimum = 1;
+            this.sliderBorderWeight.Name = "sliderBorderWeight";
+            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
+            this.sliderBorderWeight.TabIndex = 11;
+            this.sliderBorderWeight.Value = 2;
+            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(288, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Weight";
+            // 
+            // lbBorderValue
+            // 
+            this.lbBorderValue.AutoSize = true;
+            this.lbBorderValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lbBorderValue.Location = new System.Drawing.Point(396, 35);
+            this.lbBorderValue.Name = "lbBorderValue";
+            this.lbBorderValue.Size = new System.Drawing.Size(27, 13);
+            this.lbBorderValue.TabIndex = 13;
+            this.lbBorderValue.Text = "2 px";
+            // 
+            // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 503);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(784, 749);
+            this.Controls.Add(this.toolbarHolder);
             this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.btnFillColor);
             this.Controls.Add(this.menu);
-            this.Name = "Form1";
+            this.Name = "Form";
             this.Text = "2D Designer";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
@@ -362,6 +464,11 @@
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.toolbarHolder.ContentPanel.ResumeLayout(false);
+            this.toolbarHolder.ContentPanel.PerformLayout();
+            this.toolbarHolder.ResumeLayout(false);
+            this.toolbarHolder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -402,9 +509,16 @@
         private System.Windows.Forms.ToolStripMenuItem sentToBackwardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorPickerFill;
-        private System.Windows.Forms.Button btnFillColor;
         private System.Windows.Forms.ColorDialog colorPickerBorder;
         private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.ToolStripContainer toolbarHolder;
+        private System.Windows.Forms.Button btnBorderColorPicker;
+        private System.Windows.Forms.Button btnFillColorPicker;
+        private System.Windows.Forms.Label label1;
+        private BorderSelector borderSelector;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TrackBar sliderBorderWeight;
+        private System.Windows.Forms.Label lbBorderValue;
     }
 }
 

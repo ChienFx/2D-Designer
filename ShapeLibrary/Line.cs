@@ -17,7 +17,7 @@ namespace ShapeLibrary
 
         public override void Draw(Graphics graphics)
         {
-            Pen pen = new Pen(mBorder.getColor(), mBorder.getThickness());
+            Pen pen = new Pen(mBorder.getColor(), mBorder.getWeight());
             pen.DashPattern = this.mBorder.getDashValues();
             graphics.DrawLine(pen, this.mTopLeft, this.mBottomRight);
         }
