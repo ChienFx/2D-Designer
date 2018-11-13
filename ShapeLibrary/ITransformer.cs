@@ -6,8 +6,8 @@ namespace ShapeLibrary
     {
         void Draw(Graphics graphics);
         void Fill(Graphics graphics);
-        void Rotate(Graphics graphics);
-        void Scale(Graphics graphics, int xRate, int yRate);
-        void Shift(Graphics graphics, Point newPosition);
+        void Rotate(Graphics graphics, int angle);
+        void Scale(Graphics graphics, float xRate, float yRate);
+        void Shift(Graphics graphics, int dx, int dy);
     }
 }

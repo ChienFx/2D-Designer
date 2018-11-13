@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using IOLibrary;
 
 namespace ShapeLibrary
@@ -9,13 +10,19 @@ namespace ShapeLibrary
     {
         public Point mTopLeft;
         public Point mBottomRight;
-        public float mRadian;
+        public int mAngle;
         protected Border mBorder;
         protected FillPattern mFillPattern;
         
         public Shape()
         {
             mBorder = new Border();
+            mAngle = 0;
+        }
+
+        public PointF GetCenter()
+        {
+            return new PointF((mTopLeft.X + mBottomRight.X) / (float)2, (mTopLeft.Y + mBottomRight.Y) / (float)2);
         }
 
         public virtual bool IsSelected(Point mousePosition)
@@ -38,9 +45,52 @@ namespace ShapeLibrary
 
         public abstract void Draw(Graphics graphics);
         public abstract void Fill(Graphics graphics);
-        public abstract void Rotate(Graphics graphics);
-        public abstract void Scale(Graphics graphics, int xRate, int yRate);
-        public abstract void Shift(Graphics graphics, Point newPosition);
+
+        public virtual void Rotate(Graphics graphics, int angle)
+        {
+            mAngle = angle;
+            Draw(graphics);
+        }
+
+        public virtual void Scale(Graphics graphics, float xRate, float yRate)
+        {
+            //Point fixedPoint = new Point(mTopLeft.X, (mTopLeft.Y + mBottomRight.Y) / 2);
+            mTopLeft = CalculatePointAfterScale(mTopLeft, xRate, yRate, mTopLeft);
+            mBottomRight = CalculatePointAfterScale(mBottomRight, xRate, yRate, mTopLeft);
+            Draw(graphics);
+        }
+
+        private Point CalculatePointAfterScale(Point p, float Sx, float Sy, Point fixedPoint)
+        {
+            Point result = new Point();
+            result.X = (int)(p.X * Sx + fixedPoint.X * (1 - Sx));
+            result.Y = (int)(p.Y * Sy + fixedPoint.Y * (1 - Sy));
+            return result;
+        }
+
+        public virtual void Shift(Graphics graphics, int dx, int dy)
+        {
+            //Calculate new point
+            mTopLeft = CalculatePointAfterShift(mTopLeft, dx, dy);
+            mBottomRight = CalculatePointAfterShift(mBottomRight, dx, dy);
+
+            Draw(graphics);
+        }
+
+        private Point CalculatePointAfterShift(Point p, int dx, int dy)
+        {
+            Point result = new Point(p.X, p.Y);
+            result.X += dx;
+            result.Y += dy;
+            return result;
+        }
+
+        protected void TransformGraphic(Graphics graphics, int angle)
+        {
+            Matrix matrix = new Matrix();
+            matrix.RotateAt(angle, GetCenter());
+            graphics.Transform = matrix;
+        }
 
         public void setBorder(Color color)
         {
