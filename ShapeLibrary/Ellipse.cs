@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ShapeLibrary
 {
-    public class Line : Shape
+    public class Ellipse : Shape
     {
         public override bool Load(string path, ulong offset)
         {
@@ -22,14 +26,18 @@ namespace ShapeLibrary
 
             Pen pen = new Pen(mBorder.getColor(), mBorder.getWeight());
             pen.DashPattern = this.mBorder.getDashValues();
-            graphics.DrawLine(pen, this.mTopLeft, this.mBottomRight);
+            graphics.DrawEllipse(pen, new Rectangle(mTopLeft.X, mTopLeft.Y, mBottomRight.X, mBottomRight.Y));
 
             TransformGraphic(graphics, -mAngle);
         }
 
         public override void Fill(Graphics graphics)
         {
-            throw new NotImplementedException();
+            TransformGraphic(graphics, mAngle);
+
+            graphics.FillEllipse(Brushes.Red, new Rectangle(mTopLeft.X, mTopLeft.Y, mBottomRight.X, mBottomRight.Y));
+
+            TransformGraphic(graphics, -mAngle);
         }
     }
 }

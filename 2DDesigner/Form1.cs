@@ -65,7 +65,7 @@ namespace _2DDesigner
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            shape = new Line();
+            shape = new Ellipse();
             controller.addShape(shape);
             shape.mTopLeft = new Point(e.X, e.Y);
         }
@@ -118,6 +118,11 @@ namespace _2DDesigner
             int weight = sliderBorderWeight.Value;
             lbBorderValue.Text = weight.ToString() + " px";
             controller.setBorder(weight);
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

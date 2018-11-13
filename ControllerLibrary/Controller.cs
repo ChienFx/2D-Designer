@@ -76,7 +76,19 @@ namespace ControllerLibrary
             else
                 this.border.setBorder(borderStyle);
         }
-        
+
+        public void SetSelectedShapeIndex(Point mousePosition)
+        {
+            for (int i = 0; i < mShapes.Count; i++)
+            {
+                if (mShapes[i].IsSelected(mousePosition))
+                {
+                    mSelectedShapeIndex = i;
+                    return;
+                }
+            }
+            mSelectedShapeIndex = -1;
+        }
 
 
 
