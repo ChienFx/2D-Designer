@@ -74,9 +74,9 @@ namespace ShapeLibrary
 
         public void setBorder(Border border)
         {
-            this.mColor = border.getColor();
-            this.mThickness = border.getThickness();
-            this.mBorderStyle = border.getBorderStyle();
+            this.mColor = border.mColor;
+            this.mThickness = border.mThickness;
+            this.mBorderStyle = border.mBorderStyle;
         }
     }
 

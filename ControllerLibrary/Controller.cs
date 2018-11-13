@@ -19,16 +19,20 @@ namespace ControllerLibrary
         Bitmap bitmap;
         Graphics graphics;
 
-        public Controller(Graphics srcGraphic)
+        public Controller(int width, int height)
         {
             mShapes = new List<Shape>();
             mGroups = new List<Group>();
             mSelectedShapeIndex = -1;
             mSelectedGroupIndex = -1;
 
-            //fillPattern.SetDefault();
+            
             border = new Border();
-            graphics = srcGraphic;
+
+
+            bitmap = new Bitmap(width, height);
+            graphics = Graphics.FromImage(bitmap);
+
         }
 
         public Shape GetSelectedShape()
@@ -96,7 +100,12 @@ namespace ControllerLibrary
             
         }
 
-        
+        public Image getBitmap()
+        {
+            return bitmap;
+        }
+
+
 
 
         //Find with shape or group is selected by mouse click
@@ -108,8 +117,12 @@ namespace ControllerLibrary
         //Draw all shapes
         public void DrawAll()
         {
+            
             for (int i = 0; i < mShapes.Count; i++)
-                mShapes[i].Draw(graphics);
+            {
+                mShapes[i].Draw(this.graphics);
+            }
+
         }
 
         public void addShape(Shape shape)

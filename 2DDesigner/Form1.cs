@@ -16,17 +16,15 @@ namespace _2DDesigner
     {
         public Controller controller;
         public Shape shape;
+        public MonitorController monitor;
         public Form1()
         {
             InitializeComponent();
-            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(pictureBox1.Image);
-            controller = new Controller(g);
+            controller = new Controller(pictureBox.Width, pictureBox.Height);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -53,7 +51,7 @@ namespace _2DDesigner
                 controller.setBorder(color);
 
                 controller.setBorder(BorderStyle.BORDER_SOLID);
-
+                
             }
         }
 
@@ -61,7 +59,7 @@ namespace _2DDesigner
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -83,8 +81,20 @@ namespace _2DDesigner
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-             shape.mBottomRight = new Point(e.X, e.Y);
-             controller.DrawAll();
+            shape.mBottomRight = new Point(e.X, e.Y);
+            controller.DrawAll();
+            UpdateUI();
+            
         }
+
+        public void UpdateUI()
+        {
+            this.pictureBox.Image = controller.getBitmap();
+        }
+    }
+
+    public class MonitorController
+    {
+        
     }
 }
