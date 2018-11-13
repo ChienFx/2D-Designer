@@ -7,3 +7,12 @@ D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.csp
 D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.csproj.CopyComplete
 D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.dll
 D:\Courses\Junior\CG\project2\2DDesigner\ShapeLibrary\obj\Debug\ShapeLibrary.pdb
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\bin\Debug\ShapeLibrary.dll
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\bin\Debug\ShapeLibrary.pdb
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\bin\Debug\IOLibrary.cs.dll
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\bin\Debug\IOLibrary.cs.pdb
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\obj\Debug\ShapeLibrary.csprojAssemblyReference.cache
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\obj\Debug\ShapeLibrary.csproj.CoreCompileInputs.cache
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\obj\Debug\ShapeLibrary.csproj.CopyComplete
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\obj\Debug\ShapeLibrary.dll
+C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ShapeLibrary\obj\Debug\ShapeLibrary.pdb
