@@ -48,10 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\2DDesigner\2DDesigner.csproj">
-      <Project>{e3010b57-7f04-4e39-9766-955f76055cf3}</Project>
-      <Name>2DDesigner</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IOLibrary.cs\IOLibrary.csproj">
       <Project>{8b7d0190-7714-4819-ad50-e2147fd2fbc4}</Project>
       <Name>IOLibrary</Name>

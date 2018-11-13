@@ -4,10 +4,10 @@ namespace ShapeLibrary
 {
     public interface ITransformer
     {
-        void Draw(BorderStyle borderStyle);
-        void Fill(FillPattern fillPattern);
-        void Rotate(float radian);
-        void Scale(int xRate, int yRate);
-        void Shift(Point newPosition);
+        void Draw(Graphics graphics);
+        void Fill(Graphics graphics);
+        void Rotate(Graphics graphics);
+        void Scale(Graphics graphics, int xRate, int yRate);
+        void Shift(Graphics graphics, Point newPosition);
     }
 }

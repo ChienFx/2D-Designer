@@ -1,10 +1,7 @@
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\ControllerLibrary.dll
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\ControllerLibrary.pdb
-D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\2DDesigner.exe
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\IOLibrary.cs.dll
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\ShapeLibrary.dll
-D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\2DDesigner.pdb
-D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\2DDesigner.exe.config
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\IOLibrary.cs.pdb
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\bin\Debug\ShapeLibrary.pdb
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\obj\Debug\ControllerLibrary.csprojAssemblyReference.cache

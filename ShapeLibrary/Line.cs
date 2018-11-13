@@ -3,10 +3,8 @@ using System.Drawing;
 
 namespace ShapeLibrary
 {
-    class Line : Shape
+    public class Line : Shape
     {
-
-
         public override bool Load(string path, ulong offset)
         {
             throw new NotImplementedException();
@@ -17,27 +15,29 @@ namespace ShapeLibrary
             throw new NotImplementedException();
         }
 
-        public override void Draw(BorderStyle borderStyle)
+        public override void Draw(Graphics graphics)
+        {
+            Pen pen = new Pen(mBorder.getColor(), mBorder.getThickness());
+            pen.DashPattern = this.mBorder.getDashValues();
+            graphics.DrawLine(pen, this.mTopLeft, this.mBottomRight);
+        }
+
+        public override void Fill(Graphics graphics)
         {
             throw new NotImplementedException();
         }
 
-        public override void Fill(FillPattern fillPattern)
+        public override void Rotate(Graphics graphics)
         {
             throw new NotImplementedException();
         }
 
-        public override void Rotate(float radian)
+        public override void Scale(Graphics graphics, int xRate, int yRate)
         {
             throw new NotImplementedException();
         }
 
-        public override void Scale(int xRate, int yRate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Shift(Point newPosition)
+        public override void Shift(Graphics graphics, Point newPosition)
         {
             throw new NotImplementedException();
         }

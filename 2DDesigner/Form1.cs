@@ -7,19 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ControllerLibrary;
+using ShapeLibrary;
 
 namespace _2DDesigner
 {
     public partial class Form1 : Form
     {
+        public Controller controller;
+        public Shape shape;
         public Form1()
         {
             InitializeComponent();
+            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(pictureBox1.Image);
+            controller = new Controller(g);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -41,29 +48,43 @@ namespace _2DDesigner
         {
             if (colorPickerFill.ShowDialog() == DialogResult.OK)
             {
-                btnFillColor.BackColor = colorPickerFill.Color;
-                pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-                using(Graphics g = Graphics.FromImage(pictureBox1.Image))
-                {
-                    Pen pen = new Pen(colorPickerFill.Color, 10);
-                    float[] dashValues = { 5, 14, 4, 2 };
-                    pen.DashPattern = dashValues;
+                Color color = colorPickerFill.Color;
+                btnFillColor.BackColor = color;
+                controller.setBorder(color);
 
-                    g.DrawLine(pen, new Point(10, 10), new Point(400, 400));
-                }
-                
+                controller.setBorder(BorderStyle.BORDER_SOLID);
+
             }
         }
 
+        
+
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
            
+        }
 
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
            
+        }
 
-            //pen.Dispose();
-            
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            shape = new Line();
+            controller.addShape(shape);
+            shape.mTopLeft = new Point(e.X, e.Y);
+        }
 
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+             shape.mBottomRight = new Point(e.X, e.Y);
+             controller.DrawAll();
         }
     }
 }

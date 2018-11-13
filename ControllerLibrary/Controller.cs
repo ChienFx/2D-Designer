@@ -3,7 +3,6 @@ using ShapeLibrary;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Point = ShapeLibrary.Point;
 
 namespace ControllerLibrary
 {
@@ -15,21 +14,21 @@ namespace ControllerLibrary
         int mSelectedGroupIndex;
 
         FillPattern fillPattern;
-        BorderStyle borderStyle;
+        Border border;
 
-        Bitmap mBitmap;
+        Bitmap bitmap;
+        Graphics graphics;
 
-        public Controller()
+        public Controller(Graphics srcGraphic)
         {
             mShapes = new List<Shape>();
             mGroups = new List<Group>();
             mSelectedShapeIndex = -1;
             mSelectedGroupIndex = -1;
 
-            fillPattern.SetDefault();
-            borderStyle.SetDefault();
-
-            mBitmap = new Bitmap(FormSize.BITMAP_WIDTH, FormSize.WINDOW_HEIGHT);
+            //fillPattern.SetDefault();
+            border = new Border();
+            graphics = srcGraphic;
         }
 
         public Shape GetSelectedShape()
@@ -46,6 +45,32 @@ namespace ControllerLibrary
             else
                 return null;
         }
+
+        public void setBorder(Color color)
+        {
+            Shape ins = GetSelectedShape();
+            if (ins != null)
+                ins.setBorder(color);
+            else
+                this.border.setBorder(color);
+        }
+
+        public void setBorder(int thickness)
+        {
+            this.GetSelectedShape().setBorder(thickness);
+        }
+
+        public void setBorder(BorderStyle borderStyle)
+        {
+            Shape ins = GetSelectedShape();
+            if (ins != null)
+                ins.setBorder(borderStyle);
+            else
+                this.border.setBorder(borderStyle);
+        }
+        
+
+
 
 
         //Send selected shape/group to back
@@ -83,7 +108,14 @@ namespace ControllerLibrary
         //Draw all shapes
         public void DrawAll()
         {
+            for (int i = 0; i < mShapes.Count; i++)
+                mShapes[i].Draw(graphics);
+        }
 
+        public void addShape(Shape shape)
+        {
+            shape.setBorder(border);
+            mShapes.Add(shape);
         }
 
         //Delete selected shape/group
