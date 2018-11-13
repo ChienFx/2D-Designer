@@ -7,3 +7,4 @@ D:\Courses\Junior\CG\project2\2DDesigner\2DDesigner\obj\Debug\2DDesigner.csproj.
 D:\Courses\Junior\CG\project2\2DDesigner\2DDesigner\obj\Debug\2DDesigner.csproj.CoreCompileInputs.cache
 D:\Courses\Junior\CG\project2\2DDesigner\2DDesigner\obj\Debug\2DDesigner.exe
 D:\Courses\Junior\CG\project2\2DDesigner\2DDesigner\obj\Debug\2DDesigner.pdb
+D:\Courses\Junior\CG\project2\2DDesigner\2DDesigner\obj\Debug\_2DDesigner.Form1.resources

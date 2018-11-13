@@ -1,0 +1,16 @@
+#2D Designer Backlog
+
+- Resizeable project (like MS Paint allow resize size of image using mouse event or from toolbar function)
+- Build right-click's menu
+	+ 4 send
+	+ copy/cut/paste
+	+ change border
+	+ fill
+	+ 
+- Join Line C#: How to join line winform?
+
+* Default setting
+- btnFillColor = White
+- btnBorderColor = White
+
+
