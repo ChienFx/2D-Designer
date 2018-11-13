@@ -64,20 +64,23 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorPickerFill = new System.Windows.Forms.ColorDialog();
             this.colorPickerBorder = new System.Windows.Forms.ColorDialog();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.toolbarHolder = new System.Windows.Forms.ToolStripContainer();
             this.label1 = new System.Windows.Forms.Label();
             this.btnFillColorPicker = new System.Windows.Forms.Button();
             this.btnBorderColorPicker = new System.Windows.Forms.Button();
-            this.borderSelector = new _2DDesigner.BorderSelector();
             this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
             this.lbBorderValue = new System.Windows.Forms.Label();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
+            this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.toolbarHolder = new System.Windows.Forms.ToolStripContainer();
             this.menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            this.toolbarHolder.ContentPanel.SuspendLayout();
-            this.toolbarHolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.toolbarHolder.SuspendLayout();
             this.SuspendLayout();
             // 
             // menu
@@ -331,38 +334,6 @@
             this.colorPickerBorder.AnyColor = true;
             this.colorPickerBorder.Color = System.Drawing.Color.DarkRed;
             // 
-            // pictureBox
-            // 
-            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Location = new System.Drawing.Point(3, 142);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(889, 349);
-            this.pictureBox.TabIndex = 3;
-            this.pictureBox.TabStop = false;
-            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
-            // 
-            // toolbarHolder
-            // 
-            // 
-            // toolbarHolder.ContentPanel
-            // 
-            this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.toolbarHolder.ContentPanel.Controls.Add(this.lbBorderValue);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.label2);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.sliderBorderWeight);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.borderSelector);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.label1);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.btnFillColorPicker);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.btnBorderColorPicker);
-            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 86);
-            this.toolbarHolder.Location = new System.Drawing.Point(3, 25);
-            this.toolbarHolder.Name = "toolbarHolder";
-            this.toolbarHolder.Size = new System.Drawing.Size(784, 111);
-            this.toolbarHolder.TabIndex = 4;
-            this.toolbarHolder.Text = "toolStripContainer1";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -404,17 +375,6 @@
             this.btnBorderColorPicker.UseVisualStyleBackColor = false;
             this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
             // 
-            // borderSelector
-            // 
-            this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.borderSelector.FormattingEnabled = true;
-            this.borderSelector.Location = new System.Drawing.Point(358, 8);
-            this.borderSelector.Name = "borderSelector";
-            this.borderSelector.Size = new System.Drawing.Size(114, 21);
-            this.borderSelector.TabIndex = 10;
-            this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
-            // 
             // sliderBorderWeight
             // 
             this.sliderBorderWeight.LargeChange = 2;
@@ -445,6 +405,68 @@
             this.lbBorderValue.TabIndex = 13;
             this.lbBorderValue.Text = "2 px";
             // 
+            // pictureBox
+            // 
+            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.Location = new System.Drawing.Point(3, 142);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(889, 349);
+            this.pictureBox.TabIndex = 3;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            // 
+            // BottomToolStripPanel
+            // 
+            this.BottomToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.BottomToolStripPanel.Name = "BottomToolStripPanel";
+            this.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.BottomToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.BottomToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // TopToolStripPanel
+            // 
+            this.TopToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.TopToolStripPanel.Name = "TopToolStripPanel";
+            this.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.TopToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.TopToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // RightToolStripPanel
+            // 
+            this.RightToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.RightToolStripPanel.Name = "RightToolStripPanel";
+            this.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.RightToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.RightToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // LeftToolStripPanel
+            // 
+            this.LeftToolStripPanel.Location = new System.Drawing.Point(0, 0);
+            this.LeftToolStripPanel.Name = "LeftToolStripPanel";
+            this.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.LeftToolStripPanel.RowMargin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.LeftToolStripPanel.Size = new System.Drawing.Size(0, 0);
+            // 
+            // ContentPanel
+            // 
+            this.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ContentPanel.Size = new System.Drawing.Size(784, 111);
+            // 
+            // toolbarHolder
+            // 
+            // 
+            // toolbarHolder.ContentPanel
+            // 
+            this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 86);
+            this.toolbarHolder.Location = new System.Drawing.Point(3, 25);
+            this.toolbarHolder.Name = "toolbarHolder";
+            this.toolbarHolder.Size = new System.Drawing.Size(784, 111);
+            this.toolbarHolder.TabIndex = 4;
+            this.toolbarHolder.Text = "toolStripContainer1";
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -463,12 +485,10 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            this.toolbarHolder.ContentPanel.ResumeLayout(false);
-            this.toolbarHolder.ContentPanel.PerformLayout();
             this.toolbarHolder.ResumeLayout(false);
             this.toolbarHolder.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -510,8 +530,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorPickerFill;
         private System.Windows.Forms.ColorDialog colorPickerBorder;
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.ToolStripContainer toolbarHolder;
         private System.Windows.Forms.Button btnBorderColorPicker;
         private System.Windows.Forms.Button btnFillColorPicker;
         private System.Windows.Forms.Label label1;
@@ -519,6 +537,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar sliderBorderWeight;
         private System.Windows.Forms.Label lbBorderValue;
+        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
+        private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
+        private System.Windows.Forms.ToolStripContentPanel ContentPanel;
+        private System.Windows.Forms.ToolStripContainer toolbarHolder;
     }
 }
 

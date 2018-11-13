@@ -14,7 +14,7 @@ namespace ShapeLibrary
 
     public class Border : Style
     {
-        float mWeight;//độ dày
+        float mWeight;
         BorderStyle mBorderStyle;
 
         public Border(Color color, float weight, BorderStyle borderStyle )
