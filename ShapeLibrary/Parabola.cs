@@ -10,6 +10,9 @@ namespace ShapeLibrary
 {
     public class Parabola : Shape
     {
+        public Parabola() : base() { }
+        public Parabola(Point topLeft, Point bottomRight) : base(topLeft, bottomRight) { }
+
         public override bool Load(string path, ulong offset)
         {
             throw new NotImplementedException();

@@ -26,14 +26,11 @@ namespace ControllerLibrary
             mGroups = new List<Group>();
             mSelectedShapeIndex = -1;
             mSelectedGroupIndex = -1;
-
             
             border = new Border();
-
-
+ 
             bitmap = new Bitmap(width, height);
             graphics = Graphics.FromImage(bitmap);
-
         }
 
         public Shape GetSelectedShape()
@@ -131,28 +128,28 @@ namespace ControllerLibrary
 
 
         //Find with shape or group is selected by mouse click
-        public void DetectWhichObjectIsSelected(Point mousePosition)
+        public bool DetectWhichObjectIsSelected(Point mousePosition)
         {
-            for (int i = 0; i < mShapes.Count; i++)
+            for (int i = mShapes.Count - 1; i >= 0; i--)
             {
                 if (mShapes[i].IsSelected(mousePosition))
                 {
                     mSelectedShapeIndex = i;
-                    return;
+                    return true;
                 }
             }
             mSelectedShapeIndex = -1;
+            return false;
         }
 
         //Draw all shapes
         public void DrawAll()
         {
-            
+            graphics.Clear(Color.White);
             for (int i = 0; i < mShapes.Count; i++)
             {
                 mShapes[i].Draw(this.graphics);
             }
-
         }
 
         public void addShape(Shape shape)
@@ -227,11 +224,6 @@ namespace ControllerLibrary
         {
 
         }
-
-
-
-
-
 
         //---------------------------------------------------
         //                IO Implementations

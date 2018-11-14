@@ -73,6 +73,7 @@
             this.btnFillColorPicker = new System.Windows.Forms.Button();
             this.btnBorderColorPicker = new System.Windows.Forms.Button();
             this.borderSelector = new _2DDesigner.BorderSelector();
+            this.MoveObject = new System.Windows.Forms.CheckBox();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.toolbarHolder.ContentPanel.SuspendLayout();
@@ -341,8 +342,10 @@
             this.pictureBox.TabIndex = 3;
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
-            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+            this.pictureBox.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
             // 
             // toolbarHolder
             // 
@@ -350,6 +353,7 @@
             // toolbarHolder.ContentPanel
             // 
             this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolbarHolder.ContentPanel.Controls.Add(this.MoveObject);
             this.toolbarHolder.ContentPanel.Controls.Add(this.lbBorderValue);
             this.toolbarHolder.ContentPanel.Controls.Add(this.label2);
             this.toolbarHolder.ContentPanel.Controls.Add(this.sliderBorderWeight);
@@ -449,6 +453,38 @@
             4,
             5,
             6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
             7});
             this.borderSelector.Location = new System.Drawing.Point(358, 8);
             this.borderSelector.Name = "borderSelector";
@@ -456,12 +492,24 @@
             this.borderSelector.TabIndex = 10;
             this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
             // 
+            // MoveObject
+            // 
+            this.MoveObject.AutoSize = true;
+            this.MoveObject.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.MoveObject.Location = new System.Drawing.Point(18, 4);
+            this.MoveObject.Name = "MoveObject";
+            this.MoveObject.Size = new System.Drawing.Size(142, 29);
+            this.MoveObject.TabIndex = 5;
+            this.MoveObject.Text = "Move Object";
+            this.MoveObject.UseVisualStyleBackColor = true;
+            this.MoveObject.CheckedChanged += new System.EventHandler(this.MoveObject_CheckedChanged);
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(784, 817);
+            this.ClientSize = new System.Drawing.Size(784, 953);
             this.Controls.Add(this.toolbarHolder);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.menu);
@@ -530,6 +578,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar sliderBorderWeight;
         private System.Windows.Forms.Label lbBorderValue;
+        private System.Windows.Forms.CheckBox MoveObject;
     }
 }
 

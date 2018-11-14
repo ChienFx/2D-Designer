@@ -16,6 +16,16 @@ namespace ShapeLibrary
         
         public Shape()
         {
+            mTopLeft = new Point(0, 0);
+            mBottomRight = new Point(0, 0);
+            mBorder = new Border();
+            mAngle = 0;
+        }
+
+        public Shape(Point topLeft, Point bottomRight)
+        {
+            mTopLeft = topLeft;
+            mBottomRight = bottomRight;
             mBorder = new Border();
             mAngle = 0;
         }
@@ -27,12 +37,11 @@ namespace ShapeLibrary
 
         public virtual bool IsSelected(Point mousePosition)
         {
-            int x = mousePosition.X;
-            int y = mousePosition.Y;
-            if (x >= mTopLeft.X
-                && x <= mBottomRight.X
-                && y >= mTopLeft.Y
-                && y <= mBottomRight.Y)
+            int x = Math.Min(mTopLeft.X, mBottomRight.X);
+            int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
+
+            Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
+            if (rectangle.Contains(mousePosition))
                 return true;
             return false;
         }

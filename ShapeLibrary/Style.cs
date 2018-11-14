@@ -100,7 +100,7 @@ public class BorderStyle
     public static BorderStyle BORDER_STYLE_4 = new BorderStyle(new float[] { 1, 2, 1 });
     public static BorderStyle BORDER_STYLE_5 = new BorderStyle(new float[] { 1, 2, 3 });
     public static BorderStyle BORDER_STYLE_6 = new BorderStyle(new float[] { 1, 2, 3, 4 });
-    public static BorderStyle BORDER_STYLE_7 = new BorderStyle(new float[] { 1, 2,1,3 });
+    public static BorderStyle BORDER_STYLE_7 = new BorderStyle(new float[] { 1, 2, 1, 3 });
 
 
     public static int AmountOfBorderStyle = 8;
