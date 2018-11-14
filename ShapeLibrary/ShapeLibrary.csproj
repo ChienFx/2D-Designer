@@ -45,6 +45,7 @@
     <Compile Include="Ellipse.cs" />
     <Compile Include="EnumHolder.cs" />
     <Compile Include="ITransformer.cs" />
+    <Compile Include="Parabola.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Line.cs" />

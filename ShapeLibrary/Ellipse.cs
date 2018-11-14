@@ -10,6 +10,9 @@ namespace ShapeLibrary
 {
     public class Ellipse : Shape
     {
+        public Ellipse() : base() { }
+        public Ellipse(Point topLeft, Point bottomRight) : base(topLeft, bottomRight) { }
+
         public override bool Load(string path, ulong offset)
         {
             throw new NotImplementedException();
@@ -26,7 +29,12 @@ namespace ShapeLibrary
 
             Pen pen = new Pen(mBorder.getColor(), mBorder.getWeight());
             pen.DashPattern = this.mBorder.getDashValues();
-            graphics.DrawEllipse(pen, new Rectangle(mTopLeft.X, mTopLeft.Y, mBottomRight.X, mBottomRight.Y));
+
+            int x = Math.Min(mTopLeft.X, mBottomRight.X);
+            int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
+            Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
+
+            graphics.DrawEllipse(pen, rectangle);
 
             TransformGraphic(graphics, -mAngle);
         }
@@ -35,7 +43,9 @@ namespace ShapeLibrary
         {
             TransformGraphic(graphics, mAngle);
 
-            graphics.FillEllipse(Brushes.Red, new Rectangle(mTopLeft.X, mTopLeft.Y, mBottomRight.X, mBottomRight.Y));
+            HatchBrush hatchBrush = new HatchBrush(HatchStyle.SolidDiamond, Color.Red, Color.Blue);
+
+            graphics.FillEllipse(hatchBrush, new Rectangle(mTopLeft.X, mTopLeft.Y, mBottomRight.X, mBottomRight.Y));
 
             TransformGraphic(graphics, -mAngle);
         }

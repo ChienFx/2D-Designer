@@ -3,6 +3,7 @@ using ShapeLibrary;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace ControllerLibrary
 {
@@ -25,14 +26,11 @@ namespace ControllerLibrary
             mGroups = new List<Group>();
             mSelectedShapeIndex = -1;
             mSelectedGroupIndex = -1;
-
             
             border = new Border();
-
-
+ 
             bitmap = new Bitmap(width, height);
             graphics = Graphics.FromImage(bitmap);
-
         }
 
         public Shape GetSelectedShape()
@@ -77,43 +75,48 @@ namespace ControllerLibrary
                 this.border.setBorder(borderStyle);
         }
 
-        public void SetSelectedShapeIndex(Point mousePosition)
-        {
-            for (int i = 0; i < mShapes.Count; i++)
-            {
-                if (mShapes[i].IsSelected(mousePosition))
-                {
-                    mSelectedShapeIndex = i;
-                    return;
-                }
-            }
-            mSelectedShapeIndex = -1;
-        }
-
-
-
-
         //Send selected shape/group to back
         public void SendObjectToBack()
         {
-           
+            if (mSelectedShapeIndex <= 0)
+                return;
+            Shape temp = GetSelectedShape();
+            DeleteSelectedObject();
+            mShapes.Insert(0, temp);
+            mSelectedShapeIndex = 0;
         }
+
         //Send selected shape/group to forward
         public void SendObjectToForward()
         {
-            
+            if (mSelectedShapeIndex <= 0 || mSelectedShapeIndex == mShapes.Count - 1)
+                return;
+            Shape temp = GetSelectedShape();
+            DeleteSelectedObject();
+            mShapes.Insert(mSelectedShapeIndex + 1, temp);
+            mSelectedShapeIndex++;
         }
 
         //Send selected shape/group to backward
         public void SendObjectToBackward()
         {
-        
+            if (mSelectedShapeIndex <= 0)
+                return;
+            Shape temp = GetSelectedShape();
+            DeleteSelectedObject();
+            mShapes.Insert(mSelectedShapeIndex - 1, temp);
+            mSelectedShapeIndex--;
         }
 
         //Send selected shape/group to front
         public void SendObjectToFront()
         {
-            
+            if (mSelectedShapeIndex <= 0 || mSelectedShapeIndex == mShapes.Count - 1)
+                return;
+            Shape temp = GetSelectedShape();
+            DeleteSelectedObject();
+            mShapes.Add(temp);
+            mSelectedShapeIndex = mShapes.Count - 1;
         }
 
         public Image getBitmap()
@@ -125,20 +128,28 @@ namespace ControllerLibrary
 
 
         //Find with shape or group is selected by mouse click
-        public void DetectWhichObjectIsSelected(Point point)
+        public bool DetectWhichObjectIsSelected(Point mousePosition)
         {
-         
+            for (int i = mShapes.Count - 1; i >= 0; i--)
+            {
+                if (mShapes[i].IsSelected(mousePosition))
+                {
+                    mSelectedShapeIndex = i;
+                    return true;
+                }
+            }
+            mSelectedShapeIndex = -1;
+            return false;
         }
 
         //Draw all shapes
         public void DrawAll()
         {
-            
+            graphics.Clear(Color.White);
             for (int i = 0; i < mShapes.Count; i++)
             {
                 mShapes[i].Draw(this.graphics);
             }
-
         }
 
         public void addShape(Shape shape)
@@ -150,7 +161,8 @@ namespace ControllerLibrary
         //Delete selected shape/group
         public void DeleteSelectedObject()
         {
-
+            if (mSelectedShapeIndex != -1)
+                mShapes.RemoveAt(mSelectedShapeIndex);
         }
 
         //Change selected object's border style (redraw)
@@ -160,27 +172,39 @@ namespace ControllerLibrary
         }
 
         //Fill the shape (no group) with the given pattern
-        public void fillShape()
+        public void FillShape()
         {
-
+            Shape shape = GetSelectedShape();
+            if (shape is null)
+                return;
+            shape.Fill(graphics);
         }
 
         //Rotate the selected shape/group
-        public void RotateObject(float radian)
+        public void RotateObject(int angle)
         {
-
+            Shape shape = GetSelectedShape();
+            if (shape is null)
+                return;
+            shape.Rotate(graphics, angle);
         }
 
         //Scale the selected shape/group
-        public void ScaleObject(int xRatio, int yRatio)
+        public void ScaleObject(float xRatio, float yRatio)
         {
-
+            Shape shape = GetSelectedShape();
+            if (shape is null)
+                return;
+            shape.Scale(graphics, xRatio, yRatio);
         }
 
         //Shift the selected shape/group
-        public void ShiftObject(Point newPoint)
+        public void ShiftObject(int dx, int dy)
         {
-
+            Shape shape = GetSelectedShape();
+            if (shape is null)
+                return;
+            shape.Shift(graphics, dx, dy);
         }
 
         //Undo the last step
@@ -201,11 +225,6 @@ namespace ControllerLibrary
 
         }
 
-
-
-
-
-
         //---------------------------------------------------
         //                IO Implementations
         public bool Load(string path, ulong offset)
@@ -223,9 +242,9 @@ namespace ControllerLibrary
             throw new NotImplementedException();
         }
 
-        public bool CopyBitmapToClipboard()
+        public void CopyBitmapToClipboard()
         {
-            throw new NotImplementedException();
+            Clipboard.SetImage(bitmap);
         }
 
         public Bitmap ExportToBitmap()

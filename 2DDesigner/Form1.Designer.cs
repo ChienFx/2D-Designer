@@ -66,17 +66,19 @@
             this.colorPickerBorder = new System.Windows.Forms.ColorDialog();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.toolbarHolder = new System.Windows.Forms.ToolStripContainer();
+            this.lbBorderValue = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.btnFillColorPicker = new System.Windows.Forms.Button();
             this.btnBorderColorPicker = new System.Windows.Forms.Button();
             this.borderSelector = new _2DDesigner.BorderSelector();
-            this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lbBorderValue = new System.Windows.Forms.Label();
+            this.MoveObject = new System.Windows.Forms.CheckBox();
             this.menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.toolbarHolder.ContentPanel.SuspendLayout();
             this.toolbarHolder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
             this.SuspendLayout();
             // 
             // menu
@@ -336,11 +338,14 @@
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Location = new System.Drawing.Point(3, 142);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(889, 349);
+            this.pictureBox.Size = new System.Drawing.Size(784, 349);
             this.pictureBox.TabIndex = 3;
             this.pictureBox.TabStop = false;
-            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+            this.pictureBox.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
             // 
             // toolbarHolder
             // 
@@ -348,6 +353,7 @@
             // toolbarHolder.ContentPanel
             // 
             this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolbarHolder.ContentPanel.Controls.Add(this.MoveObject);
             this.toolbarHolder.ContentPanel.Controls.Add(this.lbBorderValue);
             this.toolbarHolder.ContentPanel.Controls.Add(this.label2);
             this.toolbarHolder.ContentPanel.Controls.Add(this.sliderBorderWeight);
@@ -355,12 +361,42 @@
             this.toolbarHolder.ContentPanel.Controls.Add(this.label1);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnFillColorPicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnBorderColorPicker);
-            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 86);
+            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 111);
             this.toolbarHolder.Location = new System.Drawing.Point(3, 25);
             this.toolbarHolder.Name = "toolbarHolder";
             this.toolbarHolder.Size = new System.Drawing.Size(784, 111);
             this.toolbarHolder.TabIndex = 4;
             this.toolbarHolder.Text = "toolStripContainer1";
+            // 
+            // lbBorderValue
+            // 
+            this.lbBorderValue.AutoSize = true;
+            this.lbBorderValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lbBorderValue.Location = new System.Drawing.Point(396, 35);
+            this.lbBorderValue.Name = "lbBorderValue";
+            this.lbBorderValue.Size = new System.Drawing.Size(27, 13);
+            this.lbBorderValue.TabIndex = 13;
+            this.lbBorderValue.Text = "2 px";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(288, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Weight";
+            // 
+            // sliderBorderWeight
+            // 
+            this.sliderBorderWeight.LargeChange = 2;
+            this.sliderBorderWeight.Location = new System.Drawing.Point(358, 41);
+            this.sliderBorderWeight.Minimum = 1;
+            this.sliderBorderWeight.Name = "sliderBorderWeight";
+            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
+            this.sliderBorderWeight.TabIndex = 11;
+            this.sliderBorderWeight.Value = 2;
+            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
             // 
             // label1
             // 
@@ -407,49 +443,73 @@
             // 
             this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.borderSelector.ForeColor = System.Drawing.SystemColors.WindowText;
             this.borderSelector.FormattingEnabled = true;
+            this.borderSelector.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7});
             this.borderSelector.Location = new System.Drawing.Point(358, 8);
             this.borderSelector.Name = "borderSelector";
             this.borderSelector.Size = new System.Drawing.Size(114, 21);
             this.borderSelector.TabIndex = 10;
             this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
             // 
-            // sliderBorderWeight
+            // MoveObject
             // 
-            this.sliderBorderWeight.LargeChange = 2;
-            this.sliderBorderWeight.Location = new System.Drawing.Point(358, 41);
-            this.sliderBorderWeight.Minimum = 1;
-            this.sliderBorderWeight.Name = "sliderBorderWeight";
-            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
-            this.sliderBorderWeight.TabIndex = 11;
-            this.sliderBorderWeight.Value = 2;
-            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(288, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Weight";
-            // 
-            // lbBorderValue
-            // 
-            this.lbBorderValue.AutoSize = true;
-            this.lbBorderValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lbBorderValue.Location = new System.Drawing.Point(396, 35);
-            this.lbBorderValue.Name = "lbBorderValue";
-            this.lbBorderValue.Size = new System.Drawing.Size(27, 13);
-            this.lbBorderValue.TabIndex = 13;
-            this.lbBorderValue.Text = "2 px";
+            this.MoveObject.AutoSize = true;
+            this.MoveObject.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.MoveObject.Location = new System.Drawing.Point(18, 4);
+            this.MoveObject.Name = "MoveObject";
+            this.MoveObject.Size = new System.Drawing.Size(142, 29);
+            this.MoveObject.TabIndex = 5;
+            this.MoveObject.Text = "Move Object";
+            this.MoveObject.UseVisualStyleBackColor = true;
+            this.MoveObject.CheckedChanged += new System.EventHandler(this.MoveObject_CheckedChanged);
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(784, 817);
+            this.ClientSize = new System.Drawing.Size(784, 953);
             this.Controls.Add(this.toolbarHolder);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.menu);
@@ -462,10 +522,12 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.toolbarHolder.ContentPanel.ResumeLayout(false);
+            this.toolbarHolder.ContentPanel.PerformLayout();
             this.toolbarHolder.ResumeLayout(false);
             this.toolbarHolder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,6 +569,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorPickerFill;
         private System.Windows.Forms.ColorDialog colorPickerBorder;
+        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.ToolStripContainer toolbarHolder;
         private System.Windows.Forms.Button btnBorderColorPicker;
         private System.Windows.Forms.Button btnFillColorPicker;
         private System.Windows.Forms.Label label1;
@@ -514,13 +578,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar sliderBorderWeight;
         private System.Windows.Forms.Label lbBorderValue;
-        private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
-        private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
-        private System.Windows.Forms.ToolStripPanel RightToolStripPanel;
-        private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
-        private System.Windows.Forms.ToolStripContentPanel ContentPanel;
-        private System.Windows.Forms.ToolStripContainer toolbarHolder;
+        private System.Windows.Forms.CheckBox MoveObject;
     }
 }
 

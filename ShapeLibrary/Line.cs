@@ -6,6 +6,9 @@ namespace ShapeLibrary
 {
     public class Line : Shape
     {
+        public Line() : base() { }
+        public Line(Point topLeft, Point bottomRight) : base(topLeft, bottomRight) { }
+
         public override bool Load(string path, ulong offset)
         {
             throw new NotImplementedException();
