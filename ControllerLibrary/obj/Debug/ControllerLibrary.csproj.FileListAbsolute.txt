@@ -9,14 +9,3 @@ D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\obj\Debug\ControllerL
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\obj\Debug\ControllerLibrary.csproj.CopyComplete
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\obj\Debug\ControllerLibrary.dll
 D:\Courses\Junior\CG\project2\2DDesigner\ControllerLibrary\obj\Debug\ControllerLibrary.pdb
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\bin\Debug\ControllerLibrary.dll
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\bin\Debug\ControllerLibrary.pdb
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\bin\Debug\IOLibrary.cs.dll
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\bin\Debug\ShapeLibrary.dll
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\bin\Debug\IOLibrary.cs.pdb
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\bin\Debug\ShapeLibrary.pdb
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\obj\Debug\ControllerLibrary.csprojAssemblyReference.cache
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\obj\Debug\ControllerLibrary.csproj.CoreCompileInputs.cache
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\obj\Debug\ControllerLibrary.csproj.CopyComplete
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\obj\Debug\ControllerLibrary.dll
-C:\Users\hoail\OneDrive\Documents\ComputerGraphic\Project\2D-Designer\ControllerLibrary\obj\Debug\ControllerLibrary.pdb
