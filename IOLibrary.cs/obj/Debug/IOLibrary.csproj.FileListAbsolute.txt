@@ -1,5 +1,0 @@
-D:\Courses\Junior\CG\project2\2DDesigner\IOLibrary.cs\bin\Debug\IOLibrary.cs.dll
-D:\Courses\Junior\CG\project2\2DDesigner\IOLibrary.cs\bin\Debug\IOLibrary.cs.pdb
-D:\Courses\Junior\CG\project2\2DDesigner\IOLibrary.cs\obj\Debug\IOLibrary.csproj.CoreCompileInputs.cache
-D:\Courses\Junior\CG\project2\2DDesigner\IOLibrary.cs\obj\Debug\IOLibrary.cs.dll
-D:\Courses\Junior\CG\project2\2DDesigner\IOLibrary.cs\obj\Debug\IOLibrary.cs.pdb

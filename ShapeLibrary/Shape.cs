@@ -13,7 +13,7 @@ namespace ShapeLibrary
         public int mAngle;
         protected Border mBorder;
         protected FillPattern mFillPattern;
-        
+
         public Shape()
         {
             mTopLeft = new Point(0, 0);
@@ -27,6 +27,7 @@ namespace ShapeLibrary
             mTopLeft = topLeft;
             mBottomRight = bottomRight;
             mBorder = new Border();
+            mFillPattern = new FillPattern();
             mAngle = 0;
         }
 
@@ -67,6 +68,11 @@ namespace ShapeLibrary
             mTopLeft = CalculatePointAfterScale(mTopLeft, xRate, yRate, mTopLeft);
             mBottomRight = CalculatePointAfterScale(mBottomRight, xRate, yRate, mTopLeft);
             Draw(graphics);
+        }
+
+        public void setFillPattern(Brush brush)
+        {
+            throw new NotImplementedException();
         }
 
         private Point CalculatePointAfterScale(Point p, float Sx, float Sy, Point fixedPoint)

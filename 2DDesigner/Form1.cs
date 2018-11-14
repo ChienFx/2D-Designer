@@ -12,8 +12,8 @@ namespace _2DDesigner
         public Controller controller;
         //public Shape shape;
         public Monitor monitor;
+        State state;
         Point start;
-        bool isMove = false;
         bool isMouseHold = false;
 
         public Form()
@@ -22,6 +22,7 @@ namespace _2DDesigner
             monitor = new Monitor(this);
             controller = new Controller(pictureBox.Width, pictureBox.Height);
             start = new Point(0, 0);
+            state = State.DEFAULT;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -74,13 +75,13 @@ namespace _2DDesigner
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            if (isMove)
+            if (state == State.MOVE)
             {
                 controller.DetectWhichObjectIsSelected(new Point(-1, -1));
             }
             else
             {
-                Shape shape = new Parabola(start, new Point(e.X, e.Y));
+                Shape shape = new Ellipse(start, new Point(e.X, e.Y));
                 controller.addShape(shape);
                 controller.DrawAll();
                 UpdateUI();
@@ -91,7 +92,7 @@ namespace _2DDesigner
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             //isMove = true;
-            if (isMove)
+            if (state == State.MOVE)
             {
                 controller.DetectWhichObjectIsSelected(new Point(e.X, e.Y));
             }
@@ -101,7 +102,7 @@ namespace _2DDesigner
 
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMove)
+            if (state == State.MOVE)
             {
                 if (!(controller.GetSelectedShape() is null))
                 {
@@ -173,9 +174,15 @@ namespace _2DDesigner
             controller.setBorder(weight);
         }
 
-        private void MoveObject_CheckedChanged(object sender, EventArgs e)
+        private void btnMove_Click(object sender, EventArgs e)
         {
-            isMove = MoveObject.Checked;
+            state = State.MOVE;
+            //Cursor = Cursors.NoMove2D;
+        }
+
+        private void fillPatternSelection1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            controller.setFillPattern(BrushStyle.getBrush(fillPatternSelection.SelectedIndex));
         }
     }
 }

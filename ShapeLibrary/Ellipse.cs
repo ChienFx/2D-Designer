@@ -27,14 +27,11 @@ namespace ShapeLibrary
         {
             TransformGraphic(graphics, mAngle);
 
-            Pen pen = new Pen(mBorder.getColor(), mBorder.getWeight());
-            pen.DashPattern = this.mBorder.getDashValues();
-
             int x = Math.Min(mTopLeft.X, mBottomRight.X);
             int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
             Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
 
-            graphics.DrawEllipse(pen, rectangle);
+            graphics.DrawEllipse(mBorder.createPen(), rectangle);
 
             TransformGraphic(graphics, -mAngle);
         }
@@ -43,9 +40,13 @@ namespace ShapeLibrary
         {
             TransformGraphic(graphics, mAngle);
 
-            HatchBrush hatchBrush = new HatchBrush(HatchStyle.SolidDiamond, Color.Red, Color.Blue);
+            int x = Math.Min(mTopLeft.X, mBottomRight.X);
+            int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
+            Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
 
-            graphics.FillEllipse(hatchBrush, new Rectangle(mTopLeft.X, mTopLeft.Y, mBottomRight.X, mBottomRight.Y));
+
+            Brush brush = this.mFillPattern.getBrush();
+            graphics.FillEllipse(brush, rectangle);
 
             TransformGraphic(graphics, -mAngle);
         }

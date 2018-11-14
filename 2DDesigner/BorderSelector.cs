@@ -30,4 +30,30 @@ namespace _2DDesigner
             e.Graphics.DrawLine(pen, p1, p2);
         }
     }
+
+    public class FillPatternSelection : ComboBox
+    {
+        public FillPatternSelection()
+        {
+            this.DrawMode = DrawMode.OwnerDrawVariable;
+            this.DropDownStyle = ComboBoxStyle.DropDownList;
+            for (int i = 0; i < BrushStyle.amount; i++)
+            {
+                this.Items.Add(i);
+            }
+
+        }
+
+        protected override void OnDrawItem(DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            
+            Rectangle rect = new Rectangle(e.Bounds.Left, e.Bounds.Top+2, e.Bounds.Right-e.Bounds.Left, e.Bounds.Bottom-e.Bounds.Y);
+
+            Brush brush = BrushStyle.getBrush(e.Index);
+
+            e.Graphics.FillRectangle(brush, rect);
+        }
+    }
+
 }

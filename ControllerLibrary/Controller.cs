@@ -75,6 +75,15 @@ namespace ControllerLibrary
                 this.border.setBorder(borderStyle);
         }
 
+        public void setFillPattern(Brush brush)
+        {
+            Shape ins = GetSelectedShape();
+            if (ins != null)
+                ins.setFillPattern(brush);
+            else
+                this.fillPattern.setFillPattern(brush);
+        }
+
         //Send selected shape/group to back
         public void SendObjectToBack()
         {
@@ -148,7 +157,9 @@ namespace ControllerLibrary
             graphics.Clear(Color.White);
             for (int i = 0; i < mShapes.Count; i++)
             {
+                mShapes[i].Fill(this.graphics);
                 mShapes[i].Draw(this.graphics);
+                
             }
         }
 
@@ -179,6 +190,8 @@ namespace ControllerLibrary
                 return;
             shape.Fill(graphics);
         }
+
+        
 
         //Rotate the selected shape/group
         public void RotateObject(int angle)

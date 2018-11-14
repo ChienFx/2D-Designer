@@ -127,6 +127,18 @@
     <value>368, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnMove.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAWlJREFUSEvN1EsrhFEcx/GRy0K5s3BZSMmlvAdRNljKgq28DQsvhgUpVnZWNm6h
+        iCyU3BZeAfH9mudonmfG0MxRfvVpjqdz/sec5/wn998yiLb8MH6GcY9DtPsgZkbwgPfEEToQJQN4Qige
+        HKMRVWcOFlxLPh+xhzd4bFEyhBa4wS3q0I+oKdygqvRhOj9MxfP2WC4//0qnHgv48QqPIrzQXh9ksoiJ
+        /DCVWbjGF//t7fIq+gKduA7/G5W7KU1wTg/sD9d6hYu+iR1qEzkh6xXzyGYVpebrAM34SidOECbc4SZx
+        gXFks4xrhHnPCOs30IBUunAGJ+yiBr+Na93MtVsoKh7ixHN4LN0+yGQFS/lhKjOw+Da+LR7ii7OxsvG5
+        RTyOUhmDDVhxojVaNn7lKXh8YYNWTCJKbC4L7yefL7hKxjZm1bEzffEWLLSDWkSJx3OKULzsVaw0bmIz
+        biJ68RB/Y/6seAXJ5T4A3kFhMg8lUaoAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="btnFillColorPicker.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
@@ -157,6 +169,9 @@
         0hLUBnEAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="bindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>516, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>57</value>
   </metadata>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,13 @@ namespace ShapeLibrary
 {
     public class Style
     {
-        protected Color mColor;
+        protected Color mForeground;
+
+        public void setForegroundColor(Color color)
+        {
+            mForeground = color;
+        }
+
     }
 
     public class Border : Style
@@ -17,28 +24,35 @@ namespace ShapeLibrary
         float mWeight;//độ dày
         BorderStyle mBorderStyle;
 
-        public Border(Color color, float weight, BorderStyle borderStyle )
+        public Border(Color foreground, float weight, BorderStyle borderStyle )
         {
-            mColor = color; mWeight = weight; mBorderStyle = borderStyle;
+            mForeground = foreground; mWeight = weight; mBorderStyle = borderStyle;
         }
 
         public Border()
         {
-            mColor = Color.Black;
+            mForeground = MyColor.DEFUALT_SHAPE_BORDER_COLOR;
             mWeight = 2;
             mBorderStyle = BorderStyle.BORDER_STYLE_0;
         }
 
+        public Pen createPen()
+        {
+            Pen pen = new Pen(this.mForeground, this.mWeight);
+            pen.DashPattern = this.getDashValues();
+            return pen;
+        }
+
         public Border(Border border)
         {
-            this.mColor = border.mColor;
+            this.mForeground = border.mForeground;
             this.mBorderStyle = border.mBorderStyle;
             this.mWeight = border.mWeight;
         }
 
         public Color getColor()
         {
-            return this.mColor;
+            return this.mForeground;
         }
 
         public float getWeight()
@@ -59,7 +73,7 @@ namespace ShapeLibrary
 
         public void setBorder(Color color)
         {
-            this.mColor = color;
+            this.mForeground = color;
         }
 
         public void setBorder(float weight)
@@ -74,7 +88,7 @@ namespace ShapeLibrary
 
         public void setBorder(Border border)
         {
-            this.mColor = border.mColor;
+            this.mForeground = border.mForeground;
             this.mWeight = border.mWeight;
             this.mBorderStyle = border.mBorderStyle;
         }
@@ -82,13 +96,86 @@ namespace ShapeLibrary
 
     public class FillPattern : Style
     {
-        public void SetDefault()
+        Color mBackground;
+        Brush mBrush;
+
+        public void setFillPattern(Brush brush)
         {
-            throw new NotImplementedException();
+            this.mBrush = brush;
         }
+
+
+
+        public FillPattern(Brush brush, Color foregroundColor, Color backgroundColor)
+        {
+            mBrush = brush;
+            mForeground = foregroundColor;
+            mBackground = backgroundColor;
+        }
+
+        public FillPattern()
+        {
+            mBackground = Color.Transparent;
+            mForeground = MyColor.DEFAULT_SHAPE_FILL_COLOR;
+            mBrush = new SolidBrush(mForeground);
+        }
+
+        public void setBackgroundColor(Color color)
+        {
+            this.mBackground = color;
+        }
+
+        public void setBrush(Brush brush)
+        {
+            this.mBrush = brush;
+        }
+
+        public Brush getBrush()
+        {
+            return mBrush;
+        }
+
     }
 }
+public class BrushStyle
+{
+    public static Brush Solid = new SolidBrush(Color.Aqua);
+    public static Brush BackwardDiagonal = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Aqua, Color.Beige);
+    public static Brush Cross = new HatchBrush(HatchStyle.Cross, Color.Aqua, Color.Beige);
+    public static Brush DarkDownwardDiagonal = new HatchBrush(HatchStyle.DarkDownwardDiagonal, Color.Aqua, Color.Beige);
+    public static Brush DarkHorizontal = new HatchBrush(HatchStyle.DarkHorizontal, Color.Aqua, Color.Beige);
+    public static Brush DashedDownwardDiagonal = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Aqua, Color.Beige);
+    public static Brush DiagonalBrick = new HatchBrush(HatchStyle.DiagonalBrick, Color.Aqua, Color.Beige);
+    public static Brush DiagonalCross = new HatchBrush(HatchStyle.DiagonalCross, Color.Aqua, Color.Beige);
+    public static Brush Divot = new HatchBrush(HatchStyle.Divot, Color.Aqua, Color.Beige);
+    public static Brush DottedGrid = new HatchBrush(HatchStyle.DottedGrid, Color.Aqua, Color.Beige);
+    public static Brush LargeConfetti = new HatchBrush(HatchStyle.LargeConfetti, Color.Aqua, Color.Beige);
 
+
+    public static int amount = 11;
+
+    public static Brush getBrush(int index)
+    {
+        switch (index)
+        {
+            case 0: return Solid;
+            case 1: return BackwardDiagonal;
+            case 2: return Cross;
+            case 3: return DarkDownwardDiagonal;
+            case 4: return DarkHorizontal;
+            case 5: return DashedDownwardDiagonal;
+            case 6: return DiagonalBrick;
+            case 7: return DiagonalCross;
+            case 8: return Divot;
+            case 9: return DottedGrid;
+            case 10: return LargeConfetti;
+
+            default: return Solid;
+        }
+    }
+
+
+}
 public class BorderStyle
 {
     float[] mValues;

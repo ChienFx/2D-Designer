@@ -37,4 +37,20 @@ namespace _2DDesigner
         }
         
     }
+
+    enum State
+    {
+        DEFAULT,//view
+        MOVE,
+        SCALE,
+        FILL,
+        DRAW_LINE,
+        DRAW_RECTANGLE,
+        DRAW_SQUARE,
+        DRAW_ELLIPSE,
+        DRAW_CIRCLE,
+
+    }
+
+    
 }

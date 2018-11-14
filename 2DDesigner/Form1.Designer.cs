@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form));
             this.menu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,19 +67,22 @@
             this.colorPickerBorder = new System.Windows.Forms.ColorDialog();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.toolbarHolder = new System.Windows.Forms.ToolStripContainer();
+            this.btnMove = new System.Windows.Forms.Button();
             this.lbBorderValue = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.btnFillColorPicker = new System.Windows.Forms.Button();
             this.btnBorderColorPicker = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
             this.borderSelector = new _2DDesigner.BorderSelector();
-            this.MoveObject = new System.Windows.Forms.CheckBox();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.toolbarHolder.ContentPanel.SuspendLayout();
             this.toolbarHolder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // menu
@@ -353,20 +357,36 @@
             // toolbarHolder.ContentPanel
             // 
             this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.toolbarHolder.ContentPanel.Controls.Add(this.MoveObject);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.fillPatternSelection);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnMove);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.borderSelector);
             this.toolbarHolder.ContentPanel.Controls.Add(this.lbBorderValue);
             this.toolbarHolder.ContentPanel.Controls.Add(this.label2);
             this.toolbarHolder.ContentPanel.Controls.Add(this.sliderBorderWeight);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.borderSelector);
             this.toolbarHolder.ContentPanel.Controls.Add(this.label1);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnFillColorPicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnBorderColorPicker);
-            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 111);
+            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 86);
             this.toolbarHolder.Location = new System.Drawing.Point(3, 25);
             this.toolbarHolder.Name = "toolbarHolder";
             this.toolbarHolder.Size = new System.Drawing.Size(784, 111);
             this.toolbarHolder.TabIndex = 4;
             this.toolbarHolder.Text = "toolStripContainer1";
+            // 
+            // btnMove
+            // 
+            this.btnMove.BackColor = System.Drawing.Color.Transparent;
+            this.btnMove.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMove.BackgroundImage")));
+            this.btnMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMove.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnMove.Location = new System.Drawing.Point(7, 2);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(1);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(32, 32);
+            this.btnMove.TabIndex = 14;
+            this.btnMove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMove.UseVisualStyleBackColor = false;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
             // 
             // lbBorderValue
             // 
@@ -439,11 +459,33 @@
             this.btnBorderColorPicker.UseVisualStyleBackColor = false;
             this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
             // 
+            // fillPatternSelection
+            // 
+            this.fillPatternSelection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.fillPatternSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fillPatternSelection.FormattingEnabled = true;
+            this.fillPatternSelection.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10});
+            this.fillPatternSelection.Location = new System.Drawing.Point(126, 9);
+            this.fillPatternSelection.Name = "fillPatternSelection";
+            this.fillPatternSelection.Size = new System.Drawing.Size(121, 21);
+            this.fillPatternSelection.TabIndex = 15;
+            this.fillPatternSelection.SelectedIndexChanged += new System.EventHandler(this.fillPatternSelection1_SelectedIndexChanged);
+            // 
             // borderSelector
             // 
             this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.borderSelector.ForeColor = System.Drawing.SystemColors.WindowText;
             this.borderSelector.FormattingEnabled = true;
             this.borderSelector.Items.AddRange(new object[] {
             0,
@@ -486,30 +528,18 @@
             5,
             6,
             7});
-            this.borderSelector.Location = new System.Drawing.Point(358, 8);
+            this.borderSelector.Location = new System.Drawing.Point(358, 9);
             this.borderSelector.Name = "borderSelector";
-            this.borderSelector.Size = new System.Drawing.Size(114, 21);
-            this.borderSelector.TabIndex = 10;
+            this.borderSelector.Size = new System.Drawing.Size(121, 21);
+            this.borderSelector.TabIndex = 5;
             this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
-            // 
-            // MoveObject
-            // 
-            this.MoveObject.AutoSize = true;
-            this.MoveObject.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.MoveObject.Location = new System.Drawing.Point(18, 4);
-            this.MoveObject.Name = "MoveObject";
-            this.MoveObject.Size = new System.Drawing.Size(142, 29);
-            this.MoveObject.TabIndex = 5;
-            this.MoveObject.Text = "Move Object";
-            this.MoveObject.UseVisualStyleBackColor = true;
-            this.MoveObject.CheckedChanged += new System.EventHandler(this.MoveObject_CheckedChanged);
             // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(784, 953);
+            this.ClientSize = new System.Drawing.Size(784, 783);
             this.Controls.Add(this.toolbarHolder);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.menu);
@@ -528,6 +558,7 @@
             this.toolbarHolder.ResumeLayout(false);
             this.toolbarHolder.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -574,11 +605,13 @@
         private System.Windows.Forms.Button btnBorderColorPicker;
         private System.Windows.Forms.Button btnFillColorPicker;
         private System.Windows.Forms.Label label1;
-        private BorderSelector borderSelector;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar sliderBorderWeight;
         private System.Windows.Forms.Label lbBorderValue;
-        private System.Windows.Forms.CheckBox MoveObject;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private BorderSelector borderSelector;
+        private System.Windows.Forms.Button btnMove;
+        private FillPatternSelection fillPatternSelection;
     }
 }
 
