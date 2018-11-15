@@ -67,7 +67,19 @@
             this.colorPickerBorder = new System.Windows.Forms.ColorDialog();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.toolbarHolder = new System.Windows.Forms.ToolStripContainer();
+            this.shapePickerPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLine = new System.Windows.Forms.Button();
+            this.btnRect = new System.Windows.Forms.Button();
+            this.btnEllipse = new System.Windows.Forms.Button();
+            this.btnCircle = new System.Windows.Forms.Button();
+            this.btnParabola = new System.Windows.Forms.Button();
+            this.btnHyperbole = new System.Windows.Forms.Button();
+            this.btnSquare = new System.Windows.Forms.Button();
+            this.btnTriangle = new System.Windows.Forms.Button();
+            this.btnShapePicker = new System.Windows.Forms.Button();
+            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
             this.btnMove = new System.Windows.Forms.Button();
+            this.borderSelector = new _2DDesigner.BorderSelector();
             this.lbBorderValue = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
@@ -75,12 +87,11 @@
             this.btnFillColorPicker = new System.Windows.Forms.Button();
             this.btnBorderColorPicker = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
-            this.borderSelector = new _2DDesigner.BorderSelector();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.toolbarHolder.ContentPanel.SuspendLayout();
             this.toolbarHolder.SuspendLayout();
+            this.shapePickerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -95,7 +106,7 @@
             this.aboutToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(787, 24);
+            this.menu.Size = new System.Drawing.Size(977, 24);
             this.menu.TabIndex = 1;
             this.menu.Text = "menuStrip2";
             // 
@@ -357,6 +368,8 @@
             // toolbarHolder.ContentPanel
             // 
             this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolbarHolder.ContentPanel.Controls.Add(this.shapePickerPanel);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnShapePicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.fillPatternSelection);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnMove);
             this.toolbarHolder.ContentPanel.Controls.Add(this.borderSelector);
@@ -367,11 +380,216 @@
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnFillColorPicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnBorderColorPicker);
             this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 86);
+            this.toolbarHolder.ContentPanel.Load += new System.EventHandler(this.toolbarHolder_ContentPanel_Load);
+            this.toolbarHolder.ContentPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.toolbarHolder_ContentPanel_MouseClick);
             this.toolbarHolder.Location = new System.Drawing.Point(3, 25);
             this.toolbarHolder.Name = "toolbarHolder";
             this.toolbarHolder.Size = new System.Drawing.Size(784, 111);
             this.toolbarHolder.TabIndex = 4;
             this.toolbarHolder.Text = "toolStripContainer1";
+            this.toolbarHolder.Click += new System.EventHandler(this.toolbarHolder_Click);
+            // 
+            // shapePickerPanel
+            // 
+            this.shapePickerPanel.AutoScroll = true;
+            this.shapePickerPanel.AutoScrollMargin = new System.Drawing.Size(5, 5);
+            this.shapePickerPanel.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+            this.shapePickerPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.shapePickerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.shapePickerPanel.Controls.Add(this.btnLine);
+            this.shapePickerPanel.Controls.Add(this.btnRect);
+            this.shapePickerPanel.Controls.Add(this.btnEllipse);
+            this.shapePickerPanel.Controls.Add(this.btnCircle);
+            this.shapePickerPanel.Controls.Add(this.btnParabola);
+            this.shapePickerPanel.Controls.Add(this.btnHyperbole);
+            this.shapePickerPanel.Controls.Add(this.btnSquare);
+            this.shapePickerPanel.Controls.Add(this.btnTriangle);
+            this.shapePickerPanel.Location = new System.Drawing.Point(77, 2);
+            this.shapePickerPanel.Name = "shapePickerPanel";
+            this.shapePickerPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.shapePickerPanel.Size = new System.Drawing.Size(116, 65);
+            this.shapePickerPanel.TabIndex = 17;
+            this.shapePickerPanel.Visible = false;
+            this.shapePickerPanel.Leave += new System.EventHandler(this.shapePickerPanel_Leave);
+            // 
+            // btnLine
+            // 
+            this.btnLine.BackColor = System.Drawing.Color.Transparent;
+            this.btnLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLine.BackgroundImage")));
+            this.btnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnLine.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnLine.Location = new System.Drawing.Point(6, 6);
+            this.btnLine.Margin = new System.Windows.Forms.Padding(1);
+            this.btnLine.Name = "btnLine";
+            this.btnLine.Size = new System.Drawing.Size(24, 24);
+            this.btnLine.TabIndex = 18;
+            this.btnLine.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLine.UseVisualStyleBackColor = false;
+            this.btnLine.Click += new System.EventHandler(this.btnLine_Click);
+            // 
+            // btnRect
+            // 
+            this.btnRect.BackColor = System.Drawing.Color.Transparent;
+            this.btnRect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRect.BackgroundImage")));
+            this.btnRect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnRect.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnRect.Location = new System.Drawing.Point(32, 6);
+            this.btnRect.Margin = new System.Windows.Forms.Padding(1);
+            this.btnRect.Name = "btnRect";
+            this.btnRect.Size = new System.Drawing.Size(24, 24);
+            this.btnRect.TabIndex = 19;
+            this.btnRect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRect.UseVisualStyleBackColor = false;
+            this.btnRect.Click += new System.EventHandler(this.btnRect_Click);
+            // 
+            // btnEllipse
+            // 
+            this.btnEllipse.BackColor = System.Drawing.Color.Transparent;
+            this.btnEllipse.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEllipse.BackgroundImage")));
+            this.btnEllipse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnEllipse.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnEllipse.Location = new System.Drawing.Point(58, 6);
+            this.btnEllipse.Margin = new System.Windows.Forms.Padding(1);
+            this.btnEllipse.Name = "btnEllipse";
+            this.btnEllipse.Size = new System.Drawing.Size(24, 24);
+            this.btnEllipse.TabIndex = 20;
+            this.btnEllipse.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEllipse.UseVisualStyleBackColor = false;
+            this.btnEllipse.Click += new System.EventHandler(this.btnEllipse_Click);
+            // 
+            // btnCircle
+            // 
+            this.btnCircle.BackColor = System.Drawing.Color.Transparent;
+            this.btnCircle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCircle.BackgroundImage")));
+            this.btnCircle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnCircle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCircle.Location = new System.Drawing.Point(84, 6);
+            this.btnCircle.Margin = new System.Windows.Forms.Padding(1);
+            this.btnCircle.Name = "btnCircle";
+            this.btnCircle.Size = new System.Drawing.Size(24, 24);
+            this.btnCircle.TabIndex = 24;
+            this.btnCircle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCircle.UseVisualStyleBackColor = false;
+            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
+            // 
+            // btnParabola
+            // 
+            this.btnParabola.BackColor = System.Drawing.Color.Transparent;
+            this.btnParabola.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnParabola.BackgroundImage")));
+            this.btnParabola.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnParabola.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnParabola.Location = new System.Drawing.Point(6, 32);
+            this.btnParabola.Margin = new System.Windows.Forms.Padding(1);
+            this.btnParabola.Name = "btnParabola";
+            this.btnParabola.Size = new System.Drawing.Size(24, 24);
+            this.btnParabola.TabIndex = 22;
+            this.btnParabola.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnParabola.UseVisualStyleBackColor = false;
+            this.btnParabola.Click += new System.EventHandler(this.btnParabola_Click);
+            // 
+            // btnHyperbole
+            // 
+            this.btnHyperbole.BackColor = System.Drawing.Color.Transparent;
+            this.btnHyperbole.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnHyperbole.BackgroundImage")));
+            this.btnHyperbole.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnHyperbole.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnHyperbole.Location = new System.Drawing.Point(32, 32);
+            this.btnHyperbole.Margin = new System.Windows.Forms.Padding(1);
+            this.btnHyperbole.Name = "btnHyperbole";
+            this.btnHyperbole.Size = new System.Drawing.Size(24, 24);
+            this.btnHyperbole.TabIndex = 23;
+            this.btnHyperbole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHyperbole.UseVisualStyleBackColor = false;
+            this.btnHyperbole.Click += new System.EventHandler(this.btnHyperbole_Click);
+            // 
+            // btnSquare
+            // 
+            this.btnSquare.BackColor = System.Drawing.Color.Transparent;
+            this.btnSquare.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSquare.BackgroundImage")));
+            this.btnSquare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSquare.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSquare.Location = new System.Drawing.Point(58, 32);
+            this.btnSquare.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSquare.Name = "btnSquare";
+            this.btnSquare.Size = new System.Drawing.Size(24, 24);
+            this.btnSquare.TabIndex = 25;
+            this.btnSquare.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSquare.UseVisualStyleBackColor = false;
+            this.btnSquare.Click += new System.EventHandler(this.btnSquare_Click);
+            // 
+            // btnTriangle
+            // 
+            this.btnTriangle.BackColor = System.Drawing.Color.Transparent;
+            this.btnTriangle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTriangle.BackgroundImage")));
+            this.btnTriangle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnTriangle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnTriangle.Location = new System.Drawing.Point(84, 32);
+            this.btnTriangle.Margin = new System.Windows.Forms.Padding(1);
+            this.btnTriangle.Name = "btnTriangle";
+            this.btnTriangle.Size = new System.Drawing.Size(24, 24);
+            this.btnTriangle.TabIndex = 21;
+            this.btnTriangle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnTriangle.UseVisualStyleBackColor = false;
+            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
+            // 
+            // btnShapePicker
+            // 
+            this.btnShapePicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnShapePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnShapePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnShapePicker.Location = new System.Drawing.Point(41, 2);
+            this.btnShapePicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnShapePicker.Name = "btnShapePicker";
+            this.btnShapePicker.Size = new System.Drawing.Size(32, 32);
+            this.btnShapePicker.TabIndex = 16;
+            this.btnShapePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnShapePicker.UseVisualStyleBackColor = false;
+            this.btnShapePicker.Click += new System.EventHandler(this.btnShapePicker_Click);
+            // 
+            // fillPatternSelection
+            // 
+            this.fillPatternSelection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.fillPatternSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fillPatternSelection.FormattingEnabled = true;
+            this.fillPatternSelection.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10});
+            this.fillPatternSelection.Location = new System.Drawing.Point(126, 9);
+            this.fillPatternSelection.Name = "fillPatternSelection";
+            this.fillPatternSelection.Size = new System.Drawing.Size(121, 21);
+            this.fillPatternSelection.TabIndex = 15;
+            this.fillPatternSelection.SelectedIndexChanged += new System.EventHandler(this.fillPatternSelection1_SelectedIndexChanged);
             // 
             // btnMove
             // 
@@ -387,6 +605,74 @@
             this.btnMove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnMove.UseVisualStyleBackColor = false;
             this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+            // 
+            // borderSelector
+            // 
+            this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.borderSelector.FormattingEnabled = true;
+            this.borderSelector.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7});
+            this.borderSelector.Location = new System.Drawing.Point(358, 9);
+            this.borderSelector.Name = "borderSelector";
+            this.borderSelector.Size = new System.Drawing.Size(121, 21);
+            this.borderSelector.TabIndex = 5;
+            this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
             // 
             // lbBorderValue
             // 
@@ -459,87 +745,12 @@
             this.btnBorderColorPicker.UseVisualStyleBackColor = false;
             this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
             // 
-            // fillPatternSelection
-            // 
-            this.fillPatternSelection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.fillPatternSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fillPatternSelection.FormattingEnabled = true;
-            this.fillPatternSelection.Items.AddRange(new object[] {
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10});
-            this.fillPatternSelection.Location = new System.Drawing.Point(126, 9);
-            this.fillPatternSelection.Name = "fillPatternSelection";
-            this.fillPatternSelection.Size = new System.Drawing.Size(121, 21);
-            this.fillPatternSelection.TabIndex = 15;
-            this.fillPatternSelection.SelectedIndexChanged += new System.EventHandler(this.fillPatternSelection1_SelectedIndexChanged);
-            // 
-            // borderSelector
-            // 
-            this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.borderSelector.FormattingEnabled = true;
-            this.borderSelector.Items.AddRange(new object[] {
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7});
-            this.borderSelector.Location = new System.Drawing.Point(358, 9);
-            this.borderSelector.Name = "borderSelector";
-            this.borderSelector.Size = new System.Drawing.Size(121, 21);
-            this.borderSelector.TabIndex = 5;
-            this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
-            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(784, 783);
+            this.ClientSize = new System.Drawing.Size(977, 749);
             this.Controls.Add(this.toolbarHolder);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.menu);
@@ -547,9 +758,8 @@
             this.Text = "2D Designer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form_MouseClick);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
@@ -557,6 +767,7 @@
             this.toolbarHolder.ContentPanel.PerformLayout();
             this.toolbarHolder.ResumeLayout(false);
             this.toolbarHolder.PerformLayout();
+            this.shapePickerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -612,6 +823,16 @@
         private BorderSelector borderSelector;
         private System.Windows.Forms.Button btnMove;
         private FillPatternSelection fillPatternSelection;
+        private System.Windows.Forms.Button btnShapePicker;
+        private System.Windows.Forms.FlowLayoutPanel shapePickerPanel;
+        private System.Windows.Forms.Button btnLine;
+        private System.Windows.Forms.Button btnRect;
+        private System.Windows.Forms.Button btnEllipse;
+        private System.Windows.Forms.Button btnCircle;
+        private System.Windows.Forms.Button btnParabola;
+        private System.Windows.Forms.Button btnHyperbole;
+        private System.Windows.Forms.Button btnSquare;
+        private System.Windows.Forms.Button btnTriangle;
     }
 }
 

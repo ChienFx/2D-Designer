@@ -27,10 +27,11 @@ namespace _2DDesigner
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.btnShapePicker.Image = Properties.Resources.line;
+            shapePickerPanel.Visible = false;
         }
 
-
-
+       
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -53,29 +54,15 @@ namespace _2DDesigner
 
 
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void pictureBox_Click(object sender, EventArgs e)
         {
-
+            if (shapePickerPanel.Visible == true)
+                shapePickerPanel.Visible = false;
         }
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            if (state == State.MOVE)
+           if (state == State.MOVE)
             {
                 controller.DetectWhichObjectIsSelected(new Point(-1, -1));
             }
@@ -183,6 +170,120 @@ namespace _2DDesigner
         private void fillPatternSelection1_SelectedIndexChanged(object sender, EventArgs e)
         {
             controller.setFillPattern(BrushStyle.getBrush(fillPatternSelection.SelectedIndex));
+        }
+
+        private void btnShapePicker_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_LINE;
+            shapePickerPanel.Visible = true;
+            shapePickerPanel.Focus();
+        }
+
+        private void btnLine_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_LINE;
+            this.btnShapePicker.Image = Properties.Resources.line;
+            shapePickerPanel.Visible = false;
+            btnShapePicker.Focus();
+        }
+
+        private void btnRect_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_RECTANGLE;
+            this.btnShapePicker.Image = Properties.Resources.rect;
+            shapePickerPanel.Visible = false;
+            btnShapePicker.Focus();
+        }
+
+        private void btnEllipse_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_ELLIPSE;
+            this.btnShapePicker.Image = Properties.Resources.ellipse;
+            shapePickerPanel.Visible = false;
+            btnShapePicker.Focus();
+        }
+
+        private void btnCircle_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_CIRCLE;
+            this.btnShapePicker.Image = Properties.Resources.circle;
+            shapePickerPanel.Visible = false;
+            btnShapePicker.Focus();
+        }
+
+        private void btnParabola_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_PARABOLA;
+            this.btnShapePicker.Image = Properties.Resources.parabola;
+            shapePickerPanel.Visible = false;
+            btnShapePicker.Focus();
+        }
+
+        private void btnHyperbole_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_HYPERBOLE;
+            this.btnShapePicker.Image = Properties.Resources.hyperbole;
+            shapePickerPanel.Visible = false;
+            btnShapePicker.Focus();
+        }
+
+        private void btnSquare_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_SQUARE;
+            this.btnShapePicker.Image = Properties.Resources.square;
+            shapePickerPanel.Visible = false;
+            btnShapePicker.Focus();
+        }
+
+        private void btnTriangle_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW_TRIANGLE;
+            this.btnShapePicker.Image = Properties.Resources.triangle;
+            shapePickerPanel.Visible = false;
+            btnShapePicker.Focus();
+        }
+
+        private void toolbarHolder_ContentPanel_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void toolbarHolder_Click(object sender, EventArgs e)
+        {
+            HideShapePickerPanel();
+        }
+
+        private void Form_MouseClick(object sender, MouseEventArgs e)
+        {
+            HideShapePickerPanel();
+        }
+
+        private void toolbarHolder_ContentPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            HideShapePickerPanel();
+        }
+
+        void HideShapePickerPanel()
+        {
+            if(shapePickerPanel.Visible == true)
+                shapePickerPanel.Visible = false;
+        }
+
+        void ChangeState(State state)
+        {
+            this.state = state;
+        }
+
+        private void shapePickerPanel_MouseLeave(object sender, EventArgs e)
+        {
+            shapePickerPanel.Visible = false;
+        }
+
+        
+
+        private void shapePickerPanel_Leave(object sender, EventArgs e)
+        {
+            HideShapePickerPanel();
         }
     }
 }
