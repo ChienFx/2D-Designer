@@ -142,8 +142,9 @@ namespace _2DDesigner
             if (colorPickerFill.ShowDialog() == DialogResult.OK)
             {
                 Color color = colorPickerFill.Color;
-                btnFillColorPicker.BackColor = color;
+                btnFillForePicker.BackColor = color;
 
+                controller.setFillForeground(color);
                 //chang fill color
             }
         }

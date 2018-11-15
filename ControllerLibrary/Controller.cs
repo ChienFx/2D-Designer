@@ -154,6 +154,11 @@ namespace ControllerLibrary
             return false;
         }
 
+        public void setFillForeground(Color color)
+        {
+            throw new NotImplementedException();
+        }
+
         //Draw all shapes
         public void DrawAll()
         {

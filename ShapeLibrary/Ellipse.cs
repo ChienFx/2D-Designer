@@ -42,6 +42,7 @@ namespace ShapeLibrary
 
             int x = Math.Min(mTopLeft.X, mBottomRight.X);
             int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
+
             Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
 
 
