@@ -18,7 +18,6 @@ namespace ControllerLibrary
         Border border;
 
         Bitmap bitmap;
-        Graphics graphics;
 
         public Controller(int width, int height)
         {
@@ -31,7 +30,6 @@ namespace ControllerLibrary
             fillPattern = new FillPattern();
  
             bitmap = new Bitmap(width, height);
-            graphics = Graphics.FromImage(bitmap);
         }
 
         public Shape GetSelectedShape()
@@ -158,16 +156,19 @@ namespace ControllerLibrary
         {
             throw new NotImplementedException();
         }
+        private Graphics GetGraphics()
+        {
+            return Graphics.FromImage(bitmap);
+        }
 
         //Draw all shapes
         public void DrawAll()
         {
-            graphics.Clear(Color.White);
+            GetGraphics().Clear(Color.White);
             for (int i = 0; i < mShapes.Count; i++)
             {
-                mShapes[i].Fill(this.graphics);
-                mShapes[i].Draw(this.graphics);
-                
+                mShapes[i].Fill(GetGraphics());
+                mShapes[i].Draw(GetGraphics());
             }
         }
 
@@ -199,7 +200,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return;
-            shape.Fill(graphics);
+            shape.Fill(GetGraphics());
         }
 
         
@@ -210,7 +211,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return;
-            shape.Rotate(graphics, angle);
+            shape.Rotate(GetGraphics(), angle);
         }
 
         //Scale the selected shape/group
@@ -219,7 +220,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return;
-            shape.Scale(graphics, xRatio, yRatio);
+            shape.Scale(GetGraphics(), xRatio, yRatio);
         }
 
         //Shift the selected shape/group
@@ -228,7 +229,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return;
-            shape.Shift(graphics, dx, dy);
+            shape.Shift(GetGraphics(), dx, dy);
         }
 
         //Undo the last step
