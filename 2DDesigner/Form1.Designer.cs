@@ -584,6 +584,17 @@
             7,
             8,
             9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
             10});
             this.fillPatternSelection.Location = new System.Drawing.Point(126, 9);
             this.fillPatternSelection.Name = "fillPatternSelection";
@@ -612,6 +623,14 @@
             this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.borderSelector.FormattingEnabled = true;
             this.borderSelector.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
             0,
             1,
             2,
@@ -758,7 +777,6 @@
             this.Text = "2D Designer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form_MouseClick);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();

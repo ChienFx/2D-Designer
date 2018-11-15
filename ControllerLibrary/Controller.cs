@@ -28,6 +28,7 @@ namespace ControllerLibrary
             mSelectedGroupIndex = -1;
             
             border = new Border();
+            fillPattern = new FillPattern();
  
             bitmap = new Bitmap(width, height);
             graphics = Graphics.FromImage(bitmap);
@@ -75,14 +76,16 @@ namespace ControllerLibrary
                 this.border.setBorder(borderStyle);
         }
 
-        public void setFillPattern(Brush brush)
+        public void setFillPattern(int index)
         {
             Shape ins = GetSelectedShape();
             if (ins != null)
-                ins.setFillPattern(brush);
+                ins.setFillPattern(index);
             else
-                this.fillPattern.setFillPattern(brush);
+                this.fillPattern.setFillPattern(index);
         }
+
+       
 
         //Send selected shape/group to back
         public void SendObjectToBack()
@@ -165,9 +168,12 @@ namespace ControllerLibrary
 
         public void addShape(Shape shape)
         {
+            shape.setFillPattern(fillPattern);
             shape.setBorder(border);
             mShapes.Add(shape);
         }
+
+        
 
         //Delete selected shape/group
         public void DeleteSelectedObject()

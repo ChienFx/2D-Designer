@@ -45,7 +45,8 @@ namespace ShapeLibrary
             Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
 
 
-            Brush brush = this.mFillPattern.getBrush();
+            Brush brush = mFillPattern.createBrush();
+
             graphics.FillEllipse(brush, rectangle);
 
             TransformGraphic(graphics, -mAngle);

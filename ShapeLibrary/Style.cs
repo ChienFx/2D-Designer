@@ -97,18 +97,19 @@ namespace ShapeLibrary
     public class FillPattern : Style
     {
         Color mBackground;
-        Brush mBrush;
 
-        public void setFillPattern(Brush brush)
+        private EBrushType mBrushType;
+        public static int mAmount = 11;
+
+        public void setFillPattern(int index)
         {
-            this.mBrush = brush;
+            mBrushType = (EBrushType)index;
         }
 
-
-
-        public FillPattern(Brush brush, Color foregroundColor, Color backgroundColor)
+        
+        public FillPattern(EBrushType brushType, Color foregroundColor, Color backgroundColor)
         {
-            mBrush = brush;
+            this.mBrushType = brushType;
             mForeground = foregroundColor;
             mBackground = backgroundColor;
         }
@@ -117,7 +118,7 @@ namespace ShapeLibrary
         {
             mBackground = Color.Transparent;
             mForeground = MyColor.DEFAULT_SHAPE_FILL_COLOR;
-            mBrush = new SolidBrush(mForeground);
+            mBrushType = EBrushType.Solid;
         }
 
         public void setBackgroundColor(Color color)
@@ -125,54 +126,97 @@ namespace ShapeLibrary
             this.mBackground = color;
         }
 
-        public void setBrush(Brush brush)
+        public Brush createBrush()
         {
-            this.mBrush = brush;
+            return createBrush((int)this.mBrushType);
         }
 
-        public Brush getBrush()
+        public Brush createBrush(int id)
         {
-            return mBrush;
+            switch ((EBrushType)id)
+            {
+                
+                case EBrushType.BackwardDiagonal:
+                    return new HatchBrush(HatchStyle.BackwardDiagonal, mForeground, mBackground);
+
+                case EBrushType.Cross:
+                    return new HatchBrush(HatchStyle.Cross, mForeground, mBackground);
+
+                case EBrushType.DarkDownwardDiagonal:
+                    return new HatchBrush(HatchStyle.DarkDownwardDiagonal, mForeground, mBackground);
+
+                case EBrushType.DarkHorizontal:
+                    return new HatchBrush(HatchStyle.DarkHorizontal, mForeground, mBackground);
+
+                case EBrushType.DashedDownwardDiagonal:
+                    return new HatchBrush(HatchStyle.DashedDownwardDiagonal, mForeground, mBackground);
+
+                case EBrushType.DiagonalBrick:
+                    return new HatchBrush(HatchStyle.DiagonalBrick, mForeground, mBackground);
+
+                case EBrushType.DiagonalCross:
+                    return new HatchBrush(HatchStyle.DiagonalCross, mForeground, mBackground);
+
+                case EBrushType.Divot:
+                    return new HatchBrush(HatchStyle.Divot, mForeground, mBackground);
+
+                case EBrushType.DottedGrid:
+                    return new HatchBrush(HatchStyle.DottedGrid, mForeground, mBackground);
+
+                case EBrushType.LargeConfetti:
+                    return new HatchBrush(HatchStyle.LargeConfetti, mForeground, mBackground);
+
+                default:
+                    return new SolidBrush(mForeground);
+
+            }
         }
 
+        internal void setFillPattern(FillPattern fillPattern)
+        {
+            mForeground = fillPattern.mForeground;
+            mBackground = fillPattern.mBackground;
+            mBrushType = fillPattern.mBrushType;
+        }
     }
 }
-public class BrushStyle
+public enum EBrushType
 {
-    public static Brush Solid = new SolidBrush(Color.Aqua);
-    public static Brush BackwardDiagonal = new HatchBrush(HatchStyle.BackwardDiagonal, Color.Aqua, Color.Beige);
-    public static Brush Cross = new HatchBrush(HatchStyle.Cross, Color.Aqua, Color.Beige);
-    public static Brush DarkDownwardDiagonal = new HatchBrush(HatchStyle.DarkDownwardDiagonal, Color.Aqua, Color.Beige);
-    public static Brush DarkHorizontal = new HatchBrush(HatchStyle.DarkHorizontal, Color.Aqua, Color.Beige);
-    public static Brush DashedDownwardDiagonal = new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Aqua, Color.Beige);
-    public static Brush DiagonalBrick = new HatchBrush(HatchStyle.DiagonalBrick, Color.Aqua, Color.Beige);
-    public static Brush DiagonalCross = new HatchBrush(HatchStyle.DiagonalCross, Color.Aqua, Color.Beige);
-    public static Brush Divot = new HatchBrush(HatchStyle.Divot, Color.Aqua, Color.Beige);
-    public static Brush DottedGrid = new HatchBrush(HatchStyle.DottedGrid, Color.Aqua, Color.Beige);
-    public static Brush LargeConfetti = new HatchBrush(HatchStyle.LargeConfetti, Color.Aqua, Color.Beige);
+
+     Solid = 0,
+     BackwardDiagonal = 1,// new HatchBrush(HatchStyle.BackwardDiagonal, Color.Aqua, Color.Beige);
+     Cross = 2, // new HatchBrush(HatchStyle.Cross, Color.Aqua, Color.Beige);
+     DarkDownwardDiagonal = 3,// new HatchBrush(HatchStyle.DarkDownwardDiagonal, Color.Aqua, Color.Beige);
+     DarkHorizontal = 4,// new HatchBrush(HatchStyle.DarkHorizontal, Color.Aqua, Color.Beige);
+     DashedDownwardDiagonal = 5,// new HatchBrush(HatchStyle.DashedDownwardDiagonal, Color.Aqua, Color.Beige);
+     DiagonalBrick = 6,// new HatchBrush(HatchStyle.DiagonalBrick, Color.Aqua, Color.Beige);
+     DiagonalCross = 7,// = new HatchBrush(HatchStyle.DiagonalCross, Color.Aqua, Color.Beige);
+     Divot = 8,// = new HatchBrush(HatchStyle.Divot, Color.Aqua, Color.Beige);
+     DottedGrid = 9,// = new HatchBrush(HatchStyle.DottedGrid, Color.Aqua, Color.Beige);
+     LargeConfetti = 10// = new HatchBrush(HatchStyle.LargeConfetti, Color.Aqua, Color.Beige);
 
 
-    public static int amount = 11;
+    
 
-    public static Brush getBrush(int index)
-    {
-        switch (index)
-        {
-            case 0: return Solid;
-            case 1: return BackwardDiagonal;
-            case 2: return Cross;
-            case 3: return DarkDownwardDiagonal;
-            case 4: return DarkHorizontal;
-            case 5: return DashedDownwardDiagonal;
-            case 6: return DiagonalBrick;
-            case 7: return DiagonalCross;
-            case 8: return Divot;
-            case 9: return DottedGrid;
-            case 10: return LargeConfetti;
+    //public static int getBrush(int index)
+    //{
+    //    switch (index)
+    //    {
+    //        case 0: return Solid;
+    //        case 1: return BackwardDiagonal;
+    //        case 2: return Cross;
+    //        case 3: return DarkDownwardDiagonal;
+    //        case 4: return DarkHorizontal;
+    //        case 5: return DashedDownwardDiagonal;
+    //        case 6: return DiagonalBrick;
+    //        case 7: return DiagonalCross;
+    //        case 8: return Divot;
+    //        case 9: return DottedGrid;
+    //        case 10: return LargeConfetti;
 
-            default: return Solid;
-        }
-    }
+    //        default: return Solid;
+    //    }
+    //}
 
 
 }

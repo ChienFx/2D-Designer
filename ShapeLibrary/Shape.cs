@@ -19,6 +19,7 @@ namespace ShapeLibrary
             mTopLeft = new Point(0, 0);
             mBottomRight = new Point(0, 0);
             mBorder = new Border();
+            mFillPattern = new FillPattern();
             mAngle = 0;
         }
 
@@ -68,6 +69,11 @@ namespace ShapeLibrary
             mTopLeft = CalculatePointAfterScale(mTopLeft, xRate, yRate, mTopLeft);
             mBottomRight = CalculatePointAfterScale(mBottomRight, xRate, yRate, mTopLeft);
             Draw(graphics);
+        }
+
+        public void setFillPattern(int index)
+        {
+            this.mFillPattern.setFillPattern(index);
         }
 
         public void setFillPattern(Brush brush)
@@ -125,6 +131,11 @@ namespace ShapeLibrary
         public void setBorder(Border border)
         {
             this.mBorder.setBorder(border);
+        }
+
+        public void setFillPattern(FillPattern fillPattern)
+        {
+            this.mFillPattern.setFillPattern(fillPattern);
         }
     }
 }
