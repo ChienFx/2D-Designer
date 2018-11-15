@@ -142,8 +142,9 @@ namespace _2DDesigner
             if (colorPickerFill.ShowDialog() == DialogResult.OK)
             {
                 Color color = colorPickerFill.Color;
-                btnFillColorPicker.BackColor = color;
+                btnFillForePicker.BackColor = color;
 
+                controller.setFillForeground(color);
                 //chang fill color
             }
         }
@@ -169,7 +170,8 @@ namespace _2DDesigner
 
         private void fillPatternSelection1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            controller.setFillPattern(BrushStyle.getBrush(fillPatternSelection.SelectedIndex));
+            controller.setFillPattern(fillPatternSelection.SelectedIndex);
+
         }
 
         private void btnShapePicker_Click(object sender, EventArgs e)
@@ -272,14 +274,7 @@ namespace _2DDesigner
         void ChangeState(State state)
         {
             this.state = state;
-        }
-
-        private void shapePickerPanel_MouseLeave(object sender, EventArgs e)
-        {
-            shapePickerPanel.Visible = false;
-        }
-
-        
+        }     
 
         private void shapePickerPanel_Leave(object sender, EventArgs e)
         {

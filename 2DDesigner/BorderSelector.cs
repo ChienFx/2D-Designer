@@ -1,4 +1,5 @@
 ﻿
+using ShapeLibrary;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -37,7 +38,7 @@ namespace _2DDesigner
         {
             this.DrawMode = DrawMode.OwnerDrawVariable;
             this.DropDownStyle = ComboBoxStyle.DropDownList;
-            for (int i = 0; i < BrushStyle.amount; i++)
+            for (int i = 0; i < FillPattern.mAmount; i++)
             {
                 this.Items.Add(i);
             }
@@ -50,7 +51,8 @@ namespace _2DDesigner
             
             Rectangle rect = new Rectangle(e.Bounds.Left, e.Bounds.Top+2, e.Bounds.Right-e.Bounds.Left, e.Bounds.Bottom-e.Bounds.Y);
 
-            Brush brush = BrushStyle.getBrush(e.Index);
+            FillPattern fp = new FillPattern();
+            Brush brush = fp.createBrush(e.Index);
 
             e.Graphics.FillRectangle(brush, rect);
         }
