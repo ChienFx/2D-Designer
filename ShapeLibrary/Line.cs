@@ -32,7 +32,7 @@ namespace ShapeLibrary
 
         public override void Fill(Graphics graphics)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

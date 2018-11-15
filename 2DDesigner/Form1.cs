@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,7 +15,11 @@ namespace _2DDesigner
         public Monitor monitor;
         State state;
         Point start;
+        ShapeType shapeType;
         bool isMouseHold = false;
+
+        Stack<Controller> undoList = new Stack<Controller>();
+        Stack<Controller> redoList = new Stack<Controller>();
 
         public Form()
         {
@@ -23,6 +28,8 @@ namespace _2DDesigner
             controller = new Controller(pictureBox.Width, pictureBox.Height);
             start = new Point(0, 0);
             state = State.DEFAULT;
+            shapeType = ShapeType.DEFAULT;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -62,13 +69,17 @@ namespace _2DDesigner
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-           if (state == State.MOVE)
+            undoList.Push(ObjectExtensions.Copy(controller));
+            redoList.Clear();
+
+
+            if (state == State.MOVE)
             {
                 controller.DetectWhichObjectIsSelected(new Point(-1, -1));
             }
             else
             {
-                Shape shape = new Ellipse(start, new Point(e.X, e.Y));
+                Shape shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
                 controller.addShape(shape);
                 controller.DrawAll();
                 UpdateUI();
@@ -78,7 +89,6 @@ namespace _2DDesigner
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            //isMove = true;
             if (state == State.MOVE)
             {
                 controller.DetectWhichObjectIsSelected(new Point(e.X, e.Y));
@@ -107,7 +117,7 @@ namespace _2DDesigner
                 {
                     Bitmap bitmap = (Bitmap)controller.getBitmap().Clone();
                     Graphics g = Graphics.FromImage(bitmap);
-                    Shape shape = new Parabola(start, new Point(e.X, e.Y));
+                    Shape shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
                     shape.Draw(g);
                     pictureBox.Image = bitmap;
                 }
@@ -176,14 +186,14 @@ namespace _2DDesigner
 
         private void btnShapePicker_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_LINE;
+            state = State.DRAW;
             shapePickerPanel.Visible = true;
             shapePickerPanel.Focus();
         }
 
         private void btnLine_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_LINE;
+            shapeType = ShapeType.LINE;
             this.btnShapePicker.Image = Properties.Resources.line;
             shapePickerPanel.Visible = false;
             btnShapePicker.Focus();
@@ -199,7 +209,7 @@ namespace _2DDesigner
 
         private void btnEllipse_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_ELLIPSE;
+            shapeType = ShapeType.ELLIPSE;
             this.btnShapePicker.Image = Properties.Resources.ellipse;
             shapePickerPanel.Visible = false;
             btnShapePicker.Focus();
@@ -207,7 +217,7 @@ namespace _2DDesigner
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_CIRCLE;
+            shapeType = ShapeType.ELLIPSE;
             this.btnShapePicker.Image = Properties.Resources.circle;
             shapePickerPanel.Visible = false;
             btnShapePicker.Focus();
@@ -215,7 +225,7 @@ namespace _2DDesigner
 
         private void btnParabola_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_PARABOLA;
+            shapeType = ShapeType.PARABOLA;
             this.btnShapePicker.Image = Properties.Resources.parabola;
             shapePickerPanel.Visible = false;
             btnShapePicker.Focus();
@@ -274,11 +284,35 @@ namespace _2DDesigner
         void ChangeState(State state)
         {
             this.state = state;
-        }     
+        }
 
         private void shapePickerPanel_Leave(object sender, EventArgs e)
         {
             HideShapePickerPanel();
+        }
+
+        private void Undo_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW;
+            if (undoList.Count > 0)
+            {
+                redoList.Push(controller);
+                controller = undoList.Pop();
+                controller.DrawAll();
+                UpdateUI();
+            }
+        }
+
+        private void Redo_Click(object sender, EventArgs e)
+        {
+            state = State.DRAW;
+            if (redoList.Count > 0)
+            {
+                undoList.Push(controller);
+                controller = redoList.Pop();
+                controller.DrawAll();
+                UpdateUI();
+            }
         }
     }
 }

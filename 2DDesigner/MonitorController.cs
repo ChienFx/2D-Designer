@@ -44,12 +44,9 @@ namespace _2DDesigner
         MOVE,
         SCALE,
         FILL,
-        DRAW_LINE,
+        DRAW,
         DRAW_RECTANGLE,
         DRAW_SQUARE,
-        DRAW_ELLIPSE,
-        DRAW_CIRCLE,
-        DRAW_PARABOLA,
         DRAW_HYPERBOLE,
         DRAW_TRIANGLE,
     }
