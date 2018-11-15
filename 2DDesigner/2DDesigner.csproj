@@ -69,6 +69,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -96,6 +97,30 @@
       <Project>{fcb7ec77-a28e-4692-99f2-3ffe51398b35}</Project>
       <Name>ShapeLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ellipse1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hyperbole.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\parabola.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rect1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\triangle1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

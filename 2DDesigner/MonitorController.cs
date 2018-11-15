@@ -49,7 +49,9 @@ namespace _2DDesigner
         DRAW_SQUARE,
         DRAW_ELLIPSE,
         DRAW_CIRCLE,
-
+        DRAW_PARABOLA,
+        DRAW_HYPERBOLE,
+        DRAW_TRIANGLE,
     }
 
     
