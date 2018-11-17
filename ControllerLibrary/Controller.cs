@@ -200,7 +200,11 @@ namespace ControllerLibrary
         public void DeleteSelectedObject()
         {
             if (mSelectedShapeIndex != -1)
+            {
                 mShapes.RemoveAt(mSelectedShapeIndex);
+                DrawAll();
+            }
+                
         }
 
         //Change selected object's border style (redraw)
@@ -354,11 +358,35 @@ namespace ControllerLibrary
             return cloner;
         }
 
-        public void setCopiedSelectedShape()
+        public void copySelectedShape()
         {
             Shape tmp = GetSelectedShape();
             if (tmp != null)
-                this.copiedShape = tmp.Clone();
+                this.copiedShape = (Shape)tmp.Clone();
+        }
+
+        public bool pasteCopiedShape()
+        {
+            if (copiedShape != null)
+            {
+                Shape tmp = GetSelectedShape();
+                if (tmp != null)
+                {
+                    tmp = (Shape)copiedShape.Clone();
+                    DrawAll();
+                    return true;
+                }
+                else
+                {
+                    Shape tmp2 = (Shape)copiedShape.Clone();
+                }
+            }
+            return false;
+        }
+
+        public void cutSelectedShape()
+        {
+            throw new NotImplementedException();
         }
     }
 }

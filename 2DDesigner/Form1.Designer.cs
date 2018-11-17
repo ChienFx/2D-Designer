@@ -1601,15 +1601,17 @@ namespace _2DDesigner
             // 
             this.btnCut.Name = "btnCut";
             this.btnCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.btnCut.Size = new System.Drawing.Size(144, 22);
+            this.btnCut.Size = new System.Drawing.Size(180, 22);
             this.btnCut.Text = "Cu&t";
+            this.btnCut.Click += new System.EventHandler(this.btnCut_Click);
             // 
             // btnPaste
             // 
             this.btnPaste.Name = "btnPaste";
             this.btnPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.btnPaste.Size = new System.Drawing.Size(144, 22);
+            this.btnPaste.Size = new System.Drawing.Size(180, 22);
             this.btnPaste.Text = "P&aste";
+            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
             // 
             // btnLayerItem
             // 
@@ -1712,7 +1714,17 @@ namespace _2DDesigner
 
         }
 
-       
+        private void btnPaste_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnCut_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+
 
         #endregion
         private System.Windows.Forms.MenuStrip menu;

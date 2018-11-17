@@ -712,9 +712,26 @@ namespace _2DDesigner
             {
                 this.Redo();
             }
+            else if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+            {
+                controller.copySelectedShape();
+            }
+            else if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
+            {
+                controller.pasteCopiedShape();
+            }
+            else if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+            {
+                controller.cutSelectedShape();
+            }
             else if (e.KeyCode == Keys.V)
             {
                 SwitchToMoveState();
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                controller.DeleteSelectedObject();
+                UpdateUI();
             }
             else if (e.KeyCode == Keys.D3 && e.Modifiers == Keys.Alt){
                 SwitchToHandViewState();
@@ -933,7 +950,8 @@ namespace _2DDesigner
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            DeleteSelectedShape();
+            controller.DeleteSelectedObject();
+            UpdateUI();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -967,19 +985,10 @@ namespace _2DDesigner
             }
         }
 
-        void DeleteSelectedShape()
-        {
-            if (!(controller.GetSelectedShape() is null))
-            {
-                controller.DeleteSelectedObject();
-                controller.DrawAll();
-                UpdateUI();
-            }
-        }
-
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DeleteSelectedShape();
+            controller.DeleteSelectedObject();
+            UpdateUI();
         }
 
         
@@ -1031,7 +1040,7 @@ namespace _2DDesigner
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            controller.setCopiedSelectedShape();
+            controller.copySelectedShape();
         }
     }
 }

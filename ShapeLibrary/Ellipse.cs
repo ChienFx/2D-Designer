@@ -23,15 +23,23 @@ namespace ShapeLibrary
         {
             TransformGraphic(graphics, mAngle);
 
-            graphics.DrawEllipse(mBorder.createPen(), CreateRectangleWithTwoPoint(mTopLeft, mBottomRight));
+            int x = Math.Min(mTopLeft.X, mBottomRight.X);
+            int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
+            Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
+
+            graphics.DrawEllipse(mBorder.createPen(), rectangle);
         }
 
         public override void Fill(Graphics graphics)
         {
             TransformGraphic(graphics, mAngle);
 
+            int x = Math.Min(mTopLeft.X, mBottomRight.X);
+            int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
+            Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
+
             Brush brush = mFillPattern.createBrush();
-            graphics.FillEllipse(brush, CreateRectangleWithTwoPoint(mTopLeft, mBottomRight));
+            graphics.FillEllipse(brush, rectangle);
         }
 
         public override object Clone()
