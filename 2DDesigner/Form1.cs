@@ -280,6 +280,7 @@ namespace _2DDesigner
             }
         }
 
+
         private void pickFillColor(object sender, EventArgs e)
         {
             if (colorPickerFill.ShowDialog() == DialogResult.OK)
