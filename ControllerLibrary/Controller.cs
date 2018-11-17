@@ -165,9 +165,17 @@ namespace ControllerLibrary
         {
             fillPattern.setForegroundColor(color);
         }
-        private Graphics GetGraphics()
+
+        public Graphics GetGraphics()
         {
             return Graphics.FromImage(bitmap);
+        }
+
+        public void ShowBoundingBoxOfObject()
+        {
+            DrawAll();
+            if (!(GetSelectedShape() is null))
+                GetSelectedShape().ShowBoundingBox(GetGraphics());
         }
 
         public void setFillBackground(Color color)
@@ -195,15 +203,21 @@ namespace ControllerLibrary
             if (index > mShapes.Count)
                 index = mShapes.Count;
             mShapes.Insert(index, shape);
+            mSelectedShapeIndex = index;
         }
 
         
 
         //Delete selected shape/group
-        public void DeleteSelectedObject()
+        public Shape DeleteSelectedObject()
         {
+            Shape result = null;
             if (mSelectedShapeIndex != -1)
+            {
+                result = mShapes[mSelectedShapeIndex];
                 mShapes.RemoveAt(mSelectedShapeIndex);
+            }
+            return result;
         }
 
         //Change selected object's border style (redraw)
@@ -230,7 +244,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return false;
-            shape.Rotate(null, angle);
+            shape.Rotate(angle);
             return true;
         }
 
@@ -240,7 +254,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return false;
-            shape.Scale(null, xRatio, yRatio);
+            shape.Scale(xRatio, yRatio);
             return true;
         }
 
@@ -250,7 +264,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return false;
-            shape.Shift(GetGraphics(), dx, dy);
+            shape.Shift(dx, dy);
             return true;
         }
 

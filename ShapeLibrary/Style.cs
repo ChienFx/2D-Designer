@@ -237,7 +237,7 @@ public class BorderStyle
     float[] mValues;
 
     public static BorderStyle BORDER_STYLE_0 = new BorderStyle(new float[] { 1 });
-    public static BorderStyle BORDER_STYLE_1 = new BorderStyle(new float[] { 8, 8});
+    public static BorderStyle BORDER_STYLE_1 = new BorderStyle(new float[] { 1, 1 });
     public static BorderStyle BORDER_STYLE_2 = new BorderStyle(new float[] { 1, 3 });
     public static BorderStyle BORDER_STYLE_3 = new BorderStyle(new float[] { 1, 2});
     public static BorderStyle BORDER_STYLE_4 = new BorderStyle(new float[] { 1, 2, 1 });

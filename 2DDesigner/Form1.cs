@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
 using ControllerLibrary;
@@ -14,13 +12,13 @@ namespace _2DDesigner
     public partial class Form : System.Windows.Forms.Form
     {
         public Controller controller;
-        //public Shape shape;
         public Monitor monitor;
         State state;
         Point start;
         ShapeType shapeType;
         bool isMouseHold = false;
         bool isSaved = false;
+        Shape shape;
 
         Stack<Controller> undoList = new Stack<Controller>();
         Stack<Controller> redoList = new Stack<Controller>();
@@ -35,6 +33,7 @@ namespace _2DDesigner
             start = new Point(0, 0);
             state = State.DEFAULT;
             shapeType = ShapeType.DEFAULT;
+            shape = null;
 
             this.FormClosing += Form_FormClosing;
 
@@ -123,6 +122,12 @@ namespace _2DDesigner
 
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
+            if (!(shape is null))
+            {
+                controller.addShape(shape, controller.mSelectedShapeIndex);
+                shape = null;
+            }
+
             //Push state into undo stack
             undoList.Push((Controller)controller.Clone());
             setSaveState(false);//unSaved
@@ -132,17 +137,21 @@ namespace _2DDesigner
             {
                 case State.MOVE:
                 case State.ROTATE:
-                case State.FILL:
                 case State.SCALE:
-                    UnSelectedShape();
+                case State.FILL:
                     break;
                 case State.DRAW:
-                    Shape shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
-                    controller.addShape(shape);
-                    controller.DrawAll();
-                    UpdateUI();
+                    if (start.X == e.X && start.Y == e.Y)
+                        break;
+                    Shape _shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
+                    controller.addShape(_shape);
+                    break;
+                default:
                     break;
             }
+
+            controller.ShowBoundingBoxOfObject();
+            UpdateUI();
             isMouseHold = false;
         }
 
@@ -153,14 +162,23 @@ namespace _2DDesigner
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            controller.DetectWhichObjectIsSelected(new Point(e.X, e.Y));
+
             switch (state)
             {
                 case State.MOVE:
                 case State.ROTATE:
                 case State.SCALE:
-                case State.FILL:
+                    shape = controller.DeleteSelectedObject();
+                    if (!(shape is null))
+                    {
+                        tempShape = (Shape)shape.Clone();
+                        controller.DrawAll();
+                        DrawOnCloneGraphics(shape);
+                    }
+                    break;
                 case State.HAND_VIEW:
-                    tempShape = ObjectExtensions.Copy(controller.DetectWhichObjectIsSelected(new Point(e.X, e.Y)));
+                case State.FILL:
                     break;
                 case State.DRAW:
                     break;
@@ -203,60 +221,58 @@ namespace _2DDesigner
         
         private void HandlingRotateObjectEvent(Point e)
         {
-            if (tempShape is null)
+            if (shape is null)
                 return;
-            PointF center = controller.GetSelectedShape().GetCenterOfBoundingBox();
+            PointF center = shape.GetCenterOfBoundingBox();
             Point end = new Point(e.X, e.Y);
             int angle = 1;
-
             if ((start.Y - center.Y) * (end.X - center.X)
                 - (start.X - center.X) * (end.Y - center.Y) > 0)
                 angle = -angle;
-
-            controller.RotateObject(angle);
-            controller.DrawAll();
-            UpdateUI();
+            shape.Rotate(angle);
+            DrawOnCloneGraphics(shape, true);
             start = end;
-        }
-
-        private double Distance(PointF a, PointF b)
-        {
-            return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
         }
 
         Shape tempShape;
         private void HandlingScaleObjectEvent(Point e)
         {
-            if (tempShape is null)
+            if (shape is null)
                 return;
-            controller.SetSelectedShape(tempShape);
-            PointF center = tempShape.GetCenterOfBoundingBox();
+            shape = (Shape)tempShape.Clone();
+            PointF center = shape.GetCenterOfBoundingBox();
             float Sx = Math.Abs(e.X - center.X) / Math.Abs(start.X - center.X);
             float Sy = Math.Abs(e.Y - center.Y) / Math.Abs(start.Y - center.Y);
-            controller.ScaleObject(Sx, Sy);
-            controller.DrawAll();
-            UpdateUI();
+            shape.Scale(Sx, Sy);
+            DrawOnCloneGraphics(shape, true);
         }
 
         private void HandlingDrawObjectEven(Point e)
         {
-            Bitmap bitmap = (Bitmap)controller.getBitmap().Clone();
-            Graphics g = Graphics.FromImage(bitmap);
             Shape shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
-            shape.Draw(g);
-            pictureBox.Image = bitmap;
+            DrawOnCloneGraphics(shape);
         }
 
         private void HandlingMoveObjectEvent(Point e)
         {
-            if (tempShape is null)
+            if (shape is null)
                 return;
             int dx = e.X - start.X;
             int dy = e.Y - start.Y;
-            controller.ShiftObject(dx, dy);
-            controller.DrawAll();
-            UpdateUI();
+            shape.Shift(dx, dy);
+            DrawOnCloneGraphics(shape, true);
             start = new Point(e.X, e.Y);
+        }
+
+        private void DrawOnCloneGraphics(Shape shape, bool isShowBoundingBox = false)
+        {
+            Bitmap bitmap = (Bitmap)controller.getBitmap().Clone();
+            Graphics g = Graphics.FromImage(bitmap);
+            shape.Fill(g);
+            shape.Draw(g);
+            if (isShowBoundingBox)
+                shape.ShowBoundingBox(g);
+            pictureBox.Image = bitmap;
         }
 
         private void pictureBox_MouseLeave(object sender, EventArgs e)
@@ -287,7 +303,6 @@ namespace _2DDesigner
             {
                 Color color = colorPickerFill.Color;
                 btnFillForePicker.BackColor = color;
-
                 controller.setFillForeground(color);
                 //chang fill color
             }

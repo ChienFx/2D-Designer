@@ -5,9 +5,10 @@ namespace ShapeLibrary
     public interface ITransformer
     {
         void Draw(Graphics graphics);
+        void ShowBoundingBox(Graphics graphics);
         void Fill(Graphics graphics);
-        void Rotate(Graphics graphics, float angle);
-        void Scale(Graphics graphics, float xRate, float yRate);
-        void Shift(Graphics graphics, int dx, int dy);
+        void Rotate(float angle);
+        void Scale(float xRate, float yRate);
+        void Shift(int dx, int dy);
     }
 }
