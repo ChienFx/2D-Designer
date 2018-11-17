@@ -60,36 +60,74 @@ namespace ControllerLibrary
                 return null;
         }
 
-        public void setBorder(Color color)
+        public bool setBorder(Color color)
         {
             Shape ins = GetSelectedShape();
             if (ins != null)
+            {
                 ins.setBorder(color);
-            this.border.setBorder(color);
+                ins.Draw(GetGraphics());
+                border.setBorder(color);
+                return true;
+            }
+            else
+            {
+                border.setBorder(color);
+                return false;
+            }
+            
         }
 
-        public void setBorder(int weight)
+        public bool setBorder(int weight)
         {
             Shape ins = GetSelectedShape();
             if (ins != null)
+            {
                 ins.setBorder(weight);
-            this.border.setBorder(weight);
+                border.setBorder(weight);
+                return true;
+            }
+            else
+            {
+                border.setBorder(weight);
+                return false;
+            }
+                
         }
 
-        public void setBorder(BorderStyle borderStyle)
+        public bool setBorder(BorderStyle borderStyle)
         {
             Shape ins = GetSelectedShape();
             if (ins != null)
+            {
                 ins.setBorder(borderStyle);
-            this.border.setBorder(borderStyle);
+                border.setBorder(borderStyle);
+                return true;
+            }
+            else
+            {
+                border.setBorder(borderStyle);
+                return false;
+            }
+                
+            
         }
 
-        public void setFillPattern(int index)
+        public bool setFillPattern(int index)
         {
             Shape ins = GetSelectedShape();
             if (ins != null)
+            {
                 ins.setFillPattern(index);
-            this.fillPattern.setFillPattern(index);
+                fillPattern.setFillPattern(index);
+                return true;
+            }
+            else
+            {
+                fillPattern.setFillPattern(index);
+                return false;
+            }
+            
         }
 
        
@@ -138,7 +176,7 @@ namespace ControllerLibrary
             mSelectedShapeIndex = mShapes.Count - 1;
         }
 
-        public Image getBitmap()
+        public Bitmap getBitmap()
         {
             return bitmap;
         }
@@ -158,18 +196,53 @@ namespace ControllerLibrary
             return null;
         }
 
-        public void setFillForeground(Color color)
+        public bool setFillForeground(Color color)
         {
-            fillPattern.setForegroundColor(color);
+            Shape ins = GetSelectedShape();
+            if (ins != null)
+            {
+                ins.setForegroundColor(color);
+                ins.Fill(GetGraphics());
+                ins.Draw(GetGraphics());
+                fillPattern.setForegroundColor(color);
+                return true;
+            }
+            else
+            {
+                fillPattern.setForegroundColor(color);
+                return false;
+            }
         }
+
         private Graphics GetGraphics()
         {
             return Graphics.FromImage(bitmap);
         }
 
-        public void setFillBackground(Color color)
+        public void ShowBoundingBoxOfObject()
         {
-            fillPattern.setBackgroundColor(color);
+            DrawAll();
+            if (!(GetSelectedShape() is null))
+                GetSelectedShape().ShowBoundingBox(GetGraphics());
+        }
+
+        public bool setFillBackground(Color color)
+        {
+            Shape ins = GetSelectedShape();
+            if (ins != null)
+            {
+                ins.setBackgroundColor(color);
+                ins.Fill(GetGraphics());
+                ins.Draw(GetGraphics());
+                fillPattern.setBackgroundColor(color);
+                return true;
+            }
+            else
+            {
+                fillPattern.setBackgroundColor(color);
+                return false;
+            }
+            
         }
 
         //Draw all shapes
@@ -192,19 +265,21 @@ namespace ControllerLibrary
             if (index > mShapes.Count)
                 index = mShapes.Count;
             mShapes.Insert(index, shape);
+            mSelectedShapeIndex = index;
         }
 
-        
+
 
         //Delete selected shape/group
-        public void DeleteSelectedObject()
+        public Shape DeleteSelectedObject()
         {
+            Shape result = null;
             if (mSelectedShapeIndex != -1)
             {
+                result = mShapes[mSelectedShapeIndex];
                 mShapes.RemoveAt(mSelectedShapeIndex);
-                DrawAll();
             }
-                
+            return result;
         }
 
         //Change selected object's border style (redraw)
@@ -231,7 +306,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return false;
-            shape.Rotate(null, angle);
+            shape.Rotate(angle);
             return true;
         }
 
@@ -241,7 +316,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return false;
-            shape.Scale(null, xRatio, yRatio);
+            shape.Scale(xRatio, yRatio);
             return true;
         }
 
@@ -251,7 +326,7 @@ namespace ControllerLibrary
             Shape shape = GetSelectedShape();
             if (shape is null)
                 return false;
-            shape.Shift(GetGraphics(), dx, dy);
+            shape.Shift(dx, dy);
             return true;
         }
 
@@ -275,18 +350,19 @@ namespace ControllerLibrary
                 IFormatter objBinaryFormatter = new BinaryFormatter();
 
                 ser = (SerializeProp)objBinaryFormatter.Deserialize(objStreamDeSerialize);
-                this.mShapes = ser.shapes;
-                this.mGroups = ser.groups;
-                this.fillPattern = ser.fillPattern;
-                this.border = ser.border;
-                this.bitmap = ser.bitmap;
-                this.mSelectedShapeIndex = ser.selectedShapeIndex;
-                this.mSelectedGroupIndex = ser.selectedGroupIndex;
+                mShapes = ser.shapes;
+                mGroups = ser.groups;
+                fillPattern = ser.fillPattern;
+                border = ser.border;
+                bitmap = ser.bitmap;
+                mSelectedShapeIndex = ser.selectedShapeIndex;
+                mSelectedGroupIndex = ser.selectedGroupIndex;
                 objStreamDeSerialize.Close();
                 return true;
             }
             catch(Exception e)
             {
+                MessageBox.Show(e.Message);
                 return false;
             }
         }
@@ -309,13 +385,13 @@ namespace ControllerLibrary
                       FileAccess.ReadWrite,
                       FileShare.None);
 
-                ser.shapes = this.mShapes;
-                ser.groups = this.mGroups;
-                ser.fillPattern = this.fillPattern;
-                ser.border = this.border;
-                ser.bitmap = this.bitmap;
-                ser.selectedShapeIndex = this.mSelectedShapeIndex;
-                ser.selectedGroupIndex = this.mSelectedGroupIndex;
+                ser.shapes = mShapes;
+                ser.groups = mGroups;
+                ser.fillPattern = fillPattern;
+                ser.border = border;
+                ser.bitmap = bitmap;
+                ser.selectedShapeIndex = mSelectedShapeIndex;
+                ser.selectedGroupIndex = mSelectedGroupIndex;
                 objBinaryFormatter.Serialize(objStream, ser);
                 objStream.Close();
 
@@ -323,6 +399,7 @@ namespace ControllerLibrary
             }
             catch(Exception e)
             {
+                MessageBox.Show(e.Message);
                 return false;
             }
         }
@@ -362,7 +439,7 @@ namespace ControllerLibrary
         {
             Shape tmp = GetSelectedShape();
             if (tmp != null)
-                this.copiedShape = (Shape)tmp.Clone();
+                copiedShape = (Shape)tmp.Clone();
         }
 
         public bool pasteCopiedShape()
@@ -387,6 +464,11 @@ namespace ControllerLibrary
         public void cutSelectedShape()
         {
             throw new NotImplementedException();
+        }
+
+        public Shape getCopiedShape()
+        {
+            return copiedShape;
         }
     }
 }

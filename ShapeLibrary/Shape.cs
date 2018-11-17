@@ -39,11 +39,7 @@ namespace ShapeLibrary
 
         public virtual bool IsSelected(Point mousePosition)
         {
-            int x = Math.Min(mTopLeft.X, mBottomRight.X);
-            int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
-
-            Rectangle rectangle = new Rectangle(x, y, Math.Abs(mBottomRight.X - mTopLeft.X), Math.Abs(mBottomRight.Y - mTopLeft.Y));
-            if (rectangle.Contains(mousePosition))
+            if (CreateRectangleWithTwoPoint(mTopLeft, mBottomRight).Contains(mousePosition))
                 return true;
             return false;
         }
@@ -55,9 +51,28 @@ namespace ShapeLibrary
         public abstract bool Save(string path, ulong offset);
 
         public abstract void Draw(Graphics graphics);
+
+        public virtual void ShowBoundingBox(Graphics graphics)
+        {
+            TransformGraphic(graphics, mAngle);
+
+            Pen pen = new Pen(Color.Black, 1);
+            pen.DashPattern = BorderStyle.BORDER_STYLE_1.getValues();
+            graphics.DrawRectangle(pen, CreateRectangleWithTwoPoint(mTopLeft, mBottomRight));
+        }
+
+        protected Rectangle CreateRectangleWithTwoPoint(Point topLeft, Point bottomRight)
+        {
+            int x = Math.Min(topLeft.X, bottomRight.X);
+            int y = Math.Min(topLeft.Y, bottomRight.Y);
+            int width = Math.Abs(bottomRight.X - topLeft.X);
+            int height = Math.Abs(bottomRight.Y - topLeft.Y);
+            return new Rectangle(x, y, width, height);
+        }
+
         public abstract void Fill(Graphics graphics);
 
-        public virtual void Rotate(Graphics graphics, float angle)
+        public virtual void Rotate(float angle)
         {
             mAngle += angle;
             if (mAngle > 360)
@@ -67,7 +82,7 @@ namespace ShapeLibrary
             //Draw(graphics);
         }
 
-        public virtual void Scale(Graphics graphics, float xRate, float yRate)
+        public virtual void Scale(float xRate, float yRate)
         {
             //Point fixedPoint = new Point(mTopLeft.X, (mTopLeft.Y + mBottomRight.Y) / 2);
             mTopLeft = CalculatePointAfterScale(mTopLeft, xRate, yRate, mTopLeft);
@@ -83,7 +98,7 @@ namespace ShapeLibrary
             return result;
         }
 
-        public virtual void Shift(Graphics graphics, int dx, int dy)
+        public virtual void Shift(int dx, int dy)
         {
             //Calculate new point
             mTopLeft = CalculatePointAfterShift(mTopLeft, dx, dy);
@@ -144,6 +159,16 @@ namespace ShapeLibrary
         public virtual object Clone()
         {
             throw new NotImplementedException();
+        }
+
+        public void setForegroundColor(Color color)
+        {
+            this.mFillPattern.setForegroundColor(color);
+        }
+
+        public void setBackgroundColor(Color color)
+        {
+            this.mFillPattern.setBackgroundColor(color);
         }
     }
 }
