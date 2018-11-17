@@ -13,6 +13,11 @@ namespace ShapeLibrary
     {
         protected Color mForeground;
 
+        public object Clone()
+        {
+            throw new NotImplementedException();
+        }
+
         public void setForegroundColor(Color color)
         {
             mForeground = color;
@@ -21,7 +26,7 @@ namespace ShapeLibrary
     }
 
     [Serializable]
-    public class Border : Style
+    public class Border : Style, ICloneable
     {
         float mWeight;//độ dày
         BorderStyle mBorderStyle;

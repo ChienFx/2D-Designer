@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
@@ -50,21 +51,25 @@ namespace _2DDesigner
 
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bool stopClosing = false;
             if (!isSaved)
             {
                 DialogResult res = MessageBox.Show(this, "Do you want to save this project?", "Save & Exit", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
-                    e.Cancel = !this.SaveProject();
+                    stopClosing = !this.SaveProject();
                 }
                 else if (res == DialogResult.No)
                 {
                     DialogResult res2 = MessageBox.Show(this, "Your project will be loss!\nContinue Exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    e.Cancel = (res2 == DialogResult.No);
+                    stopClosing = (res2 == DialogResult.No);
                 }
                 else
-                    e.Cancel = true;
+                    stopClosing = true;
+
+                e.Cancel = stopClosing;
             }
+            if (stopClosing) { return; }
             DisposeResources();
                 
         }
@@ -87,6 +92,9 @@ namespace _2DDesigner
             HideLayerPanel();
             HideShapePickerPanel();
             HideZoomPanel();
+            shapeType = ShapeType.LINE;
+            setPenCursor();
+            state = State.DRAW;
         }
 
 
@@ -144,7 +152,7 @@ namespace _2DDesigner
                 case State.ROTATE:
                 case State.FILL:
                 case State.SCALE:
-                    UnSelectedShape();
+                    //UnSelectedShape();
                     break;
                 case State.DRAW:
                     Shape shape = ShapeFactory.CreateShape(shapeType, start, e.Location);
@@ -921,6 +929,109 @@ namespace _2DDesigner
         private void pictureBox_MouseHover(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            DeleteSelectedShape();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bitmapbmpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rightClickMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Shape selectedShape = controller.GetSelectedShape();
+            if(selectedShape == null)
+            {
+                btnCopy.Enabled = false;
+                btnCut.Enabled = false;
+                btnDelItem.Enabled = false;
+                btnLayerItem.Enabled = false;
+                btnExportShape.Enabled = false;
+            }
+            else
+            {
+                btnCopy.Enabled = true;
+                btnCut.Enabled = true;
+                btnDelItem.Enabled = true;
+                btnLayerItem.Enabled = true;
+                btnExportShape.Enabled = true;
+            }
+        }
+
+        void DeleteSelectedShape()
+        {
+            if (!(controller.GetSelectedShape() is null))
+            {
+                controller.DeleteSelectedObject();
+                controller.DrawAll();
+                UpdateUI();
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteSelectedShape();
+        }
+
+        
+
+        void ExportProjectToImage(ImageFormat imgF, string defaultExt, string title, string filter, string defaultFileName)
+        {
+            saveImgDialog.AddExtension = true;
+            saveImgDialog.DefaultExt = defaultExt;
+            saveImgDialog.Title = title;
+            saveImgDialog.FileName = defaultFileName;
+            saveImgDialog.Filter = filter;
+
+
+            if (saveImgDialog.ShowDialog() == DialogResult.OK)
+            {
+                string pathImg = saveImgDialog.FileName;
+                try
+                {
+                    controller.getBitmap().Save(pathImg, imgF);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            return;
+        }
+
+        private void bMPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProjectToImage(ImageFormat.Bmp, "bmp", "Export to Bitmap", "Bitmap file|*.bmp", "bitmap01");
+        }
+
+        private void iMGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProjectToImage(ImageFormat.Jpeg,"jpg", "Export to JPEG", "JPEG file|*.jpg", "jpegfile01");
+          
+        }
+
+        private void pNGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProjectToImage(ImageFormat.Png, "png", "Export to PNG", "PNG file|*.png", "pngfile01");
+        }
+
+        private void gifToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProjectToImage(ImageFormat.Gif, "gif", "Export to GIF", "GIF file|*.gif", "giffile01");
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            controller.setCopiedSelectedShape();
         }
     }
 }
