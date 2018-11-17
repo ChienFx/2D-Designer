@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShapeLibrary
 {
+    [Serializable]
     public class Parabola : Shape
     {
         public Parabola() : base() { }
@@ -31,13 +32,24 @@ namespace ShapeLibrary
             pen.DashPattern = this.mBorder.getDashValues();
             Point[] points = {mTopLeft, new Point((mTopLeft.X + mBottomRight.X) / 2, mBottomRight.Y), new Point(mBottomRight.X, mTopLeft.Y)};
             graphics.DrawCurve(pen, points);
-
-            TransformGraphic(graphics, -mAngle);
         }
 
         public override void Fill(Graphics graphics)
         {
             
+        }
+
+        public override object Clone()
+        {
+            Parabola result = new Parabola();
+
+            result.mAngle = mAngle;
+            result.mBorder = new Border(mBorder);
+            result.mFillPattern = mFillPattern;
+            result.mTopLeft = new Point(mTopLeft.X, mTopLeft.Y);
+            result.mBottomRight = new Point(mBottomRight.X, mBottomRight.Y);
+
+            return result;
         }
     }
 }

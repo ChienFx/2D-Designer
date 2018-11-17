@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ControllerLibrary
 {
+    [Serializable]
     public static class FormSize
     {
         public static int WINDOW_WIDTH = 1000;

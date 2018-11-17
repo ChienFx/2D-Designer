@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShapeLibrary
 {
+    [Serializable]
     public class Style
     {
         protected Color mForeground;
@@ -19,6 +20,7 @@ namespace ShapeLibrary
 
     }
 
+    [Serializable]
     public class Border : Style
     {
         float mWeight;//độ dày
@@ -94,6 +96,7 @@ namespace ShapeLibrary
         }
     }
 
+    [Serializable]
     public class FillPattern : Style
     {
         Color mBackground;
@@ -118,6 +121,13 @@ namespace ShapeLibrary
         {
             mBackground = Color.Transparent;
             mForeground = MyColor.DEFAULT_SHAPE_FILL_COLOR;
+            mBrushType = EBrushType.Solid;
+        }
+
+        public FillPattern(Color black)
+        {
+            mBackground = Color.Transparent;
+            mForeground = black;
             mBrushType = EBrushType.Solid;
         }
 
@@ -220,6 +230,8 @@ public enum EBrushType
 
 
 }
+
+[Serializable]
 public class BorderStyle
 {
     float[] mValues;

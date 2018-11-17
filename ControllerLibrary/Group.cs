@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace ControllerLibrary
 {
+    [Serializable]
     public class Group
     {
         List<Shape> mGroup;

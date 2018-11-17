@@ -51,7 +51,7 @@ namespace _2DDesigner
             
             Rectangle rect = new Rectangle(e.Bounds.Left, e.Bounds.Top+2, e.Bounds.Right-e.Bounds.Left, e.Bounds.Bottom-e.Bounds.Y);
 
-            FillPattern fp = new FillPattern();
+            FillPattern fp = new FillPattern(Color.Black);
             Brush brush = fp.createBrush(e.Index);
 
             e.Graphics.FillRectangle(brush, rect);

@@ -6,11 +6,11 @@ using IOLibrary;
 namespace ShapeLibrary
 {
     [Serializable]
-    public abstract class Shape: ITransformer, IInputOutput
+    public abstract class Shape: ITransformer, IInputOutput, ICloneable
     {
         public Point mTopLeft;
         public Point mBottomRight;
-        public int mAngle;
+        public float mAngle;
         protected Border mBorder;
         protected FillPattern mFillPattern;
 
@@ -32,7 +32,7 @@ namespace ShapeLibrary
             mAngle = 0;
         }
 
-        public PointF GetCenter()
+        public PointF GetCenterOfBoundingBox()
         {
             return new PointF((mTopLeft.X + mBottomRight.X) / (float)2, (mTopLeft.Y + mBottomRight.Y) / (float)2);
         }
@@ -57,10 +57,14 @@ namespace ShapeLibrary
         public abstract void Draw(Graphics graphics);
         public abstract void Fill(Graphics graphics);
 
-        public virtual void Rotate(Graphics graphics, int angle)
+        public virtual void Rotate(Graphics graphics, float angle)
         {
-            mAngle = angle;
-            Draw(graphics);
+            mAngle += angle;
+            if (mAngle > 360)
+                mAngle = 0;
+            if (mAngle < 0)
+                mAngle = 360;
+            //Draw(graphics);
         }
 
         public virtual void Scale(Graphics graphics, float xRate, float yRate)
@@ -68,17 +72,7 @@ namespace ShapeLibrary
             //Point fixedPoint = new Point(mTopLeft.X, (mTopLeft.Y + mBottomRight.Y) / 2);
             mTopLeft = CalculatePointAfterScale(mTopLeft, xRate, yRate, mTopLeft);
             mBottomRight = CalculatePointAfterScale(mBottomRight, xRate, yRate, mTopLeft);
-            Draw(graphics);
-        }
-
-        public void setFillPattern(int index)
-        {
-            this.mFillPattern.setFillPattern(index);
-        }
-
-        public void setFillPattern(Brush brush)
-        {
-            throw new NotImplementedException();
+            //Draw(graphics);
         }
 
         private Point CalculatePointAfterScale(Point p, float Sx, float Sy, Point fixedPoint)
@@ -94,8 +88,7 @@ namespace ShapeLibrary
             //Calculate new point
             mTopLeft = CalculatePointAfterShift(mTopLeft, dx, dy);
             mBottomRight = CalculatePointAfterShift(mBottomRight, dx, dy);
-
-            Draw(graphics);
+            //Draw(graphics);
         }
 
         private Point CalculatePointAfterShift(Point p, int dx, int dy)
@@ -106,10 +99,20 @@ namespace ShapeLibrary
             return result;
         }
 
-        protected void TransformGraphic(Graphics graphics, int angle)
+        public void setFillPattern(int index)
+        {
+            this.mFillPattern.setFillPattern(index);
+        }
+
+        public void setFillPattern(Brush brush)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected void TransformGraphic(Graphics graphics, float angle)
         {
             Matrix matrix = new Matrix();
-            matrix.RotateAt(angle, GetCenter());
+            matrix.RotateAt(angle, GetCenterOfBoundingBox());
             graphics.Transform = matrix;
         }
 
@@ -136,6 +139,11 @@ namespace ShapeLibrary
         public void setFillPattern(FillPattern fillPattern)
         {
             this.mFillPattern.setFillPattern(fillPattern);
+        }
+
+        public virtual object Clone()
+        {
+            throw new NotImplementedException();
         }
     }
 }

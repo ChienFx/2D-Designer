@@ -124,5 +124,47 @@
   <ItemGroup>
     <None Include="Resources\triangle1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rotate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-save-as1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send_to_froward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send_to_front.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send_backward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\send_to_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 namespace _2DDesigner
 {
+    [Serializable]
     public class Monitor
     {
         int window_width;
@@ -37,7 +38,7 @@ namespace _2DDesigner
         }
         
     }
-
+    [Serializable]
     enum State
     {
         DEFAULT,//view
@@ -49,6 +50,8 @@ namespace _2DDesigner
         DRAW_SQUARE,
         DRAW_HYPERBOLE,
         DRAW_TRIANGLE,
+        ROTATE,
+        HAND_VIEW,
     }
 
     

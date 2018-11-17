@@ -1,2 +1,5 @@
 - build controller
 - design monitor
+- design border, bursh effect
+- save/load, new project
+- shortcut

@@ -13,5 +13,7 @@ namespace ShapeLibrary
         public static Color DEFAULT_SHAPE_FILL_COLOR = Color.DeepSkyBlue;
         public static Color DEFUALT_SHAPE_BORDER_COLOR = Color.CornflowerBlue;
         public static Color TRANSPARENT = Color.Transparent;
+
+        public static Color DEFAULT_BACKGROUND = Color.White;
     }
 }

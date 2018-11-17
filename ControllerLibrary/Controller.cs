@@ -3,21 +3,28 @@ using ShapeLibrary;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
 namespace ControllerLibrary
 {
-    public class Controller:IInputOutput//, ITransformer
+    [Serializable]
+    public class Controller:IInputOutput, ICloneable//, ITransformer
     {
         List<Shape> mShapes;
         List<Group> mGroups;
-        int mSelectedShapeIndex;
+        public int mSelectedShapeIndex;
         int mSelectedGroupIndex;
 
         FillPattern fillPattern;
         Border border;
 
         Bitmap bitmap;
+
+        //Graphics graphics;
+
 
         public Controller(int width, int height)
         {
@@ -32,6 +39,10 @@ namespace ControllerLibrary
             bitmap = new Bitmap(width, height);
         }
 
+        private Controller()
+        {
+        }
+
         public Shape GetSelectedShape()
         {
             if (mSelectedShapeIndex >= 0 && mSelectedShapeIndex < mShapes.Count)
@@ -39,6 +50,7 @@ namespace ControllerLibrary
             else
                 return null;
         }
+
         public Group GetSelectedGroup()
         {
             if (mSelectedGroupIndex >= 0 && mSelectedGroupIndex < mGroups.Count)
@@ -99,7 +111,7 @@ namespace ControllerLibrary
         //Send selected shape/group to forward
         public void SendObjectToForward()
         {
-            if (mSelectedShapeIndex <= 0 || mSelectedShapeIndex == mShapes.Count - 1)
+            if (mSelectedShapeIndex < 0 || mSelectedShapeIndex == mShapes.Count - 1)
                 return;
             Shape temp = GetSelectedShape();
             DeleteSelectedObject();
@@ -121,7 +133,7 @@ namespace ControllerLibrary
         //Send selected shape/group to front
         public void SendObjectToFront()
         {
-            if (mSelectedShapeIndex <= 0 || mSelectedShapeIndex == mShapes.Count - 1)
+            if (mSelectedShapeIndex < 0 || mSelectedShapeIndex == mShapes.Count - 1)
                 return;
             Shape temp = GetSelectedShape();
             DeleteSelectedObject();
@@ -134,31 +146,33 @@ namespace ControllerLibrary
             return bitmap;
         }
 
-
-
-
         //Find with shape or group is selected by mouse click
-        public bool DetectWhichObjectIsSelected(Point mousePosition)
+        public Shape DetectWhichObjectIsSelected(Point mousePosition)
         {
             for (int i = mShapes.Count - 1; i >= 0; i--)
             {
                 if (mShapes[i].IsSelected(mousePosition))
                 {
                     mSelectedShapeIndex = i;
-                    return true;
+                    return mShapes[i];
                 }
             }
             mSelectedShapeIndex = -1;
-            return false;
+            return null;
         }
 
         public void setFillForeground(Color color)
         {
-            throw new NotImplementedException();
+            fillPattern.setForegroundColor(color);
         }
         private Graphics GetGraphics()
         {
             return Graphics.FromImage(bitmap);
+        }
+
+        public void setFillBackground(Color color)
+        {
+            fillPattern.setBackgroundColor(color);
         }
 
         //Draw all shapes
@@ -169,8 +183,10 @@ namespace ControllerLibrary
             {
                 mShapes[i].Fill(GetGraphics());
                 mShapes[i].Draw(GetGraphics());
+                
             }
         }
+
 
         public void addShape(Shape shape)
         {
@@ -195,53 +211,45 @@ namespace ControllerLibrary
         }
 
         //Fill the shape (no group) with the given pattern
-        public void FillShape()
+        public bool FillShape()
         {
             Shape shape = GetSelectedShape();
             if (shape is null)
-                return;
+                return false;
             shape.Fill(GetGraphics());
+            return true;
         }
 
         
 
         //Rotate the selected shape/group
-        public void RotateObject(int angle)
+        public bool RotateObject(float angle)
         {
             Shape shape = GetSelectedShape();
             if (shape is null)
-                return;
-            shape.Rotate(GetGraphics(), angle);
+                return false;
+            shape.Rotate(null, angle);
+            return true;
         }
 
         //Scale the selected shape/group
-        public void ScaleObject(float xRatio, float yRatio)
+        public bool ScaleObject(float xRatio, float yRatio)
         {
             Shape shape = GetSelectedShape();
             if (shape is null)
-                return;
-            shape.Scale(GetGraphics(), xRatio, yRatio);
+                return false;
+            shape.Scale(null, xRatio, yRatio);
+            return true;
         }
 
         //Shift the selected shape/group
-        public void ShiftObject(int dx, int dy)
+        public bool ShiftObject(int dx, int dy)
         {
             Shape shape = GetSelectedShape();
             if (shape is null)
-                return;
+                return false;
             shape.Shift(GetGraphics(), dx, dy);
-        }
-
-        //Undo the last step
-        public void Undo()
-        {
-
-        }
-
-        //Redo the last step
-        public void Redo()
-        {
-
+            return true;
         }
 
         //Zoom the monitor with ratio in range of 0-1 (default is 0.5)
@@ -254,12 +262,66 @@ namespace ControllerLibrary
         //                IO Implementations
         public bool Load(string path, ulong offset)
         {
-            throw new NotImplementedException();
+            try
+            {
+                SerializeProp ser = new SerializeProp();
+                Stream objStreamDeSerialize = new FileStream(path,
+                      FileMode.Open,
+                      FileAccess.Read,
+                      FileShare.Read);
+                IFormatter objBinaryFormatter = new BinaryFormatter();
+
+                ser = (SerializeProp)objBinaryFormatter.Deserialize(objStreamDeSerialize);
+                this.mShapes = ser.shapes;
+                this.mGroups = ser.groups;
+                this.fillPattern = ser.fillPattern;
+                this.border = ser.border;
+                this.bitmap = ser.bitmap;
+                this.mSelectedShapeIndex = ser.selectedShapeIndex;
+                this.mSelectedGroupIndex = ser.selectedGroupIndex;
+                objStreamDeSerialize.Close();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+
+        public void SetSelectedShape(Shape tempShape)
+        {
+            mShapes[mSelectedShapeIndex].mTopLeft = new Point(tempShape.mTopLeft.X, tempShape.mTopLeft.Y);
+            mShapes[mSelectedShapeIndex].mBottomRight = new Point(tempShape.mBottomRight.X, tempShape.mBottomRight.Y);
+            mShapes[mSelectedShapeIndex].mAngle = tempShape.mAngle;
         }
 
         public bool Save(string path, ulong offset)
         {
-            throw new NotImplementedException();
+            try
+            {
+                SerializeProp ser = new SerializeProp();
+                IFormatter objBinaryFormatter = new BinaryFormatter();
+                Stream objStream = new FileStream(path,
+                      FileMode.Create,
+                      FileAccess.ReadWrite,
+                      FileShare.None);
+
+                ser.shapes = this.mShapes;
+                ser.groups = this.mGroups;
+                ser.fillPattern = this.fillPattern;
+                ser.border = this.border;
+                ser.bitmap = this.bitmap;
+                ser.selectedShapeIndex = this.mSelectedShapeIndex;
+                ser.selectedGroupIndex = this.mSelectedGroupIndex;
+                objBinaryFormatter.Serialize(objStream, ser);
+                objStream.Close();
+
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public bool SaveAs(string newName, string path, ulong offset)
@@ -275,6 +337,22 @@ namespace ControllerLibrary
         public Bitmap ExportToBitmap()
         {
             throw new NotImplementedException();
+        }
+
+        public object Clone()
+        {
+            Controller cloner = new Controller();
+
+            cloner.bitmap = (Bitmap)bitmap.Clone();
+            cloner.mSelectedGroupIndex = mSelectedGroupIndex;
+            cloner.mSelectedShapeIndex = mSelectedShapeIndex;
+            cloner.border = new Border(border);
+            cloner.mShapes = new List<Shape>();
+            for (int i = 0; i < mShapes.Count; i++)
+                cloner.mShapes.Add((Shape)mShapes[i].Clone());
+            cloner.fillPattern = fillPattern;
+
+            return cloner;
         }
     }
 }

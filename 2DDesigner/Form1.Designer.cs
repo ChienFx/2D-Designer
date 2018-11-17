@@ -1,4 +1,6 @@
-﻿namespace _2DDesigner
+﻿using System;
+
+namespace _2DDesigner
 {
     partial class Form
     {
@@ -65,12 +67,34 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorPickerFill = new System.Windows.Forms.ColorDialog();
             this.colorPickerBorder = new System.Windows.Forms.ColorDialog();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.toolbarHolder = new System.Windows.Forms.ToolStripContainer();
+            this.btnHandView = new System.Windows.Forms.Button();
+            this.btnLayer = new System.Windows.Forms.Button();
+            this.btnSaveAs = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnOpenProject = new System.Windows.Forms.Button();
+            this.btnNewProject = new System.Windows.Forms.Button();
+            this.btnRotate = new System.Windows.Forms.Button();
+            this.btnScale = new System.Windows.Forms.Button();
+            this.btnRedo = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnUndo = new System.Windows.Forms.Button();
             this.btnFillBgPicker = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnShapePicker = new System.Windows.Forms.Button();
+            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
+            this.btnMove = new System.Windows.Forms.Button();
+            this.borderSelector = new _2DDesigner.BorderSelector();
+            this.lbBorderValue = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnFillForePicker = new System.Windows.Forms.Button();
+            this.btnBorderColorPicker = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.shapePickerPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLine = new System.Windows.Forms.Button();
             this.btnRect = new System.Windows.Forms.Button();
@@ -80,26 +104,23 @@
             this.btnHyperbole = new System.Windows.Forms.Button();
             this.btnSquare = new System.Windows.Forms.Button();
             this.btnTriangle = new System.Windows.Forms.Button();
-            this.btnShapePicker = new System.Windows.Forms.Button();
-            this.btnMove = new System.Windows.Forms.Button();
-            this.lbBorderValue = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnFillForePicker = new System.Windows.Forms.Button();
-            this.btnBorderColorPicker = new System.Windows.Forms.Button();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
-            this.borderSelector = new _2DDesigner.BorderSelector();
-            this.Undo = new System.Windows.Forms.Button();
-            this.Redo = new System.Windows.Forms.Button();
+            this.layerPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSendForward = new System.Windows.Forms.Button();
+            this.btnSendFront = new System.Windows.Forms.Button();
+            this.btnSendBackward = new System.Windows.Forms.Button();
+            this.btnSendBack = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.toolbarHolder.ContentPanel.SuspendLayout();
             this.toolbarHolder.SuspendLayout();
-            this.shapePickerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.shapePickerPanel.SuspendLayout();
+            this.layerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menu
@@ -134,26 +155,34 @@
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.newProjectToolStripMenuItem.Text = "New Project";
+            this.newProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.newProjectToolStripMenuItem.Text = "&New Project";
+            this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.openProjectToolStripMenuItem.Text = "Open Project";
+            this.openProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.openProjectToolStripMenuItem.Text = "&Open Project";
+            this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As";
+            this.saveAsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.saveAsToolStripMenuItem.Text = "Save &As";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
@@ -163,8 +192,8 @@
             this.pNGToolStripMenuItem,
             this.aIToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.exportToolStripMenuItem.Text = "&Export";
             // 
             // bMPToolStripMenuItem
             // 
@@ -193,20 +222,24 @@
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.importToolStripMenuItem.Text = "Import";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.importToolStripMenuItem.Text = "&Import";
             // 
             // closeProjectToolStripMenuItem
             // 
             this.closeProjectToolStripMenuItem.Name = "closeProjectToolStripMenuItem";
-            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.closeProjectToolStripMenuItem.Text = "Close Project";
+            this.closeProjectToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.closeProjectToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.closeProjectToolStripMenuItem.Text = "&Close Project";
+            this.closeProjectToolStripMenuItem.Click += new System.EventHandler(this.closeProjectToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.exitToolStripMenuItem.Text = "&Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click_1);
             // 
             // editToolStripMenuItem
             // 
@@ -353,32 +386,27 @@
             this.colorPickerBorder.AnyColor = true;
             this.colorPickerBorder.Color = System.Drawing.Color.DarkRed;
             // 
-            // pictureBox
-            // 
-            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Location = new System.Drawing.Point(3, 142);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(784, 349);
-            this.pictureBox.TabIndex = 3;
-            this.pictureBox.TabStop = false;
-            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
-            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
-            this.pictureBox.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
-            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
-            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
-            // 
             // toolbarHolder
             // 
             // 
             // toolbarHolder.ContentPanel
             // 
             this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnHandView);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnLayer);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnSaveAs);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnSave);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnOpenProject);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnNewProject);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnRotate);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnScale);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnRedo);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.label6);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnUndo);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnFillBgPicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.label5);
             this.toolbarHolder.ContentPanel.Controls.Add(this.label4);
             this.toolbarHolder.ContentPanel.Controls.Add(this.label3);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.shapePickerPanel);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnShapePicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.fillPatternSelection);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnMove);
@@ -389,6 +417,8 @@
             this.toolbarHolder.ContentPanel.Controls.Add(this.label1);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnFillForePicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnBorderColorPicker);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.button3);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.button2);
             this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 86);
             this.toolbarHolder.ContentPanel.Load += new System.EventHandler(this.toolbarHolder_ContentPanel_Load);
             this.toolbarHolder.ContentPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.toolbarHolder_ContentPanel_MouseClick);
@@ -399,12 +429,161 @@
             this.toolbarHolder.Text = "toolStripContainer1";
             this.toolbarHolder.Click += new System.EventHandler(this.toolbarHolder_Click);
             // 
+            // btnHandView
+            // 
+            this.btnHandView.BackColor = System.Drawing.Color.Transparent;
+            this.btnHandView.BackgroundImage = global::_2DDesigner.Properties.Resources.hand;
+            this.btnHandView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnHandView.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnHandView.Location = new System.Drawing.Point(9, 38);
+            this.btnHandView.Margin = new System.Windows.Forms.Padding(1);
+            this.btnHandView.Name = "btnHandView";
+            this.btnHandView.Size = new System.Drawing.Size(32, 32);
+            this.btnHandView.TabIndex = 33;
+            this.btnHandView.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHandView.UseVisualStyleBackColor = false;
+            this.btnHandView.Click += new System.EventHandler(this.btnHandView_Click);
+            this.btnHandView.MouseHover += new System.EventHandler(this.btnHandView_MouseHover);
+            // 
+            // btnLayer
+            // 
+            this.btnLayer.BackgroundImage = global::_2DDesigner.Properties.Resources.layer;
+            this.btnLayer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnLayer.Location = new System.Drawing.Point(224, 1);
+            this.btnLayer.Name = "btnLayer";
+            this.btnLayer.Size = new System.Drawing.Size(32, 32);
+            this.btnLayer.TabIndex = 30;
+            this.btnLayer.UseVisualStyleBackColor = true;
+            this.btnLayer.Click += new System.EventHandler(this.btnLayer_Click);
+            this.btnLayer.MouseHover += new System.EventHandler(this.btnLayer_MouseHover);
+            // 
+            // btnSaveAs
+            // 
+            this.btnSaveAs.BackColor = System.Drawing.Color.Transparent;
+            this.btnSaveAs.BackgroundImage = global::_2DDesigner.Properties.Resources.icon_save_as;
+            this.btnSaveAs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSaveAs.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSaveAs.Location = new System.Drawing.Point(113, 2);
+            this.btnSaveAs.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSaveAs.Name = "btnSaveAs";
+            this.btnSaveAs.Size = new System.Drawing.Size(32, 32);
+            this.btnSaveAs.TabIndex = 29;
+            this.btnSaveAs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSaveAs.UseVisualStyleBackColor = false;
+            this.btnSaveAs.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            this.btnSaveAs.MouseHover += new System.EventHandler(this.btnSaveAs_MouseHover);
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.Transparent;
+            this.btnSave.BackgroundImage = global::_2DDesigner.Properties.Resources.save;
+            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSave.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSave.Location = new System.Drawing.Point(79, 1);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(32, 32);
+            this.btnSave.TabIndex = 28;
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.btnSave.MouseHover += new System.EventHandler(this.btnSave_MouseHover);
+            // 
+            // btnOpenProject
+            // 
+            this.btnOpenProject.BackColor = System.Drawing.Color.Transparent;
+            this.btnOpenProject.BackgroundImage = global::_2DDesigner.Properties.Resources.folder;
+            this.btnOpenProject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnOpenProject.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnOpenProject.Location = new System.Drawing.Point(43, 2);
+            this.btnOpenProject.Margin = new System.Windows.Forms.Padding(1);
+            this.btnOpenProject.Name = "btnOpenProject";
+            this.btnOpenProject.Size = new System.Drawing.Size(32, 32);
+            this.btnOpenProject.TabIndex = 27;
+            this.btnOpenProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnOpenProject.UseVisualStyleBackColor = false;
+            this.btnOpenProject.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
+            this.btnOpenProject.MouseHover += new System.EventHandler(this.btnOpenProject_MouseHover);
+            // 
+            // btnNewProject
+            // 
+            this.btnNewProject.BackColor = System.Drawing.Color.Transparent;
+            this.btnNewProject.BackgroundImage = global::_2DDesigner.Properties.Resources.newFile;
+            this.btnNewProject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnNewProject.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnNewProject.Location = new System.Drawing.Point(9, 2);
+            this.btnNewProject.Margin = new System.Windows.Forms.Padding(1);
+            this.btnNewProject.Name = "btnNewProject";
+            this.btnNewProject.Size = new System.Drawing.Size(32, 32);
+            this.btnNewProject.TabIndex = 26;
+            this.btnNewProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnNewProject.UseVisualStyleBackColor = false;
+            this.btnNewProject.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
+            this.btnNewProject.MouseHover += new System.EventHandler(this.btnNewProject_MouseHover);
+            // 
+            // btnRotate
+            // 
+            this.btnRotate.BackgroundImage = global::_2DDesigner.Properties.Resources.rotate;
+            this.btnRotate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnRotate.Location = new System.Drawing.Point(113, 38);
+            this.btnRotate.Name = "btnRotate";
+            this.btnRotate.Size = new System.Drawing.Size(32, 32);
+            this.btnRotate.TabIndex = 25;
+            this.btnRotate.UseVisualStyleBackColor = true;
+            this.btnRotate.Click += new System.EventHandler(this.btnRotate_Click);
+            this.btnRotate.MouseHover += new System.EventHandler(this.btnRotate_MouseHover);
+            // 
+            // btnScale
+            // 
+            this.btnScale.BackgroundImage = global::_2DDesigner.Properties.Resources.scale;
+            this.btnScale.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnScale.Location = new System.Drawing.Point(148, 38);
+            this.btnScale.Name = "btnScale";
+            this.btnScale.Size = new System.Drawing.Size(32, 32);
+            this.btnScale.TabIndex = 24;
+            this.btnScale.UseVisualStyleBackColor = true;
+            this.btnScale.Click += new System.EventHandler(this.btnScale_Click);
+            this.btnScale.MouseHover += new System.EventHandler(this.btnScale_MouseHover);
+            // 
+            // btnRedo
+            // 
+            this.btnRedo.BackgroundImage = global::_2DDesigner.Properties.Resources.redo;
+            this.btnRedo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnRedo.Location = new System.Drawing.Point(186, 2);
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.Size = new System.Drawing.Size(32, 32);
+            this.btnRedo.TabIndex = 23;
+            this.btnRedo.UseVisualStyleBackColor = true;
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
+            this.btnRedo.MouseHover += new System.EventHandler(this.btnRedo_MouseHover);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(355, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 13);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Border Color";
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.BackgroundImage = global::_2DDesigner.Properties.Resources.undo;
+            this.btnUndo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnUndo.Location = new System.Drawing.Point(148, 2);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(32, 32);
+            this.btnUndo.TabIndex = 22;
+            this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
+            this.btnUndo.MouseHover += new System.EventHandler(this.btnUndo_MouseHover);
+            // 
             // btnFillBgPicker
             // 
             this.btnFillBgPicker.BackColor = System.Drawing.Color.Transparent;
             this.btnFillBgPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnFillBgPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnFillBgPicker.Location = new System.Drawing.Point(594, 62);
+            this.btnFillBgPicker.Location = new System.Drawing.Point(659, 62);
             this.btnFillBgPicker.Margin = new System.Windows.Forms.Padding(1);
             this.btnFillBgPicker.Name = "btnFillBgPicker";
             this.btnFillBgPicker.Size = new System.Drawing.Size(103, 24);
@@ -412,11 +591,12 @@
             this.btnFillBgPicker.Text = " ";
             this.btnFillBgPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnFillBgPicker.UseVisualStyleBackColor = false;
+            this.btnFillBgPicker.Click += new System.EventHandler(this.pickFillBgColor);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(514, 68);
+            this.label5.Location = new System.Drawing.Point(579, 68);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 13);
             this.label5.TabIndex = 20;
@@ -425,7 +605,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(514, 41);
+            this.label4.Location = new System.Drawing.Point(579, 41);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 13);
             this.label4.TabIndex = 19;
@@ -434,11 +614,566 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(514, 12);
+            this.label3.Location = new System.Drawing.Point(579, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 18;
             this.label3.Text = "Fill Pattern";
+            // 
+            // btnShapePicker
+            // 
+            this.btnShapePicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnShapePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnShapePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnShapePicker.Location = new System.Drawing.Point(79, 38);
+            this.btnShapePicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnShapePicker.Name = "btnShapePicker";
+            this.btnShapePicker.Size = new System.Drawing.Size(32, 32);
+            this.btnShapePicker.TabIndex = 16;
+            this.btnShapePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnShapePicker.UseVisualStyleBackColor = false;
+            this.btnShapePicker.Click += new System.EventHandler(this.btnShapePicker_Click);
+            this.btnShapePicker.MouseHover += new System.EventHandler(this.btnShapePicker_MouseHover);
+            // 
+            // fillPatternSelection
+            // 
+            this.fillPatternSelection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.fillPatternSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.fillPatternSelection.FormattingEnabled = true;
+            this.fillPatternSelection.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10});
+            this.fillPatternSelection.Location = new System.Drawing.Point(659, 9);
+            this.fillPatternSelection.Name = "fillPatternSelection";
+            this.fillPatternSelection.Size = new System.Drawing.Size(103, 21);
+            this.fillPatternSelection.TabIndex = 15;
+            this.fillPatternSelection.SelectedIndexChanged += new System.EventHandler(this.fillPatternSelection1_SelectedIndexChanged);
+            // 
+            // btnMove
+            // 
+            this.btnMove.BackColor = System.Drawing.Color.Transparent;
+            this.btnMove.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMove.BackgroundImage")));
+            this.btnMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMove.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnMove.Location = new System.Drawing.Point(43, 38);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(1);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(32, 32);
+            this.btnMove.TabIndex = 14;
+            this.btnMove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMove.UseVisualStyleBackColor = false;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+            this.btnMove.MouseHover += new System.EventHandler(this.btnMove_MouseHover);
+            // 
+            // borderSelector
+            // 
+            this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.borderSelector.FormattingEnabled = true;
+            this.borderSelector.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7});
+            this.borderSelector.Location = new System.Drawing.Point(423, 9);
+            this.borderSelector.Name = "borderSelector";
+            this.borderSelector.Size = new System.Drawing.Size(121, 21);
+            this.borderSelector.TabIndex = 5;
+            this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
+            // 
+            // lbBorderValue
+            // 
+            this.lbBorderValue.AutoSize = true;
+            this.lbBorderValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lbBorderValue.Location = new System.Drawing.Point(461, 62);
+            this.lbBorderValue.Name = "lbBorderValue";
+            this.lbBorderValue.Size = new System.Drawing.Size(27, 13);
+            this.lbBorderValue.TabIndex = 13;
+            this.lbBorderValue.Text = "2 px";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(353, 72);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Weight";
+            // 
+            // sliderBorderWeight
+            // 
+            this.sliderBorderWeight.LargeChange = 2;
+            this.sliderBorderWeight.Location = new System.Drawing.Point(423, 68);
+            this.sliderBorderWeight.Minimum = 1;
+            this.sliderBorderWeight.Name = "sliderBorderWeight";
+            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
+            this.sliderBorderWeight.TabIndex = 11;
+            this.sliderBorderWeight.Value = 2;
+            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(353, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Border Style";
+            // 
+            // btnFillForePicker
+            // 
+            this.btnFillForePicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnFillForePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFillForePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnFillForePicker.Location = new System.Drawing.Point(659, 35);
+            this.btnFillForePicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnFillForePicker.Name = "btnFillForePicker";
+            this.btnFillForePicker.Size = new System.Drawing.Size(103, 24);
+            this.btnFillForePicker.TabIndex = 7;
+            this.btnFillForePicker.Text = " ";
+            this.btnFillForePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFillForePicker.UseVisualStyleBackColor = false;
+            this.btnFillForePicker.Click += new System.EventHandler(this.pickFillForeColor);
+            // 
+            // btnBorderColorPicker
+            // 
+            this.btnBorderColorPicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnBorderColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBorderColorPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnBorderColorPicker.Location = new System.Drawing.Point(423, 37);
+            this.btnBorderColorPicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnBorderColorPicker.Name = "btnBorderColorPicker";
+            this.btnBorderColorPicker.Size = new System.Drawing.Size(121, 22);
+            this.btnBorderColorPicker.TabIndex = 2;
+            this.btnBorderColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBorderColorPicker.UseVisualStyleBackColor = false;
+            this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::_2DDesigner.Properties.Resources.redo;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button3.Location = new System.Drawing.Point(300, 1);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(32, 32);
+            this.button3.TabIndex = 32;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.BackgroundImage = global::_2DDesigner.Properties.Resources.redo;
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button2.Location = new System.Drawing.Point(262, 1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(32, 32);
+            this.button2.TabIndex = 31;
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // shapePickerPanel
             // 
@@ -455,10 +1190,10 @@
             this.shapePickerPanel.Controls.Add(this.btnHyperbole);
             this.shapePickerPanel.Controls.Add(this.btnSquare);
             this.shapePickerPanel.Controls.Add(this.btnTriangle);
-            this.shapePickerPanel.Location = new System.Drawing.Point(77, 2);
+            this.shapePickerPanel.Location = new System.Drawing.Point(787, 142);
             this.shapePickerPanel.Name = "shapePickerPanel";
             this.shapePickerPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.shapePickerPanel.Size = new System.Drawing.Size(116, 65);
+            this.shapePickerPanel.Size = new System.Drawing.Size(119, 65);
             this.shapePickerPanel.TabIndex = 17;
             this.shapePickerPanel.Visible = false;
             this.shapePickerPanel.Leave += new System.EventHandler(this.shapePickerPanel_Leave);
@@ -477,6 +1212,7 @@
             this.btnLine.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLine.UseVisualStyleBackColor = false;
             this.btnLine.Click += new System.EventHandler(this.btnLine_Click);
+            this.btnLine.MouseHover += new System.EventHandler(this.btnLine_MouseHover);
             // 
             // btnRect
             // 
@@ -583,294 +1319,128 @@
             this.btnTriangle.UseVisualStyleBackColor = false;
             this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
             // 
-            // btnShapePicker
+            // layerPanel
             // 
-            this.btnShapePicker.BackColor = System.Drawing.Color.Transparent;
-            this.btnShapePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnShapePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnShapePicker.Location = new System.Drawing.Point(41, 2);
-            this.btnShapePicker.Margin = new System.Windows.Forms.Padding(1);
-            this.btnShapePicker.Name = "btnShapePicker";
-            this.btnShapePicker.Size = new System.Drawing.Size(32, 32);
-            this.btnShapePicker.TabIndex = 16;
-            this.btnShapePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnShapePicker.UseVisualStyleBackColor = false;
-            this.btnShapePicker.Click += new System.EventHandler(this.btnShapePicker_Click);
+            this.layerPanel.AutoScroll = true;
+            this.layerPanel.AutoScrollMargin = new System.Drawing.Size(5, 5);
+            this.layerPanel.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+            this.layerPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.layerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.layerPanel.Controls.Add(this.btnSendForward);
+            this.layerPanel.Controls.Add(this.btnSendFront);
+            this.layerPanel.Controls.Add(this.btnSendBackward);
+            this.layerPanel.Controls.Add(this.btnSendBack);
+            this.layerPanel.Location = new System.Drawing.Point(787, 213);
+            this.layerPanel.Name = "layerPanel";
+            this.layerPanel.Padding = new System.Windows.Forms.Padding(2);
+            this.layerPanel.Size = new System.Drawing.Size(132, 111);
+            this.layerPanel.TabIndex = 26;
+            this.layerPanel.Visible = false;
+            this.layerPanel.Leave += new System.EventHandler(this.layerPanel_Leave);
             // 
-            // btnMove
+            // btnSendForward
             // 
-            this.btnMove.BackColor = System.Drawing.Color.Transparent;
-            this.btnMove.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMove.BackgroundImage")));
-            this.btnMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnMove.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnMove.Location = new System.Drawing.Point(7, 2);
-            this.btnMove.Margin = new System.Windows.Forms.Padding(1);
-            this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(32, 32);
-            this.btnMove.TabIndex = 14;
-            this.btnMove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMove.UseVisualStyleBackColor = false;
-            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+            this.btnSendForward.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendForward.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_froward;
+            this.btnSendForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSendForward.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSendForward.Location = new System.Drawing.Point(3, 3);
+            this.btnSendForward.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSendForward.Name = "btnSendForward";
+            this.btnSendForward.Size = new System.Drawing.Size(118, 24);
+            this.btnSendForward.TabIndex = 18;
+            this.btnSendForward.Text = "      Send Forward";
+            this.btnSendForward.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendForward.UseVisualStyleBackColor = false;
+            this.btnSendForward.Click += new System.EventHandler(this.btnSendForward_Click);
             // 
-            // lbBorderValue
+            // btnSendFront
             // 
-            this.lbBorderValue.AutoSize = true;
-            this.lbBorderValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lbBorderValue.Location = new System.Drawing.Point(396, 35);
-            this.lbBorderValue.Name = "lbBorderValue";
-            this.lbBorderValue.Size = new System.Drawing.Size(27, 13);
-            this.lbBorderValue.TabIndex = 13;
-            this.lbBorderValue.Text = "2 px";
+            this.btnSendFront.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendFront.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_front;
+            this.btnSendFront.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSendFront.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSendFront.Location = new System.Drawing.Point(3, 29);
+            this.btnSendFront.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSendFront.Name = "btnSendFront";
+            this.btnSendFront.Size = new System.Drawing.Size(118, 24);
+            this.btnSendFront.TabIndex = 22;
+            this.btnSendFront.Text = "      Send To Front";
+            this.btnSendFront.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendFront.UseVisualStyleBackColor = false;
+            this.btnSendFront.Click += new System.EventHandler(this.btnSendFront_Click);
             // 
-            // label2
+            // btnSendBackward
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(288, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Weight";
+            this.btnSendBackward.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendBackward.BackgroundImage = global::_2DDesigner.Properties.Resources.send_backward;
+            this.btnSendBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSendBackward.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSendBackward.Location = new System.Drawing.Point(3, 55);
+            this.btnSendBackward.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSendBackward.Name = "btnSendBackward";
+            this.btnSendBackward.Size = new System.Drawing.Size(118, 24);
+            this.btnSendBackward.TabIndex = 23;
+            this.btnSendBackward.Text = "      Send Backward";
+            this.btnSendBackward.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendBackward.UseVisualStyleBackColor = false;
+            this.btnSendBackward.Click += new System.EventHandler(this.btnSendBackward_Click);
             // 
-            // sliderBorderWeight
+            // btnSendBack
             // 
-            this.sliderBorderWeight.LargeChange = 2;
-            this.sliderBorderWeight.Location = new System.Drawing.Point(358, 41);
-            this.sliderBorderWeight.Minimum = 1;
-            this.sliderBorderWeight.Name = "sliderBorderWeight";
-            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
-            this.sliderBorderWeight.TabIndex = 11;
-            this.sliderBorderWeight.Value = 2;
-            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
+            this.btnSendBack.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendBack.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_back;
+            this.btnSendBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSendBack.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSendBack.Location = new System.Drawing.Point(3, 81);
+            this.btnSendBack.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSendBack.Name = "btnSendBack";
+            this.btnSendBack.Size = new System.Drawing.Size(118, 24);
+            this.btnSendBack.TabIndex = 25;
+            this.btnSendBack.Text = "      Send To Back";
+            this.btnSendBack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendBack.UseVisualStyleBackColor = false;
+            this.btnSendBack.Click += new System.EventHandler(this.btnSendBack_Click);
             // 
-            // label1
+            // saveFileDialog
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(288, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Border Style";
+            this.saveFileDialog.DefaultExt = "lc";
+            this.saveFileDialog.FileName = "project1";
+            this.saveFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
+            this.saveFileDialog.RestoreDirectory = true;
+            this.saveFileDialog.Title = "Save As";
             // 
-            // btnFillForePicker
+            // openFileDialog
             // 
-            this.btnFillForePicker.BackColor = System.Drawing.Color.Transparent;
-            this.btnFillForePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFillForePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnFillForePicker.Location = new System.Drawing.Point(594, 35);
-            this.btnFillForePicker.Margin = new System.Windows.Forms.Padding(1);
-            this.btnFillForePicker.Name = "btnFillForePicker";
-            this.btnFillForePicker.Size = new System.Drawing.Size(103, 24);
-            this.btnFillForePicker.TabIndex = 7;
-            this.btnFillForePicker.Text = " ";
-            this.btnFillForePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFillForePicker.UseVisualStyleBackColor = false;
-            this.btnFillForePicker.Click += new System.EventHandler(this.pickFillColor);
+            this.openFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
+            this.openFileDialog.RestoreDirectory = true;
+            this.openFileDialog.Title = "Open project";
             // 
-            // btnBorderColorPicker
+            // pictureBox
             // 
-            this.btnBorderColorPicker.BackColor = System.Drawing.Color.Transparent;
-            this.btnBorderColorPicker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnBorderColorPicker.BackgroundImage")));
-            this.btnBorderColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnBorderColorPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnBorderColorPicker.Location = new System.Drawing.Point(291, 68);
-            this.btnBorderColorPicker.Margin = new System.Windows.Forms.Padding(1);
-            this.btnBorderColorPicker.Name = "btnBorderColorPicker";
-            this.btnBorderColorPicker.Size = new System.Drawing.Size(61, 32);
-            this.btnBorderColorPicker.TabIndex = 2;
-            this.btnBorderColorPicker.Text = "Shape border";
-            this.btnBorderColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorderColorPicker.UseVisualStyleBackColor = false;
-            this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
+            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.Location = new System.Drawing.Point(3, 142);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(784, 349);
+            this.pictureBox.TabIndex = 3;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+            this.pictureBox.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
             // 
-            // fillPatternSelection
+            // label7
             // 
-            this.fillPatternSelection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.fillPatternSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.fillPatternSelection.FormattingEnabled = true;
-            this.fillPatternSelection.Items.AddRange(new object[] {
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10});
-            this.fillPatternSelection.Location = new System.Drawing.Point(594, 9);
-            this.fillPatternSelection.Name = "fillPatternSelection";
-            this.fillPatternSelection.Size = new System.Drawing.Size(103, 21);
-            this.fillPatternSelection.TabIndex = 15;
-            this.fillPatternSelection.SelectedIndexChanged += new System.EventHandler(this.fillPatternSelection1_SelectedIndexChanged);
-            // 
-            // borderSelector
-            // 
-            this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.borderSelector.FormattingEnabled = true;
-            this.borderSelector.Items.AddRange(new object[] {
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7});
-            this.borderSelector.Location = new System.Drawing.Point(358, 9);
-            this.borderSelector.Name = "borderSelector";
-            this.borderSelector.Size = new System.Drawing.Size(121, 21);
-            this.borderSelector.TabIndex = 5;
-            this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
-            // 
-            // Undo
-            // 
-            this.Undo.Location = new System.Drawing.Point(805, 27);
-            this.Undo.Name = "Undo";
-            this.Undo.Size = new System.Drawing.Size(75, 23);
-            this.Undo.TabIndex = 22;
-            this.Undo.Text = "Undo";
-            this.Undo.UseVisualStyleBackColor = true;
-            this.Undo.Click += new System.EventHandler(this.Undo_Click);
-            // 
-            // Redo
-            // 
-            this.Redo.Location = new System.Drawing.Point(805, 56);
-            this.Redo.Name = "Redo";
-            this.Redo.Size = new System.Drawing.Size(75, 23);
-            this.Redo.TabIndex = 23;
-            this.Redo.Text = "Redo";
-            this.Redo.UseVisualStyleBackColor = true;
-            this.Redo.Click += new System.EventHandler(this.Redo_Click);
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.label7.Location = new System.Drawing.Point(834, 50);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 25);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "label7";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // Form
             // 
@@ -878,30 +1448,35 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(977, 749);
-            this.Controls.Add(this.Redo);
-            this.Controls.Add(this.Undo);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.toolbarHolder);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.menu);
+            this.Controls.Add(this.shapePickerPanel);
+            this.Controls.Add(this.layerPanel);
+            this.KeyPreview = true;
             this.Name = "Form";
             this.Text = "2D Designer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_KeyDown);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.toolbarHolder.ContentPanel.ResumeLayout(false);
             this.toolbarHolder.ContentPanel.PerformLayout();
             this.toolbarHolder.ResumeLayout(false);
             this.toolbarHolder.PerformLayout();
-            this.shapePickerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.shapePickerPanel.ResumeLayout(false);
+            this.layerPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+       
 
         #endregion
         private System.Windows.Forms.MenuStrip menu;
@@ -947,7 +1522,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar sliderBorderWeight;
         private System.Windows.Forms.Label lbBorderValue;
-        private System.Windows.Forms.BindingSource bindingSource1;
         private BorderSelector borderSelector;
         private System.Windows.Forms.Button btnMove;
         private FillPatternSelection fillPatternSelection;
@@ -965,8 +1539,28 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnFillBgPicker;
-        private System.Windows.Forms.Button Undo;
-        private System.Windows.Forms.Button Redo;
+        private System.Windows.Forms.Button btnUndo;
+        private System.Windows.Forms.Button btnRedo;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnRotate;
+        private System.Windows.Forms.Button btnScale;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button btnSaveAs;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnOpenProject;
+        private System.Windows.Forms.Button btnNewProject;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnLayer;
+        private System.Windows.Forms.FlowLayoutPanel layerPanel;
+        private System.Windows.Forms.Button btnSendForward;
+        private System.Windows.Forms.Button btnSendFront;
+        private System.Windows.Forms.Button btnSendBackward;
+        private System.Windows.Forms.Button btnSendBack;
+        private System.Windows.Forms.Button btnHandView;
+        private System.Windows.Forms.Label label7;
     }
 }
 
