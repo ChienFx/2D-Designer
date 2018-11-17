@@ -68,7 +68,18 @@ namespace _2DDesigner
             this.colorPickerFill = new System.Windows.Forms.ColorDialog();
             this.colorPickerBorder = new System.Windows.Forms.ColorDialog();
             this.toolbarHolder = new System.Windows.Forms.ToolStripContainer();
+            this.zoomLabel = new System.Windows.Forms.Label();
+            this.zoomSlider = new System.Windows.Forms.TrackBar();
             this.btnHandView = new System.Windows.Forms.Button();
+            this.shapePickerPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLine = new System.Windows.Forms.Button();
+            this.btnRect = new System.Windows.Forms.Button();
+            this.btnEllipse = new System.Windows.Forms.Button();
+            this.btnCircle = new System.Windows.Forms.Button();
+            this.btnParabola = new System.Windows.Forms.Button();
+            this.btnHyperbole = new System.Windows.Forms.Button();
+            this.btnSquare = new System.Windows.Forms.Button();
+            this.btnTriangle = new System.Windows.Forms.Button();
             this.btnLayer = new System.Windows.Forms.Button();
             this.btnSaveAs = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
@@ -84,9 +95,7 @@ namespace _2DDesigner
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnShapePicker = new System.Windows.Forms.Button();
-            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
             this.btnMove = new System.Windows.Forms.Button();
-            this.borderSelector = new _2DDesigner.BorderSelector();
             this.lbBorderValue = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
@@ -94,16 +103,7 @@ namespace _2DDesigner
             this.btnFillForePicker = new System.Windows.Forms.Button();
             this.btnBorderColorPicker = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.shapePickerPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnLine = new System.Windows.Forms.Button();
-            this.btnRect = new System.Windows.Forms.Button();
-            this.btnEllipse = new System.Windows.Forms.Button();
-            this.btnCircle = new System.Windows.Forms.Button();
-            this.btnParabola = new System.Windows.Forms.Button();
-            this.btnHyperbole = new System.Windows.Forms.Button();
-            this.btnSquare = new System.Windows.Forms.Button();
-            this.btnTriangle = new System.Windows.Forms.Button();
+            this.btnZoom = new System.Windows.Forms.Button();
             this.layerPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSendForward = new System.Windows.Forms.Button();
             this.btnSendFront = new System.Windows.Forms.Button();
@@ -113,12 +113,15 @@ namespace _2DDesigner
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lbMouseHover = new System.Windows.Forms.Label();
+            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
+            this.borderSelector = new _2DDesigner.BorderSelector();
             this.menu.SuspendLayout();
             this.toolbarHolder.ContentPanel.SuspendLayout();
             this.toolbarHolder.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomSlider)).BeginInit();
             this.shapePickerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).BeginInit();
             this.layerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
@@ -133,7 +136,7 @@ namespace _2DDesigner
             this.aboutToolStripMenuItem});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(977, 24);
+            this.menu.Size = new System.Drawing.Size(804, 24);
             this.menu.TabIndex = 1;
             this.menu.Text = "menuStrip2";
             // 
@@ -392,7 +395,11 @@ namespace _2DDesigner
             // toolbarHolder.ContentPanel
             // 
             this.toolbarHolder.ContentPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.toolbarHolder.ContentPanel.Controls.Add(this.lbMouseHover);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.zoomLabel);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.zoomSlider);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnHandView);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.shapePickerPanel);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnLayer);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnSaveAs);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnSave);
@@ -418,16 +425,40 @@ namespace _2DDesigner
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnFillForePicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnBorderColorPicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.button3);
-            this.toolbarHolder.ContentPanel.Controls.Add(this.button2);
-            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(784, 86);
+            this.toolbarHolder.ContentPanel.Controls.Add(this.btnZoom);
+            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(800, 100);
             this.toolbarHolder.ContentPanel.Load += new System.EventHandler(this.toolbarHolder_ContentPanel_Load);
             this.toolbarHolder.ContentPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.toolbarHolder_ContentPanel_MouseClick);
             this.toolbarHolder.Location = new System.Drawing.Point(3, 25);
             this.toolbarHolder.Name = "toolbarHolder";
-            this.toolbarHolder.Size = new System.Drawing.Size(784, 111);
+            this.toolbarHolder.Size = new System.Drawing.Size(800, 100);
             this.toolbarHolder.TabIndex = 4;
             this.toolbarHolder.Text = "toolStripContainer1";
             this.toolbarHolder.Click += new System.EventHandler(this.toolbarHolder_Click);
+            // 
+            // zoomLabel
+            // 
+            this.zoomLabel.AutoSize = true;
+            this.zoomLabel.BackColor = System.Drawing.Color.Transparent;
+            this.zoomLabel.Location = new System.Drawing.Point(299, 87);
+            this.zoomLabel.Name = "zoomLabel";
+            this.zoomLabel.Size = new System.Drawing.Size(33, 13);
+            this.zoomLabel.TabIndex = 35;
+            this.zoomLabel.Text = "100%";
+            // 
+            // zoomSlider
+            // 
+            this.zoomSlider.LargeChange = 2;
+            this.zoomSlider.Location = new System.Drawing.Point(300, -7);
+            this.zoomSlider.Maximum = 20;
+            this.zoomSlider.Minimum = 1;
+            this.zoomSlider.Name = "zoomSlider";
+            this.zoomSlider.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.zoomSlider.Size = new System.Drawing.Size(45, 92);
+            this.zoomSlider.TabIndex = 34;
+            this.zoomSlider.Value = 10;
+            this.zoomSlider.Scroll += new System.EventHandler(this.zoomSlider_Scroll);
+            this.zoomSlider.Leave += new System.EventHandler(this.zoomSlider_Leave);
             // 
             // btnHandView
             // 
@@ -444,6 +475,150 @@ namespace _2DDesigner
             this.btnHandView.UseVisualStyleBackColor = false;
             this.btnHandView.Click += new System.EventHandler(this.btnHandView_Click);
             this.btnHandView.MouseHover += new System.EventHandler(this.btnHandView_MouseHover);
+            // 
+            // shapePickerPanel
+            // 
+            this.shapePickerPanel.AutoScroll = true;
+            this.shapePickerPanel.AutoScrollMargin = new System.Drawing.Size(5, 5);
+            this.shapePickerPanel.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+            this.shapePickerPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.shapePickerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.shapePickerPanel.Controls.Add(this.btnLine);
+            this.shapePickerPanel.Controls.Add(this.btnRect);
+            this.shapePickerPanel.Controls.Add(this.btnEllipse);
+            this.shapePickerPanel.Controls.Add(this.btnCircle);
+            this.shapePickerPanel.Controls.Add(this.btnParabola);
+            this.shapePickerPanel.Controls.Add(this.btnHyperbole);
+            this.shapePickerPanel.Controls.Add(this.btnSquare);
+            this.shapePickerPanel.Controls.Add(this.btnTriangle);
+            this.shapePickerPanel.Location = new System.Drawing.Point(115, 40);
+            this.shapePickerPanel.Name = "shapePickerPanel";
+            this.shapePickerPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.shapePickerPanel.Size = new System.Drawing.Size(119, 65);
+            this.shapePickerPanel.TabIndex = 17;
+            this.shapePickerPanel.Visible = false;
+            this.shapePickerPanel.Leave += new System.EventHandler(this.shapePickerPanel_Leave);
+            // 
+            // btnLine
+            // 
+            this.btnLine.BackColor = System.Drawing.Color.Transparent;
+            this.btnLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLine.BackgroundImage")));
+            this.btnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnLine.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnLine.Location = new System.Drawing.Point(6, 6);
+            this.btnLine.Margin = new System.Windows.Forms.Padding(1);
+            this.btnLine.Name = "btnLine";
+            this.btnLine.Size = new System.Drawing.Size(24, 24);
+            this.btnLine.TabIndex = 18;
+            this.btnLine.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLine.UseVisualStyleBackColor = false;
+            this.btnLine.Click += new System.EventHandler(this.btnLine_Click);
+            this.btnLine.MouseHover += new System.EventHandler(this.btnLine_MouseHover);
+            // 
+            // btnRect
+            // 
+            this.btnRect.BackColor = System.Drawing.Color.Transparent;
+            this.btnRect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRect.BackgroundImage")));
+            this.btnRect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnRect.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnRect.Location = new System.Drawing.Point(32, 6);
+            this.btnRect.Margin = new System.Windows.Forms.Padding(1);
+            this.btnRect.Name = "btnRect";
+            this.btnRect.Size = new System.Drawing.Size(24, 24);
+            this.btnRect.TabIndex = 19;
+            this.btnRect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRect.UseVisualStyleBackColor = false;
+            this.btnRect.Click += new System.EventHandler(this.btnRect_Click);
+            // 
+            // btnEllipse
+            // 
+            this.btnEllipse.BackColor = System.Drawing.Color.Transparent;
+            this.btnEllipse.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEllipse.BackgroundImage")));
+            this.btnEllipse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnEllipse.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnEllipse.Location = new System.Drawing.Point(58, 6);
+            this.btnEllipse.Margin = new System.Windows.Forms.Padding(1);
+            this.btnEllipse.Name = "btnEllipse";
+            this.btnEllipse.Size = new System.Drawing.Size(24, 24);
+            this.btnEllipse.TabIndex = 20;
+            this.btnEllipse.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEllipse.UseVisualStyleBackColor = false;
+            this.btnEllipse.Click += new System.EventHandler(this.btnEllipse_Click);
+            // 
+            // btnCircle
+            // 
+            this.btnCircle.BackColor = System.Drawing.Color.Transparent;
+            this.btnCircle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCircle.BackgroundImage")));
+            this.btnCircle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnCircle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCircle.Location = new System.Drawing.Point(84, 6);
+            this.btnCircle.Margin = new System.Windows.Forms.Padding(1);
+            this.btnCircle.Name = "btnCircle";
+            this.btnCircle.Size = new System.Drawing.Size(24, 24);
+            this.btnCircle.TabIndex = 24;
+            this.btnCircle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCircle.UseVisualStyleBackColor = false;
+            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
+            // 
+            // btnParabola
+            // 
+            this.btnParabola.BackColor = System.Drawing.Color.Transparent;
+            this.btnParabola.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnParabola.BackgroundImage")));
+            this.btnParabola.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnParabola.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnParabola.Location = new System.Drawing.Point(6, 32);
+            this.btnParabola.Margin = new System.Windows.Forms.Padding(1);
+            this.btnParabola.Name = "btnParabola";
+            this.btnParabola.Size = new System.Drawing.Size(24, 24);
+            this.btnParabola.TabIndex = 22;
+            this.btnParabola.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnParabola.UseVisualStyleBackColor = false;
+            this.btnParabola.Click += new System.EventHandler(this.btnParabola_Click);
+            // 
+            // btnHyperbole
+            // 
+            this.btnHyperbole.BackColor = System.Drawing.Color.Transparent;
+            this.btnHyperbole.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnHyperbole.BackgroundImage")));
+            this.btnHyperbole.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnHyperbole.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnHyperbole.Location = new System.Drawing.Point(32, 32);
+            this.btnHyperbole.Margin = new System.Windows.Forms.Padding(1);
+            this.btnHyperbole.Name = "btnHyperbole";
+            this.btnHyperbole.Size = new System.Drawing.Size(24, 24);
+            this.btnHyperbole.TabIndex = 23;
+            this.btnHyperbole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHyperbole.UseVisualStyleBackColor = false;
+            this.btnHyperbole.Click += new System.EventHandler(this.btnHyperbole_Click);
+            // 
+            // btnSquare
+            // 
+            this.btnSquare.BackColor = System.Drawing.Color.Transparent;
+            this.btnSquare.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSquare.BackgroundImage")));
+            this.btnSquare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSquare.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSquare.Location = new System.Drawing.Point(58, 32);
+            this.btnSquare.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSquare.Name = "btnSquare";
+            this.btnSquare.Size = new System.Drawing.Size(24, 24);
+            this.btnSquare.TabIndex = 25;
+            this.btnSquare.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSquare.UseVisualStyleBackColor = false;
+            this.btnSquare.Click += new System.EventHandler(this.btnSquare_Click);
+            // 
+            // btnTriangle
+            // 
+            this.btnTriangle.BackColor = System.Drawing.Color.Transparent;
+            this.btnTriangle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTriangle.BackgroundImage")));
+            this.btnTriangle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnTriangle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnTriangle.Location = new System.Drawing.Point(84, 32);
+            this.btnTriangle.Margin = new System.Windows.Forms.Padding(1);
+            this.btnTriangle.Name = "btnTriangle";
+            this.btnTriangle.Size = new System.Drawing.Size(24, 24);
+            this.btnTriangle.TabIndex = 21;
+            this.btnTriangle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnTriangle.UseVisualStyleBackColor = false;
+            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
             // 
             // btnLayer
             // 
@@ -634,6 +809,233 @@ namespace _2DDesigner
             this.btnShapePicker.UseVisualStyleBackColor = false;
             this.btnShapePicker.Click += new System.EventHandler(this.btnShapePicker_Click);
             this.btnShapePicker.MouseHover += new System.EventHandler(this.btnShapePicker_MouseHover);
+            // 
+            // btnMove
+            // 
+            this.btnMove.BackColor = System.Drawing.Color.Transparent;
+            this.btnMove.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMove.BackgroundImage")));
+            this.btnMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMove.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnMove.Location = new System.Drawing.Point(43, 38);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(1);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(32, 32);
+            this.btnMove.TabIndex = 14;
+            this.btnMove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMove.UseVisualStyleBackColor = false;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+            this.btnMove.MouseHover += new System.EventHandler(this.btnMove_MouseHover);
+            // 
+            // lbBorderValue
+            // 
+            this.lbBorderValue.AutoSize = true;
+            this.lbBorderValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lbBorderValue.Location = new System.Drawing.Point(461, 62);
+            this.lbBorderValue.Name = "lbBorderValue";
+            this.lbBorderValue.Size = new System.Drawing.Size(27, 13);
+            this.lbBorderValue.TabIndex = 13;
+            this.lbBorderValue.Text = "2 px";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(353, 72);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Weight";
+            // 
+            // sliderBorderWeight
+            // 
+            this.sliderBorderWeight.LargeChange = 2;
+            this.sliderBorderWeight.Location = new System.Drawing.Point(423, 68);
+            this.sliderBorderWeight.Minimum = 1;
+            this.sliderBorderWeight.Name = "sliderBorderWeight";
+            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
+            this.sliderBorderWeight.TabIndex = 11;
+            this.sliderBorderWeight.Value = 2;
+            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(353, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Border Style";
+            // 
+            // btnFillForePicker
+            // 
+            this.btnFillForePicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnFillForePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFillForePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnFillForePicker.Location = new System.Drawing.Point(659, 35);
+            this.btnFillForePicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnFillForePicker.Name = "btnFillForePicker";
+            this.btnFillForePicker.Size = new System.Drawing.Size(103, 24);
+            this.btnFillForePicker.TabIndex = 7;
+            this.btnFillForePicker.Text = " ";
+            this.btnFillForePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFillForePicker.UseVisualStyleBackColor = false;
+            this.btnFillForePicker.Click += new System.EventHandler(this.pickFillForeColor);
+            // 
+            // btnBorderColorPicker
+            // 
+            this.btnBorderColorPicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnBorderColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBorderColorPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnBorderColorPicker.Location = new System.Drawing.Point(423, 37);
+            this.btnBorderColorPicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnBorderColorPicker.Name = "btnBorderColorPicker";
+            this.btnBorderColorPicker.Size = new System.Drawing.Size(121, 22);
+            this.btnBorderColorPicker.TabIndex = 2;
+            this.btnBorderColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBorderColorPicker.UseVisualStyleBackColor = false;
+            this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
+            // 
+            // button3
+            // 
+            this.button3.BackgroundImage = global::_2DDesigner.Properties.Resources.redo;
+            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button3.Location = new System.Drawing.Point(300, 1);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(32, 32);
+            this.button3.TabIndex = 32;
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // btnZoom
+            // 
+            this.btnZoom.BackgroundImage = global::_2DDesigner.Properties.Resources.zoom_in;
+            this.btnZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnZoom.Location = new System.Drawing.Point(262, 1);
+            this.btnZoom.Name = "btnZoom";
+            this.btnZoom.Size = new System.Drawing.Size(32, 32);
+            this.btnZoom.TabIndex = 31;
+            this.btnZoom.UseVisualStyleBackColor = true;
+            this.btnZoom.Click += new System.EventHandler(this.btnZoom_Click);
+            // 
+            // layerPanel
+            // 
+            this.layerPanel.AutoScroll = true;
+            this.layerPanel.AutoScrollMargin = new System.Drawing.Size(5, 5);
+            this.layerPanel.AutoScrollMinSize = new System.Drawing.Size(5, 5);
+            this.layerPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.layerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.layerPanel.Controls.Add(this.btnSendForward);
+            this.layerPanel.Controls.Add(this.btnSendFront);
+            this.layerPanel.Controls.Add(this.btnSendBackward);
+            this.layerPanel.Controls.Add(this.btnSendBack);
+            this.layerPanel.Location = new System.Drawing.Point(265, 25);
+            this.layerPanel.Name = "layerPanel";
+            this.layerPanel.Padding = new System.Windows.Forms.Padding(2);
+            this.layerPanel.Size = new System.Drawing.Size(132, 113);
+            this.layerPanel.TabIndex = 26;
+            this.layerPanel.Visible = false;
+            this.layerPanel.Leave += new System.EventHandler(this.layerPanel_Leave);
+            // 
+            // btnSendForward
+            // 
+            this.btnSendForward.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendForward.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_froward;
+            this.btnSendForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSendForward.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSendForward.Location = new System.Drawing.Point(3, 3);
+            this.btnSendForward.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSendForward.Name = "btnSendForward";
+            this.btnSendForward.Size = new System.Drawing.Size(118, 24);
+            this.btnSendForward.TabIndex = 18;
+            this.btnSendForward.Text = "      Send Forward";
+            this.btnSendForward.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendForward.UseVisualStyleBackColor = false;
+            this.btnSendForward.Click += new System.EventHandler(this.btnSendForward_Click);
+            // 
+            // btnSendFront
+            // 
+            this.btnSendFront.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendFront.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_front;
+            this.btnSendFront.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSendFront.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSendFront.Location = new System.Drawing.Point(3, 29);
+            this.btnSendFront.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSendFront.Name = "btnSendFront";
+            this.btnSendFront.Size = new System.Drawing.Size(118, 24);
+            this.btnSendFront.TabIndex = 22;
+            this.btnSendFront.Text = "      Send To Front";
+            this.btnSendFront.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendFront.UseVisualStyleBackColor = false;
+            this.btnSendFront.Click += new System.EventHandler(this.btnSendFront_Click);
+            // 
+            // btnSendBackward
+            // 
+            this.btnSendBackward.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendBackward.BackgroundImage = global::_2DDesigner.Properties.Resources.send_backward;
+            this.btnSendBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSendBackward.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSendBackward.Location = new System.Drawing.Point(3, 55);
+            this.btnSendBackward.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSendBackward.Name = "btnSendBackward";
+            this.btnSendBackward.Size = new System.Drawing.Size(118, 24);
+            this.btnSendBackward.TabIndex = 23;
+            this.btnSendBackward.Text = "      Send Backward";
+            this.btnSendBackward.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendBackward.UseVisualStyleBackColor = false;
+            this.btnSendBackward.Click += new System.EventHandler(this.btnSendBackward_Click);
+            // 
+            // btnSendBack
+            // 
+            this.btnSendBack.BackColor = System.Drawing.Color.Transparent;
+            this.btnSendBack.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_back;
+            this.btnSendBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSendBack.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSendBack.Location = new System.Drawing.Point(3, 81);
+            this.btnSendBack.Margin = new System.Windows.Forms.Padding(1);
+            this.btnSendBack.Name = "btnSendBack";
+            this.btnSendBack.Size = new System.Drawing.Size(118, 24);
+            this.btnSendBack.TabIndex = 25;
+            this.btnSendBack.Text = "      Send To Back";
+            this.btnSendBack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSendBack.UseVisualStyleBackColor = false;
+            this.btnSendBack.Click += new System.EventHandler(this.btnSendBack_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "lc";
+            this.saveFileDialog.FileName = "project1";
+            this.saveFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
+            this.saveFileDialog.RestoreDirectory = true;
+            this.saveFileDialog.Title = "Save As";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
+            this.openFileDialog.RestoreDirectory = true;
+            this.openFileDialog.Title = "Open project";
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.Location = new System.Drawing.Point(3, 131);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(800, 426);
+            this.pictureBox.TabIndex = 3;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+            this.pictureBox.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
+            // 
+            // lbMouseHover
+            // 
+            this.lbMouseHover.AutoSize = true;
+            this.lbMouseHover.Location = new System.Drawing.Point(9, 79);
+            this.lbMouseHover.Name = "lbMouseHover";
+            this.lbMouseHover.Size = new System.Drawing.Size(35, 13);
+            this.lbMouseHover.TabIndex = 29;
+            this.lbMouseHover.Text = "label7";
             // 
             // fillPatternSelection
             // 
@@ -860,6 +1262,39 @@ namespace _2DDesigner
             7,
             8,
             9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
             10});
             this.fillPatternSelection.Location = new System.Drawing.Point(659, 9);
             this.fillPatternSelection.Name = "fillPatternSelection";
@@ -867,28 +1302,37 @@ namespace _2DDesigner
             this.fillPatternSelection.TabIndex = 15;
             this.fillPatternSelection.SelectedIndexChanged += new System.EventHandler(this.fillPatternSelection1_SelectedIndexChanged);
             // 
-            // btnMove
-            // 
-            this.btnMove.BackColor = System.Drawing.Color.Transparent;
-            this.btnMove.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMove.BackgroundImage")));
-            this.btnMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnMove.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnMove.Location = new System.Drawing.Point(43, 38);
-            this.btnMove.Margin = new System.Windows.Forms.Padding(1);
-            this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(32, 32);
-            this.btnMove.TabIndex = 14;
-            this.btnMove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMove.UseVisualStyleBackColor = false;
-            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
-            this.btnMove.MouseHover += new System.EventHandler(this.btnMove_MouseHover);
-            // 
             // borderSelector
             // 
             this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.borderSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.borderSelector.FormattingEnabled = true;
+            this.borderSelector.IntegralHeight = false;
             this.borderSelector.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
             0,
             1,
             2,
@@ -1087,377 +1531,20 @@ namespace _2DDesigner
             this.borderSelector.TabIndex = 5;
             this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
             // 
-            // lbBorderValue
-            // 
-            this.lbBorderValue.AutoSize = true;
-            this.lbBorderValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.lbBorderValue.Location = new System.Drawing.Point(461, 62);
-            this.lbBorderValue.Name = "lbBorderValue";
-            this.lbBorderValue.Size = new System.Drawing.Size(27, 13);
-            this.lbBorderValue.TabIndex = 13;
-            this.lbBorderValue.Text = "2 px";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(353, 72);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Weight";
-            // 
-            // sliderBorderWeight
-            // 
-            this.sliderBorderWeight.LargeChange = 2;
-            this.sliderBorderWeight.Location = new System.Drawing.Point(423, 68);
-            this.sliderBorderWeight.Minimum = 1;
-            this.sliderBorderWeight.Name = "sliderBorderWeight";
-            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
-            this.sliderBorderWeight.TabIndex = 11;
-            this.sliderBorderWeight.Value = 2;
-            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(353, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Border Style";
-            // 
-            // btnFillForePicker
-            // 
-            this.btnFillForePicker.BackColor = System.Drawing.Color.Transparent;
-            this.btnFillForePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFillForePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnFillForePicker.Location = new System.Drawing.Point(659, 35);
-            this.btnFillForePicker.Margin = new System.Windows.Forms.Padding(1);
-            this.btnFillForePicker.Name = "btnFillForePicker";
-            this.btnFillForePicker.Size = new System.Drawing.Size(103, 24);
-            this.btnFillForePicker.TabIndex = 7;
-            this.btnFillForePicker.Text = " ";
-            this.btnFillForePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFillForePicker.UseVisualStyleBackColor = false;
-            this.btnFillForePicker.Click += new System.EventHandler(this.pickFillForeColor);
-            // 
-            // btnBorderColorPicker
-            // 
-            this.btnBorderColorPicker.BackColor = System.Drawing.Color.Transparent;
-            this.btnBorderColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnBorderColorPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnBorderColorPicker.Location = new System.Drawing.Point(423, 37);
-            this.btnBorderColorPicker.Margin = new System.Windows.Forms.Padding(1);
-            this.btnBorderColorPicker.Name = "btnBorderColorPicker";
-            this.btnBorderColorPicker.Size = new System.Drawing.Size(121, 22);
-            this.btnBorderColorPicker.TabIndex = 2;
-            this.btnBorderColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorderColorPicker.UseVisualStyleBackColor = false;
-            this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImage = global::_2DDesigner.Properties.Resources.redo;
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button3.Location = new System.Drawing.Point(300, 1);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(32, 32);
-            this.button3.TabIndex = 32;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImage = global::_2DDesigner.Properties.Resources.redo;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button2.Location = new System.Drawing.Point(262, 1);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(32, 32);
-            this.button2.TabIndex = 31;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // shapePickerPanel
-            // 
-            this.shapePickerPanel.AutoScroll = true;
-            this.shapePickerPanel.AutoScrollMargin = new System.Drawing.Size(5, 5);
-            this.shapePickerPanel.AutoScrollMinSize = new System.Drawing.Size(5, 5);
-            this.shapePickerPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.shapePickerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.shapePickerPanel.Controls.Add(this.btnLine);
-            this.shapePickerPanel.Controls.Add(this.btnRect);
-            this.shapePickerPanel.Controls.Add(this.btnEllipse);
-            this.shapePickerPanel.Controls.Add(this.btnCircle);
-            this.shapePickerPanel.Controls.Add(this.btnParabola);
-            this.shapePickerPanel.Controls.Add(this.btnHyperbole);
-            this.shapePickerPanel.Controls.Add(this.btnSquare);
-            this.shapePickerPanel.Controls.Add(this.btnTriangle);
-            this.shapePickerPanel.Location = new System.Drawing.Point(787, 142);
-            this.shapePickerPanel.Name = "shapePickerPanel";
-            this.shapePickerPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.shapePickerPanel.Size = new System.Drawing.Size(119, 65);
-            this.shapePickerPanel.TabIndex = 17;
-            this.shapePickerPanel.Visible = false;
-            this.shapePickerPanel.Leave += new System.EventHandler(this.shapePickerPanel_Leave);
-            // 
-            // btnLine
-            // 
-            this.btnLine.BackColor = System.Drawing.Color.Transparent;
-            this.btnLine.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLine.BackgroundImage")));
-            this.btnLine.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnLine.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnLine.Location = new System.Drawing.Point(6, 6);
-            this.btnLine.Margin = new System.Windows.Forms.Padding(1);
-            this.btnLine.Name = "btnLine";
-            this.btnLine.Size = new System.Drawing.Size(24, 24);
-            this.btnLine.TabIndex = 18;
-            this.btnLine.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLine.UseVisualStyleBackColor = false;
-            this.btnLine.Click += new System.EventHandler(this.btnLine_Click);
-            this.btnLine.MouseHover += new System.EventHandler(this.btnLine_MouseHover);
-            // 
-            // btnRect
-            // 
-            this.btnRect.BackColor = System.Drawing.Color.Transparent;
-            this.btnRect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRect.BackgroundImage")));
-            this.btnRect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnRect.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnRect.Location = new System.Drawing.Point(32, 6);
-            this.btnRect.Margin = new System.Windows.Forms.Padding(1);
-            this.btnRect.Name = "btnRect";
-            this.btnRect.Size = new System.Drawing.Size(24, 24);
-            this.btnRect.TabIndex = 19;
-            this.btnRect.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRect.UseVisualStyleBackColor = false;
-            this.btnRect.Click += new System.EventHandler(this.btnRect_Click);
-            // 
-            // btnEllipse
-            // 
-            this.btnEllipse.BackColor = System.Drawing.Color.Transparent;
-            this.btnEllipse.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnEllipse.BackgroundImage")));
-            this.btnEllipse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnEllipse.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnEllipse.Location = new System.Drawing.Point(58, 6);
-            this.btnEllipse.Margin = new System.Windows.Forms.Padding(1);
-            this.btnEllipse.Name = "btnEllipse";
-            this.btnEllipse.Size = new System.Drawing.Size(24, 24);
-            this.btnEllipse.TabIndex = 20;
-            this.btnEllipse.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEllipse.UseVisualStyleBackColor = false;
-            this.btnEllipse.Click += new System.EventHandler(this.btnEllipse_Click);
-            // 
-            // btnCircle
-            // 
-            this.btnCircle.BackColor = System.Drawing.Color.Transparent;
-            this.btnCircle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCircle.BackgroundImage")));
-            this.btnCircle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnCircle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnCircle.Location = new System.Drawing.Point(84, 6);
-            this.btnCircle.Margin = new System.Windows.Forms.Padding(1);
-            this.btnCircle.Name = "btnCircle";
-            this.btnCircle.Size = new System.Drawing.Size(24, 24);
-            this.btnCircle.TabIndex = 24;
-            this.btnCircle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCircle.UseVisualStyleBackColor = false;
-            this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
-            // 
-            // btnParabola
-            // 
-            this.btnParabola.BackColor = System.Drawing.Color.Transparent;
-            this.btnParabola.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnParabola.BackgroundImage")));
-            this.btnParabola.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnParabola.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnParabola.Location = new System.Drawing.Point(6, 32);
-            this.btnParabola.Margin = new System.Windows.Forms.Padding(1);
-            this.btnParabola.Name = "btnParabola";
-            this.btnParabola.Size = new System.Drawing.Size(24, 24);
-            this.btnParabola.TabIndex = 22;
-            this.btnParabola.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnParabola.UseVisualStyleBackColor = false;
-            this.btnParabola.Click += new System.EventHandler(this.btnParabola_Click);
-            // 
-            // btnHyperbole
-            // 
-            this.btnHyperbole.BackColor = System.Drawing.Color.Transparent;
-            this.btnHyperbole.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnHyperbole.BackgroundImage")));
-            this.btnHyperbole.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnHyperbole.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnHyperbole.Location = new System.Drawing.Point(32, 32);
-            this.btnHyperbole.Margin = new System.Windows.Forms.Padding(1);
-            this.btnHyperbole.Name = "btnHyperbole";
-            this.btnHyperbole.Size = new System.Drawing.Size(24, 24);
-            this.btnHyperbole.TabIndex = 23;
-            this.btnHyperbole.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnHyperbole.UseVisualStyleBackColor = false;
-            this.btnHyperbole.Click += new System.EventHandler(this.btnHyperbole_Click);
-            // 
-            // btnSquare
-            // 
-            this.btnSquare.BackColor = System.Drawing.Color.Transparent;
-            this.btnSquare.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSquare.BackgroundImage")));
-            this.btnSquare.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnSquare.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnSquare.Location = new System.Drawing.Point(58, 32);
-            this.btnSquare.Margin = new System.Windows.Forms.Padding(1);
-            this.btnSquare.Name = "btnSquare";
-            this.btnSquare.Size = new System.Drawing.Size(24, 24);
-            this.btnSquare.TabIndex = 25;
-            this.btnSquare.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSquare.UseVisualStyleBackColor = false;
-            this.btnSquare.Click += new System.EventHandler(this.btnSquare_Click);
-            // 
-            // btnTriangle
-            // 
-            this.btnTriangle.BackColor = System.Drawing.Color.Transparent;
-            this.btnTriangle.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTriangle.BackgroundImage")));
-            this.btnTriangle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnTriangle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnTriangle.Location = new System.Drawing.Point(84, 32);
-            this.btnTriangle.Margin = new System.Windows.Forms.Padding(1);
-            this.btnTriangle.Name = "btnTriangle";
-            this.btnTriangle.Size = new System.Drawing.Size(24, 24);
-            this.btnTriangle.TabIndex = 21;
-            this.btnTriangle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnTriangle.UseVisualStyleBackColor = false;
-            this.btnTriangle.Click += new System.EventHandler(this.btnTriangle_Click);
-            // 
-            // layerPanel
-            // 
-            this.layerPanel.AutoScroll = true;
-            this.layerPanel.AutoScrollMargin = new System.Drawing.Size(5, 5);
-            this.layerPanel.AutoScrollMinSize = new System.Drawing.Size(5, 5);
-            this.layerPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.layerPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.layerPanel.Controls.Add(this.btnSendForward);
-            this.layerPanel.Controls.Add(this.btnSendFront);
-            this.layerPanel.Controls.Add(this.btnSendBackward);
-            this.layerPanel.Controls.Add(this.btnSendBack);
-            this.layerPanel.Location = new System.Drawing.Point(787, 213);
-            this.layerPanel.Name = "layerPanel";
-            this.layerPanel.Padding = new System.Windows.Forms.Padding(2);
-            this.layerPanel.Size = new System.Drawing.Size(132, 111);
-            this.layerPanel.TabIndex = 26;
-            this.layerPanel.Visible = false;
-            this.layerPanel.Leave += new System.EventHandler(this.layerPanel_Leave);
-            // 
-            // btnSendForward
-            // 
-            this.btnSendForward.BackColor = System.Drawing.Color.Transparent;
-            this.btnSendForward.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_froward;
-            this.btnSendForward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnSendForward.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnSendForward.Location = new System.Drawing.Point(3, 3);
-            this.btnSendForward.Margin = new System.Windows.Forms.Padding(1);
-            this.btnSendForward.Name = "btnSendForward";
-            this.btnSendForward.Size = new System.Drawing.Size(118, 24);
-            this.btnSendForward.TabIndex = 18;
-            this.btnSendForward.Text = "      Send Forward";
-            this.btnSendForward.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSendForward.UseVisualStyleBackColor = false;
-            this.btnSendForward.Click += new System.EventHandler(this.btnSendForward_Click);
-            // 
-            // btnSendFront
-            // 
-            this.btnSendFront.BackColor = System.Drawing.Color.Transparent;
-            this.btnSendFront.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_front;
-            this.btnSendFront.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnSendFront.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnSendFront.Location = new System.Drawing.Point(3, 29);
-            this.btnSendFront.Margin = new System.Windows.Forms.Padding(1);
-            this.btnSendFront.Name = "btnSendFront";
-            this.btnSendFront.Size = new System.Drawing.Size(118, 24);
-            this.btnSendFront.TabIndex = 22;
-            this.btnSendFront.Text = "      Send To Front";
-            this.btnSendFront.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSendFront.UseVisualStyleBackColor = false;
-            this.btnSendFront.Click += new System.EventHandler(this.btnSendFront_Click);
-            // 
-            // btnSendBackward
-            // 
-            this.btnSendBackward.BackColor = System.Drawing.Color.Transparent;
-            this.btnSendBackward.BackgroundImage = global::_2DDesigner.Properties.Resources.send_backward;
-            this.btnSendBackward.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnSendBackward.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnSendBackward.Location = new System.Drawing.Point(3, 55);
-            this.btnSendBackward.Margin = new System.Windows.Forms.Padding(1);
-            this.btnSendBackward.Name = "btnSendBackward";
-            this.btnSendBackward.Size = new System.Drawing.Size(118, 24);
-            this.btnSendBackward.TabIndex = 23;
-            this.btnSendBackward.Text = "      Send Backward";
-            this.btnSendBackward.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSendBackward.UseVisualStyleBackColor = false;
-            this.btnSendBackward.Click += new System.EventHandler(this.btnSendBackward_Click);
-            // 
-            // btnSendBack
-            // 
-            this.btnSendBack.BackColor = System.Drawing.Color.Transparent;
-            this.btnSendBack.BackgroundImage = global::_2DDesigner.Properties.Resources.send_to_back;
-            this.btnSendBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnSendBack.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnSendBack.Location = new System.Drawing.Point(3, 81);
-            this.btnSendBack.Margin = new System.Windows.Forms.Padding(1);
-            this.btnSendBack.Name = "btnSendBack";
-            this.btnSendBack.Size = new System.Drawing.Size(118, 24);
-            this.btnSendBack.TabIndex = 25;
-            this.btnSendBack.Text = "      Send To Back";
-            this.btnSendBack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSendBack.UseVisualStyleBackColor = false;
-            this.btnSendBack.Click += new System.EventHandler(this.btnSendBack_Click);
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.DefaultExt = "lc";
-            this.saveFileDialog.FileName = "project1";
-            this.saveFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
-            this.saveFileDialog.RestoreDirectory = true;
-            this.saveFileDialog.Title = "Save As";
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
-            this.openFileDialog.RestoreDirectory = true;
-            this.openFileDialog.Title = "Open project";
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Location = new System.Drawing.Point(3, 142);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(784, 349);
-            this.pictureBox.TabIndex = 3;
-            this.pictureBox.TabStop = false;
-            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
-            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
-            this.pictureBox.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
-            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
-            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label7.Location = new System.Drawing.Point(834, 50);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 25);
-            this.label7.TabIndex = 27;
-            this.label7.Text = "label7";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(977, 749);
-            this.Controls.Add(this.label7);
+            this.ClientSize = new System.Drawing.Size(804, 561);
+            this.Controls.Add(this.layerPanel);
             this.Controls.Add(this.toolbarHolder);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.menu);
-            this.Controls.Add(this.shapePickerPanel);
-            this.Controls.Add(this.layerPanel);
             this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(820, 600);
             this.Name = "Form";
             this.Text = "2D Designer";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form_KeyDown);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
@@ -1467,8 +1554,9 @@ namespace _2DDesigner
             this.toolbarHolder.ContentPanel.PerformLayout();
             this.toolbarHolder.ResumeLayout(false);
             this.toolbarHolder.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zoomSlider)).EndInit();
             this.shapePickerPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sliderBorderWeight)).EndInit();
             this.layerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -1552,7 +1640,7 @@ namespace _2DDesigner
         private System.Windows.Forms.Button btnOpenProject;
         private System.Windows.Forms.Button btnNewProject;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnZoom;
         private System.Windows.Forms.Button btnLayer;
         private System.Windows.Forms.FlowLayoutPanel layerPanel;
         private System.Windows.Forms.Button btnSendForward;
@@ -1560,7 +1648,9 @@ namespace _2DDesigner
         private System.Windows.Forms.Button btnSendBackward;
         private System.Windows.Forms.Button btnSendBack;
         private System.Windows.Forms.Button btnHandView;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TrackBar zoomSlider;
+        private System.Windows.Forms.Label zoomLabel;
+        private System.Windows.Forms.Label lbMouseHover;
     }
 }
 

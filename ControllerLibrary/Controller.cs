@@ -188,11 +188,13 @@ namespace ControllerLibrary
         }
 
 
-        public void addShape(Shape shape)
+        public void addShape(Shape shape, int index = int.MaxValue)
         {
             shape.setFillPattern(fillPattern);
             shape.setBorder(border);
-            mShapes.Add(shape);
+            if (index > mShapes.Count)
+                index = mShapes.Count;
+            mShapes.Insert(index, shape);
         }
 
         
