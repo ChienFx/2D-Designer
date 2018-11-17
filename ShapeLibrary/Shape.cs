@@ -156,5 +156,15 @@ namespace ShapeLibrary
         {
             throw new NotImplementedException();
         }
+
+        public void setForegroundColor(Color color)
+        {
+            this.mFillPattern.setForegroundColor(color);
+        }
+
+        public void setBackgroundColor(Color color)
+        {
+            this.mFillPattern.setBackgroundColor(color);
+        }
     }
 }

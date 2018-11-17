@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
 using ControllerLibrary;
@@ -31,6 +28,8 @@ namespace _2DDesigner
 
         private float zoomRatio = 1;
         private Shape tempShape, shape;
+
+        private Cursor curFunction = Cursor.Current;
 
         public Form()
         {
@@ -94,7 +93,7 @@ namespace _2DDesigner
             HideShapePickerPanel();
             HideZoomPanel();
             shapeType = ShapeType.LINE;
-            setPenCursor();
+            setCursor("pen.cur");
             state = State.DRAW;
         }
 
@@ -260,6 +259,11 @@ namespace _2DDesigner
             start = end;
         }
 
+        private double Distance(PointF a, PointF b)
+        {
+            return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+        }
+
         private void HandlingScaleObjectEvent(Point e)
         {
             if (shape is null)
@@ -307,7 +311,7 @@ namespace _2DDesigner
 
         public void UpdateUI()
         {
-            this.pictureBox.Image = controller.getBitmap();
+            this.pictureBox.Image = (Bitmap)controller.getBitmap();
         }
         
         private void pickBorderColor(object sender, EventArgs e)
@@ -316,7 +320,10 @@ namespace _2DDesigner
             {
                 Color color = colorPickerBorder.Color;
                 btnBorderColorPicker.BackColor = color;
-                controller.setBorder(color);
+                if (controller.setBorder(color))
+                {
+                    UpdateUI();
+                }
             }
         }
 
@@ -328,15 +335,22 @@ namespace _2DDesigner
                 Color color = colorPickerFill.Color;
                 btnFillForePicker.BackColor = color;
 
-                controller.setFillForeground(color);
-                //chang fill color
+                if (controller.setFillForeground(color))
+                {
+                    //controller.DrawAll();
+                    UpdateUI();
+                }
             }
         }
 
         private void borderSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             Debug.WriteLine(sender.ToString() + e.ToString());
-            controller.setBorder(BorderStyle.getPattern(borderSelector.SelectedIndex));
+            if (controller.setBorder(BorderStyle.getPattern(borderSelector.SelectedIndex)))
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
         }
 
         private void pickFillForeColor(object sender, EventArgs e)
@@ -345,7 +359,10 @@ namespace _2DDesigner
             {
                 Color color = colorPickerFill.Color;
                 btnFillForePicker.BackColor = color;
-                controller.setFillForeground(color);
+                if(controller.setFillForeground(color))
+                {
+                    UpdateUI();
+                }
             }
         }
 
@@ -355,7 +372,10 @@ namespace _2DDesigner
             {
                 Color color = colorPickerFill.Color;
                 btnFillBgPicker.BackColor = color;
-                controller.setFillBackground(color);
+                if (controller.setFillBackground(color))
+                {
+                    UpdateUI();
+                }
             }
         }
 
@@ -363,7 +383,12 @@ namespace _2DDesigner
         {
             int weight = sliderBorderWeight.Value;
             lbBorderValue.Text = weight.ToString() + " px";
-            controller.setBorder(weight);
+            if (controller.setBorder(weight))
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
+                
         }
 
         private void btnMove_Click(object sender, EventArgs e)
@@ -373,7 +398,11 @@ namespace _2DDesigner
 
         private void fillPatternSelection1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            controller.setFillPattern(fillPatternSelection.SelectedIndex);
+            if (controller.setFillPattern(fillPatternSelection.SelectedIndex))
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
 
         }
 
@@ -382,12 +411,19 @@ namespace _2DDesigner
             state = State.DRAW;
             shapePickerPanel.Visible = true;
             shapePickerPanel.Focus();
-            this.Cursor = Cursors.Arrow;
+            setCursor(null, Cursors.Arrow);
         }
 
-        private void setPenCursor()
+        private void setCursor(string curName=null, Cursor cur=null)
         {
-            this.Cursor = new Cursor(Application.StartupPath + "\\Cursors\\pen.cur");
+            if (curName != null)
+            {
+                curFunction = new Cursor(Application.StartupPath + "\\Cursors\\" + curName);
+                this.Cursor = curFunction;
+            }
+
+            if (cur != null)
+                curFunction = cur;
         }
 
         private void btnLine_Click(object sender, EventArgs e)
@@ -396,16 +432,16 @@ namespace _2DDesigner
             this.btnShapePicker.Image = Properties.Resources.line;
             HideShapePickerPanel();
             btnShapePicker.Focus();
-            setPenCursor();
+            setCursor("pen.cur");
         }
 
         private void btnRect_Click(object sender, EventArgs e)
         {
-            shapeType = ShapeType.RECTANGLE;
+            state = State.DRAW_RECTANGLE;
             this.btnShapePicker.Image = Properties.Resources.rect;
             HideShapePickerPanel();
             btnShapePicker.Focus();
-            setPenCursor();
+            setCursor("pen.cur");
         }
 
         private void btnEllipse_Click(object sender, EventArgs e)
@@ -414,7 +450,7 @@ namespace _2DDesigner
             this.btnShapePicker.Image = Properties.Resources.ellipse;
             HideShapePickerPanel();
             btnShapePicker.Focus();
-            setPenCursor();
+            setCursor("pen.cur");
         }
 
         private void btnCircle_Click(object sender, EventArgs e)
@@ -423,7 +459,7 @@ namespace _2DDesigner
             this.btnShapePicker.Image = Properties.Resources.circle;
             HideShapePickerPanel();
             btnShapePicker.Focus();
-            setPenCursor();
+            setCursor("pen.cur");
         }
 
         private void btnParabola_Click(object sender, EventArgs e)
@@ -432,7 +468,7 @@ namespace _2DDesigner
             this.btnShapePicker.Image = Properties.Resources.parabola;
             HideShapePickerPanel();
             btnShapePicker.Focus();
-            setPenCursor();
+            setCursor("pen.cur");
         }
 
         private void btnHyperbole_Click(object sender, EventArgs e)
@@ -441,25 +477,25 @@ namespace _2DDesigner
             this.btnShapePicker.Image = Properties.Resources.hyperbole;
             HideShapePickerPanel();
             btnShapePicker.Focus();
-            setPenCursor();
+            setCursor("pen.cur");
         }
 
         private void btnSquare_Click(object sender, EventArgs e)
         {
-            shapeType = ShapeType.TRIANGLE;
+            state = State.DRAW_SQUARE;
             this.btnShapePicker.Image = Properties.Resources.square;
             HideShapePickerPanel();
             btnShapePicker.Focus();
-            setPenCursor();
+            setCursor("pen.cur");
         }
 
         private void btnTriangle_Click(object sender, EventArgs e)
         {
-            shapeType = ShapeType.TRIANGLE;
+            state = State.DRAW_TRIANGLE;
             this.btnShapePicker.Image = Properties.Resources.triangle;
             HideShapePickerPanel();
             btnShapePicker.Focus();
-            setPenCursor();
+            setCursor("pen.cur");
         }
 
         private void toolbarHolder_ContentPanel_Load(object sender, EventArgs e)
@@ -731,11 +767,19 @@ namespace _2DDesigner
             }
             else if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
             {
-                controller.pasteCopiedShape();
+                if (controller.pasteCopiedShape())
+                {
+                    controller.DrawAll();
+                    UpdateUI();
+                }
             }
-            else if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+            else if (e.KeyCode == Keys.X && e.Modifiers == Keys.Control)
             {
-                controller.cutSelectedShape();
+                if (controller.cutSelectedShape())
+                {
+                    controller.DrawAll();
+                    UpdateUI();
+                }
             }
             else if (e.KeyCode == Keys.V)
             {
@@ -743,8 +787,11 @@ namespace _2DDesigner
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                controller.DeleteSelectedObject();
-                UpdateUI();
+                if (controller.DeleteSelectedObject() != null)
+                {
+                    controller.DrawAll();
+                    UpdateUI();
+                }
             }
             else if (e.KeyCode == Keys.D3 && e.Modifiers == Keys.Alt){
                 SwitchToHandViewState();
@@ -763,26 +810,25 @@ namespace _2DDesigner
         private void SwitchToMoveState()
         {
             this.state = State.MOVE;
-            this.Cursor = new Cursor(Application.StartupPath + "\\Cursors\\move.cur");
+            setCursor("move.cur");
         }
 
         private void SwitchToRotateState()
         {
             this.state = State.ROTATE;
-            this.Cursor = new Cursor(Application.StartupPath + "\\Cursors\\rotate.cur");
+            setCursor("rotate.cur");
         }
 
         private void SwitchToScaleState()
         {
             this.state = State.SCALE;
-            this.Cursor = new Cursor(Application.StartupPath + "\\Cursors\\scale.cur");
+            setCursor("scale.cur");
         }
 
         private void SwitchToHandViewState()
         {
             this.state = State.HAND_VIEW;// move hold the picture
-            //this.Cursor = Cursors.Hand;
-            this.Cursor = new Cursor(Application.StartupPath + "\\Cursors\\hand.cur");
+            setCursor("hand.cur");
 
         }
 
@@ -878,27 +924,42 @@ namespace _2DDesigner
         //Edit layer
         private void btnSendForward_Click(object sender, EventArgs e)
         {
+            controller.SendObjectToForward();
+            controller.DrawAll();
+            UpdateUI();
             HideLayerPanel();
         }
 
         private void btnSendFront_Click(object sender, EventArgs e)
         {
+            controller.SendObjectToFront();
+            controller.DrawAll();
+            UpdateUI();
             HideLayerPanel();
         }
 
         private void btnSendBackward_Click(object sender, EventArgs e)
         {
+            controller.SendObjectToBackward();
+            controller.DrawAll();
+            UpdateUI();
             HideLayerPanel();
+
         }
 
         private void btnSendBack_Click(object sender, EventArgs e)
         {
+            controller.SendObjectToBack();
+            controller.DrawAll();
+            UpdateUI();
             HideLayerPanel();
+
         }
 
         private void layerPanel_Leave(object sender, EventArgs e)
         {
             HideLayerPanel();
+
         }
 
         private void closeProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -964,6 +1025,7 @@ namespace _2DDesigner
         private void btnDel_Click(object sender, EventArgs e)
         {
             controller.DeleteSelectedObject();
+            controller.DrawAll();
             UpdateUI();
         }
 
@@ -980,31 +1042,14 @@ namespace _2DDesigner
         private void rightClickMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Shape selectedShape = controller.GetSelectedShape();
-            if(selectedShape == null)
-            {
-                btnCopy.Enabled = false;
-                btnCut.Enabled = false;
-                btnDelItem.Enabled = false;
-                btnLayerItem.Enabled = false;
-                btnExportShape.Enabled = false;
-            }
-            else
-            {
-                btnCopy.Enabled = true;
-                btnCut.Enabled = true;
-                btnDelItem.Enabled = true;
-                btnLayerItem.Enabled = true;
-                btnExportShape.Enabled = true;
-            }
-        }
-
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            controller.DeleteSelectedObject();
-            UpdateUI();
-        }
-
-        
+            bool notNull = selectedShape != null;
+            btnCopy.Enabled = notNull;
+            btnCut.Enabled = notNull;
+            btnDelItem.Enabled = notNull;
+            btnLayerItem.Enabled = notNull;
+            btnExportShape.Enabled = notNull;
+            btnPaste.Enabled = controller.getCopiedShape() != null;
+        }      
 
         void ExportProjectToImage(ImageFormat imgF, string defaultExt, string title, string filter, string defaultFileName)
         {
@@ -1051,10 +1096,54 @@ namespace _2DDesigner
             ExportProjectToImage(ImageFormat.Gif, "gif", "Export to GIF", "GIF file|*.gif", "giffile01");
         }
 
+
+        private void rightClickMenu_Click(object sender, EventArgs e)
+        {
+        }
+
         private void btnCopy_Click(object sender, EventArgs e)
         {
             controller.copySelectedShape();
         }
+        
+        private void btnPaste_Click(object sender, EventArgs e)
+        {
+            if (controller.pasteCopiedShape())
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
+        }
+
+        private void btnCut_Click(object sender, EventArgs e)
+        {
+            if (controller.cutSelectedShape())
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
+        }
+
+        private void setMouseToMainBoard(object sender, EventArgs e)
+        {
+            this.Cursor = curFunction;
+        }
+
+        private void setMouseToToolbar(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Arrow;
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (controller.DeleteSelectedObject() != null)
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
+        }
+
+
     }
 }
 
