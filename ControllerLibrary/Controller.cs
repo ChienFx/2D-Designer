@@ -446,24 +446,23 @@ namespace ControllerLibrary
         {
             if (copiedShape != null)
             {
-                Shape tmp = GetSelectedShape();
-                if (tmp != null)
-                {
-                    tmp = (Shape)copiedShape.Clone();
-                    DrawAll();
-                    return true;
-                }
-                else
-                {
-                    Shape tmp2 = (Shape)copiedShape.Clone();
-                }
+                copiedShape.Shift(10, 10);
+                Shape tmp = (Shape)copiedShape.Clone();
+                addShape(tmp);
+                return true;
             }
             return false;
         }
 
-        public void cutSelectedShape()
+        public bool cutSelectedShape()
         {
-            throw new NotImplementedException();
+            Shape tmp = DeleteSelectedObject();
+            if (tmp != null)
+            {
+                copiedShape = tmp;
+                return true;
+            }
+            return false;
         }
 
         public Shape getCopiedShape()

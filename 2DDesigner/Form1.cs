@@ -419,6 +419,7 @@ namespace _2DDesigner
             if (curName != null)
             {
                 curFunction = new Cursor(Application.StartupPath + "\\Cursors\\" + curName);
+                this.Cursor = curFunction;
             }
 
             if (cur != null)
@@ -766,11 +767,19 @@ namespace _2DDesigner
             }
             else if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
             {
-                controller.pasteCopiedShape();
+                if (controller.pasteCopiedShape())
+                {
+                    controller.DrawAll();
+                    UpdateUI();
+                }
             }
-            else if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+            else if (e.KeyCode == Keys.X && e.Modifiers == Keys.Control)
             {
-                controller.cutSelectedShape();
+                if (controller.cutSelectedShape())
+                {
+                    controller.DrawAll();
+                    UpdateUI();
+                }
             }
             else if (e.KeyCode == Keys.V)
             {
@@ -778,8 +787,11 @@ namespace _2DDesigner
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                controller.DeleteSelectedObject();
-                UpdateUI();
+                if (controller.DeleteSelectedObject() != null)
+                {
+                    controller.DrawAll();
+                    UpdateUI();
+                }
             }
             else if (e.KeyCode == Keys.D3 && e.Modifiers == Keys.Alt){
                 SwitchToHandViewState();
@@ -1096,12 +1108,20 @@ namespace _2DDesigner
         
         private void btnPaste_Click(object sender, EventArgs e)
         {
-            controller.pasteCopiedShape();
+            if (controller.pasteCopiedShape())
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
         }
 
         private void btnCut_Click(object sender, EventArgs e)
         {
-            controller.cutSelectedShape();
+            if (controller.cutSelectedShape())
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
         }
 
         private void setMouseToMainBoard(object sender, EventArgs e)
@@ -1116,9 +1136,11 @@ namespace _2DDesigner
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            controller.DeleteSelectedObject();
-            controller.DrawAll();
-            UpdateUI();
+            if (controller.DeleteSelectedObject() != null)
+            {
+                controller.DrawAll();
+                UpdateUI();
+            }
         }
 
 
