@@ -8,33 +8,25 @@ namespace _2DDesigner
     [Serializable]
     public class Monitor
     {
-        int window_width;
-        int window_height;
-
-        int toolbar_width;
-        int toolbar_height;
-        Point toolbar_positon;
-
-        int picturebox_width;
-        int picturebox_height;
-        Point picturebox_position;
+        public Size sizeWindow_Min = new Size(805, 605);
+        public Size sizeToolBar = new Size(800, 100);
+        public Size sizePictureBox_Max;
+        public Size sizeWindow_Max;
 
         Form form;
-       
-        public Monitor(Form form)
-        {
-            this.form = form;
 
-            SetFullScreen();
+        public Monitor(Form xForm)
+        {
+            this.form = xForm;
         }
 
-        private void SetFullScreen()
+        public void SetFullScreen()
         {
-            window_width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
-            window_height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
-            form.SetBounds(0, 0, window_width, window_height);
             form.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            
+            sizeWindow_Max = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            sizePictureBox_Max = new Size(
+                sizeWindow_Max.Width-10,
+                sizeWindow_Max.Height-sizeToolBar.Height-60);// sizeWindow_Max.Width, sizeWindow_Max.Height - sizeToolBar.Height);
         }
         
     }

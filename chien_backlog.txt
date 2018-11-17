@@ -3,3 +3,11 @@
 - design border, bursh effect
 - save/load, new project
 - shortcut
+- not MDI, can be use in many instance (orther thread)
+- export image	
+------------To do------------
+- zoom
+- menu right click
+- characters
+- grid
+

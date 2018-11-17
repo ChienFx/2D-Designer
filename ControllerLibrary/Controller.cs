@@ -17,7 +17,7 @@ namespace ControllerLibrary
         List<Group> mGroups;
         public int mSelectedShapeIndex;
         int mSelectedGroupIndex;
-
+        Shape copiedShape;
         FillPattern fillPattern;
         Border border;
 
@@ -30,6 +30,7 @@ namespace ControllerLibrary
         {
             mShapes = new List<Shape>();
             mGroups = new List<Group>();
+
             mSelectedShapeIndex = -1;
             mSelectedGroupIndex = -1;
             
@@ -64,8 +65,7 @@ namespace ControllerLibrary
             Shape ins = GetSelectedShape();
             if (ins != null)
                 ins.setBorder(color);
-            else
-                this.border.setBorder(color);
+            this.border.setBorder(color);
         }
 
         public void setBorder(int weight)
@@ -73,8 +73,7 @@ namespace ControllerLibrary
             Shape ins = GetSelectedShape();
             if (ins != null)
                 ins.setBorder(weight);
-            else
-                this.border.setBorder(weight);
+            this.border.setBorder(weight);
         }
 
         public void setBorder(BorderStyle borderStyle)
@@ -82,8 +81,7 @@ namespace ControllerLibrary
             Shape ins = GetSelectedShape();
             if (ins != null)
                 ins.setBorder(borderStyle);
-            else
-                this.border.setBorder(borderStyle);
+            this.border.setBorder(borderStyle);
         }
 
         public void setFillPattern(int index)
@@ -91,8 +89,7 @@ namespace ControllerLibrary
             Shape ins = GetSelectedShape();
             if (ins != null)
                 ins.setFillPattern(index);
-            else
-                this.fillPattern.setFillPattern(index);
+            this.fillPattern.setFillPattern(index);
         }
 
        
@@ -141,7 +138,7 @@ namespace ControllerLibrary
             mSelectedShapeIndex = mShapes.Count - 1;
         }
 
-        public Image getBitmap()
+        public Bitmap getBitmap()
         {
             return bitmap;
         }
@@ -166,7 +163,7 @@ namespace ControllerLibrary
             fillPattern.setForegroundColor(color);
         }
 
-        public Graphics GetGraphics()
+        private Graphics GetGraphics()
         {
             return Graphics.FromImage(bitmap);
         }
@@ -206,7 +203,7 @@ namespace ControllerLibrary
             mSelectedShapeIndex = index;
         }
 
-        
+
 
         //Delete selected shape/group
         public Shape DeleteSelectedObject()
@@ -300,6 +297,7 @@ namespace ControllerLibrary
             }
             catch(Exception e)
             {
+                MessageBox.Show(e.Message);
                 return false;
             }
         }
@@ -336,6 +334,7 @@ namespace ControllerLibrary
             }
             catch(Exception e)
             {
+                MessageBox.Show(e.Message);
                 return false;
             }
         }
@@ -369,6 +368,37 @@ namespace ControllerLibrary
             cloner.fillPattern = fillPattern;
 
             return cloner;
+        }
+
+        public void copySelectedShape()
+        {
+            Shape tmp = GetSelectedShape();
+            if (tmp != null)
+                this.copiedShape = (Shape)tmp.Clone();
+        }
+
+        public bool pasteCopiedShape()
+        {
+            if (copiedShape != null)
+            {
+                Shape tmp = GetSelectedShape();
+                if (tmp != null)
+                {
+                    tmp = (Shape)copiedShape.Clone();
+                    DrawAll();
+                    return true;
+                }
+                else
+                {
+                    Shape tmp2 = (Shape)copiedShape.Clone();
+                }
+            }
+            return false;
+        }
+
+        public void cutSelectedShape()
+        {
+            throw new NotImplementedException();
         }
     }
 }

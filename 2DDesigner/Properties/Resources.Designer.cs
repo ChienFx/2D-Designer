@@ -263,6 +263,16 @@ namespace _2DDesigner.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap trash_bold {
+            get {
+                object obj = ResourceManager.GetObject("trash_bold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap triangle {
             get {
                 object obj = ResourceManager.GetObject("triangle", resourceCulture);
@@ -276,6 +286,16 @@ namespace _2DDesigner.Properties {
         internal static System.Drawing.Bitmap undo {
             get {
                 object obj = ResourceManager.GetObject("undo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zoom_in {
+            get {
+                object obj = ResourceManager.GetObject("zoom in", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

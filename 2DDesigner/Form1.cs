@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
 using ControllerLibrary;
@@ -12,58 +16,69 @@ namespace _2DDesigner
     public partial class Form : System.Windows.Forms.Form
     {
         public Controller controller;
+        //public Shape shape;
         public Monitor monitor;
         State state;
         Point start;
         ShapeType shapeType;
         bool isMouseHold = false;
         bool isSaved = false;
-        Shape shape;
 
         Stack<Controller> undoList = new Stack<Controller>();
         Stack<Controller> redoList = new Stack<Controller>();
 
         string path_Save = null;
 
+        private float zoomRatio = 1;
+        private Shape tempShape, shape;
+
         public Form()
         {
             InitializeComponent();
             monitor = new Monitor(this);
+            monitor.SetFullScreen();
+            pictureBox.Size = monitor.sizePictureBox_Max;
+
             controller = new Controller(pictureBox.Width, pictureBox.Height);
             start = new Point(0, 0);
             state = State.DEFAULT;
             shapeType = ShapeType.DEFAULT;
-            shape = null;
-
+            UpdateUI();
+            this.DoubleBuffered = true;
             this.FormClosing += Form_FormClosing;
+            shape = null;
 
         }
 
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bool stopClosing = false;
             if (!isSaved)
             {
                 DialogResult res = MessageBox.Show(this, "Do you want to save this project?", "Save & Exit", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
                 {
-                    e.Cancel = !this.SaveProject();
+                    stopClosing = !this.SaveProject();
                 }
                 else if (res == DialogResult.No)
                 {
                     DialogResult res2 = MessageBox.Show(this, "Your project will be loss!\nContinue Exit?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    e.Cancel = (res2 == DialogResult.No);
+                    stopClosing = (res2 == DialogResult.No);
                 }
                 else
-                    e.Cancel = true;
+                    stopClosing = true;
+
+                e.Cancel = stopClosing;
             }
+            if (stopClosing) { return; }
             DisposeResources();
                 
         }
 
         private void DisposeResources()
         {
-            if(pictureBox!=null)
-                pictureBox.Dispose();
+            if(pictureBox.Image!=null)
+                pictureBox.Image.Dispose();
 
             this.Dispose();
         }
@@ -75,8 +90,12 @@ namespace _2DDesigner
             btnFillBgPicker.BackColor = MyColor.DEFAULT_BACKGROUND;
             btnFillForePicker.BackColor = MyColor.DEFAULT_SHAPE_FILL_COLOR;
             setSaveState(true);
-            shapePickerPanel.Visible = false;
-            layerPanel.Visible = false;
+            HideLayerPanel();
+            HideShapePickerPanel();
+            HideZoomPanel();
+            shapeType = ShapeType.LINE;
+            setPenCursor();
+            state = State.DRAW;
         }
 
 
@@ -106,6 +125,7 @@ namespace _2DDesigner
         {
             HideShapePickerPanel();
             HideLayerPanel();
+            HideZoomPanel();
         }
 
         void setSaveState(bool flag)
@@ -119,7 +139,7 @@ namespace _2DDesigner
                 this.Text += "*";
             }
         }
-
+        
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             if (!(shape is null))
@@ -187,8 +207,14 @@ namespace _2DDesigner
             start = new Point(e.X, e.Y);
         }
 
+        private void setTextForLabel(Label lb, Point p)
+        {
+            lb.Text = p.ToString();
+        }
+
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
+            setTextForLabel(lbMouseHover, e.Location);
             if (isMouseHold)
             {
                 switch (state)
@@ -218,7 +244,7 @@ namespace _2DDesigner
             controller.DrawAll();
             UpdateUI();
         }
-        
+
         private void HandlingRotateObjectEvent(Point e)
         {
             if (shape is null)
@@ -234,7 +260,6 @@ namespace _2DDesigner
             start = end;
         }
 
-        Shape tempShape;
         private void HandlingScaleObjectEvent(Point e)
         {
             if (shape is null)
@@ -284,8 +309,7 @@ namespace _2DDesigner
         {
             this.pictureBox.Image = controller.getBitmap();
         }
-
-
+        
         private void pickBorderColor(object sender, EventArgs e)
         {
             if (colorPickerBorder.ShowDialog() == DialogResult.OK)
@@ -303,6 +327,7 @@ namespace _2DDesigner
             {
                 Color color = colorPickerFill.Color;
                 btnFillForePicker.BackColor = color;
+
                 controller.setFillForeground(color);
                 //chang fill color
             }
@@ -346,7 +371,6 @@ namespace _2DDesigner
             SwitchToMoveState();
         }
 
-
         private void fillPatternSelection1_SelectedIndexChanged(object sender, EventArgs e)
         {
             controller.setFillPattern(fillPatternSelection.SelectedIndex);
@@ -358,6 +382,7 @@ namespace _2DDesigner
             state = State.DRAW;
             shapePickerPanel.Visible = true;
             shapePickerPanel.Focus();
+            this.Cursor = Cursors.Arrow;
         }
 
         private void setPenCursor()
@@ -376,7 +401,7 @@ namespace _2DDesigner
 
         private void btnRect_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_RECTANGLE;
+            shapeType = ShapeType.RECTANGLE;
             this.btnShapePicker.Image = Properties.Resources.rect;
             HideShapePickerPanel();
             btnShapePicker.Focus();
@@ -421,7 +446,7 @@ namespace _2DDesigner
 
         private void btnSquare_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_SQUARE;
+            shapeType = ShapeType.TRIANGLE;
             this.btnShapePicker.Image = Properties.Resources.square;
             HideShapePickerPanel();
             btnShapePicker.Focus();
@@ -430,7 +455,7 @@ namespace _2DDesigner
 
         private void btnTriangle_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_TRIANGLE;
+            shapeType = ShapeType.TRIANGLE;
             this.btnShapePicker.Image = Properties.Resources.triangle;
             HideShapePickerPanel();
             btnShapePicker.Focus();
@@ -446,18 +471,21 @@ namespace _2DDesigner
         {
             HideShapePickerPanel();
             HideLayerPanel();
+            HideZoomPanel();
         }
 
         private void Form_MouseClick(object sender, MouseEventArgs e)
         {
             HideShapePickerPanel();
             HideLayerPanel();
+            HideZoomPanel();
         }
 
         private void toolbarHolder_ContentPanel_MouseClick(object sender, MouseEventArgs e)
         {
             HideShapePickerPanel();
             HideLayerPanel();
+            HideZoomPanel();
         }
 
         void HideShapePickerPanel()
@@ -470,6 +498,15 @@ namespace _2DDesigner
         {
             if (layerPanel.Visible == true)
                 layerPanel.Visible = false;
+        }
+
+        void HideZoomPanel()
+        {
+            if(zoomSlider.Visible == true)
+            {
+                zoomSlider.Visible = false;
+                zoomLabel.Visible = false;
+            }
         }
 
         void ChangeState(State state)
@@ -615,6 +652,8 @@ namespace _2DDesigner
                     path_Save = openFileDialog.FileName;
                     if (controller.Load(path_Save, 0) == true)
                     {
+                        undoList.Clear();
+                        redoList.Clear();
                         setSaveState(true);
                         controller.DrawAll();
                         UpdateUI();
@@ -686,9 +725,26 @@ namespace _2DDesigner
             {
                 this.Redo();
             }
+            else if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+            {
+                controller.copySelectedShape();
+            }
+            else if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
+            {
+                controller.pasteCopiedShape();
+            }
+            else if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+            {
+                controller.cutSelectedShape();
+            }
             else if (e.KeyCode == Keys.V)
             {
                 SwitchToMoveState();
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                controller.DeleteSelectedObject();
+                UpdateUI();
             }
             else if (e.KeyCode == Keys.D3 && e.Modifiers == Keys.Alt){
                 SwitchToHandViewState();
@@ -809,7 +865,6 @@ namespace _2DDesigner
 
         private void btnLayer_Click(object sender, EventArgs e)
         {
-            label7.Text = controller.mSelectedShapeIndex.ToString();
             layerPanel.Visible = true;
             layerPanel.Focus();
         }
@@ -823,39 +878,26 @@ namespace _2DDesigner
         //Edit layer
         private void btnSendForward_Click(object sender, EventArgs e)
         {
-            controller.SendObjectToForward();
-            controller.DrawAll();
-            UpdateUI();
             HideLayerPanel();
         }
 
         private void btnSendFront_Click(object sender, EventArgs e)
         {
-            controller.SendObjectToFront();
-            controller.DrawAll();
-            UpdateUI();
             HideLayerPanel();
         }
 
         private void btnSendBackward_Click(object sender, EventArgs e)
         {
-            controller.SendObjectToBackward();
-            controller.DrawAll();
-            UpdateUI();
             HideLayerPanel();
         }
 
         private void btnSendBack_Click(object sender, EventArgs e)
         {
-            controller.SendObjectToBack();
-            controller.DrawAll();
-            UpdateUI();
             HideLayerPanel();
         }
 
         private void layerPanel_Leave(object sender, EventArgs e)
         {
-
             HideLayerPanel();
         }
 
@@ -872,11 +914,146 @@ namespace _2DDesigner
         private void btnHandView_MouseHover(object sender, EventArgs e)
         {
             showToolTipButton(btnHandView, "View");
+            
         }
 
-        private void label7_Click(object sender, EventArgs e)
+        private void zoomSlider_Scroll(object sender, EventArgs e)
+        {
+            if(zoomSlider.Value > 0)
+            {
+                zoomLabel.Text = ((zoomSlider.Value * 10)).ToString() + "%";
+                zoomRatio = zoomSlider.Value / 10.0f;
+
+                pictureBox.Image= null;
+                pictureBox.Image = PictureBoxZoom(controller.getBitmap(), zoomRatio);
+            }
+        }
+
+        public Image PictureBoxZoom(Image img, float ratio)
+        {
+            Bitmap bm = new Bitmap(img, (int)(img.Width * ratio),(int)(img.Height * ratio));
+            //Graphics grap = Graphics.FromImage(bm);
+            //grap.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            return bm;
+        }
+
+        private void btnZoom_Click(object sender, EventArgs e)
+        {
+            zoomSlider.Visible = true;
+            zoomLabel.Visible = true;
+            zoomSlider.Focus();
+        }
+
+        private void zoomSlider_Leave(object sender, EventArgs e)
+        {
+            HideZoomPanel();
+            zoomRatio = 1;
+            UpdateUI();
+        }
+
+        private void lbMappedCur_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            controller.DeleteSelectedObject();
+            UpdateUI();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bitmapbmpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rightClickMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Shape selectedShape = controller.GetSelectedShape();
+            if(selectedShape == null)
+            {
+                btnCopy.Enabled = false;
+                btnCut.Enabled = false;
+                btnDelItem.Enabled = false;
+                btnLayerItem.Enabled = false;
+                btnExportShape.Enabled = false;
+            }
+            else
+            {
+                btnCopy.Enabled = true;
+                btnCut.Enabled = true;
+                btnDelItem.Enabled = true;
+                btnLayerItem.Enabled = true;
+                btnExportShape.Enabled = true;
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            controller.DeleteSelectedObject();
+            UpdateUI();
+        }
+
+        
+
+        void ExportProjectToImage(ImageFormat imgF, string defaultExt, string title, string filter, string defaultFileName)
+        {
+            saveImgDialog.AddExtension = true;
+            saveImgDialog.DefaultExt = defaultExt;
+            saveImgDialog.Title = title;
+            saveImgDialog.FileName = defaultFileName;
+            saveImgDialog.Filter = filter;
+
+
+            if (saveImgDialog.ShowDialog() == DialogResult.OK)
+            {
+                string pathImg = saveImgDialog.FileName;
+                try
+                {
+                    controller.getBitmap().Save(pathImg, imgF);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            return;
+        }
+
+        private void bMPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProjectToImage(ImageFormat.Bmp, "bmp", "Export to Bitmap", "Bitmap file|*.bmp", "bitmap01");
+        }
+
+        private void iMGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProjectToImage(ImageFormat.Jpeg,"jpg", "Export to JPEG", "JPEG file|*.jpg", "jpegfile01");
+          
+        }
+
+        private void pNGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProjectToImage(ImageFormat.Png, "png", "Export to PNG", "PNG file|*.png", "pngfile01");
+        }
+
+        private void gifToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportProjectToImage(ImageFormat.Gif, "gif", "Export to GIF", "GIF file|*.gif", "giffile01");
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            controller.copySelectedShape();
         }
     }
 }
