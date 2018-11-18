@@ -44,6 +44,11 @@ namespace ShapeLibrary
         }
 
         //ITransformer Implementation
+       
+        //IInputOutput Implementation
+        public abstract bool Load(string path, ulong offset);
+        public abstract bool Save(string path, ulong offset);
+
         public abstract void Draw(Graphics graphics);
 
         public virtual void ShowBoundingBox(Graphics graphics)
@@ -94,7 +99,7 @@ namespace ShapeLibrary
             //Draw(graphics);
         }
 
-        private Point CalculatePointAfterScale(Point p, float Sx, float Sy, Point fixedPoint)
+        protected Point CalculatePointAfterScale(Point p, float Sx, float Sy, Point fixedPoint)
         {
             Point result = new Point();
             result.X = (int)(p.X * Sx + fixedPoint.X * (1 - Sx));
@@ -110,7 +115,7 @@ namespace ShapeLibrary
             //Draw(graphics);
         }
 
-        private Point CalculatePointAfterShift(Point p, int dx, int dy)
+        protected Point CalculatePointAfterShift(Point p, int dx, int dy)
         {
             Point result = new Point(p.X, p.Y);
             result.X += dx;

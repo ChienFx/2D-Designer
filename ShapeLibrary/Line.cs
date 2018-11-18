@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace ShapeLibrary
 {
@@ -9,13 +10,25 @@ namespace ShapeLibrary
         public Line() : base() { }
         public Line(Point topLeft, Point bottomRight) : base(topLeft, bottomRight) { }
 
+        public override bool IsSelected(Point mousePosition)
+        {
+            if (base.IsSelected(mousePosition))
+            {
+                int a = mBottomRight.X - mTopLeft.X;
+                int b = mBottomRight.Y - mTopLeft.Y;
+                int x = mousePosition.X - mTopLeft.X;
+                int y = mousePosition.Y - mTopLeft.Y;
+                double result = (b * x - a * y) / Math.Sqrt(a * a + b * b);
+                return (result <= 10) && (result >= -10);
+            }
+            return false;
+        }
+
         public override void Draw(Graphics graphics)
         { 
             TransformGraphic(graphics, mAngle);
 
-            Pen pen = new Pen(mBorder.getColor(), mBorder.getWeight());
-            pen.DashPattern = this.mBorder.getDashValues();
-            graphics.DrawLine(pen, this.mTopLeft, this.mBottomRight);
+            graphics.DrawLine(mBorder.createPen(), this.mTopLeft, this.mBottomRight);
         }
 
         public override void Fill(Graphics graphics)
@@ -34,6 +47,11 @@ namespace ShapeLibrary
             result.mBottomRight = new Point(mBottomRight.X, mBottomRight.Y);
 
             return result;
+        }
+
+        public override void ShowBoundingBox(Graphics graphics)
+        {
+            
         }
     }
 }

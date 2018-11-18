@@ -9,14 +9,15 @@ namespace ShapeLibrary
         public Ellipse() : base() { }
         public Ellipse(Point topLeft, Point bottomRight) : base(topLeft, bottomRight) { }
 
-        public override bool Load(string path, ulong offset)
+        public override bool IsSelected(Point mousePosition)
         {
-            throw new NotImplementedException();
-        }
-
-        public override bool Save(string path, ulong offset)
-        {
-            throw new NotImplementedException();
+            PointF center = GetCenterOfBoundingBox();
+            double a = Math.Abs(center.X - mTopLeft.X);
+            double b = Math.Abs(center.Y - mTopLeft.Y);
+            double x = mousePosition.X - center.X;
+            double y = mousePosition.Y - center.Y;
+            double result = Math.Pow(x / a, 2) + Math.Pow(y / b, 2) - 1;
+            return result <= 0;
         }
 
         public override void Draw(Graphics graphics)

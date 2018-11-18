@@ -437,7 +437,7 @@ namespace _2DDesigner
 
         private void btnRect_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_RECTANGLE;
+            shapeType = ShapeType.RECTANGLE;
             this.btnShapePicker.Image = Properties.Resources.rect;
             HideShapePickerPanel();
             btnShapePicker.Focus();
@@ -482,7 +482,7 @@ namespace _2DDesigner
 
         private void btnSquare_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_SQUARE;
+            shapeType = ShapeType.RECTANGLE;
             this.btnShapePicker.Image = Properties.Resources.square;
             HideShapePickerPanel();
             btnShapePicker.Focus();
@@ -491,7 +491,7 @@ namespace _2DDesigner
 
         private void btnTriangle_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_TRIANGLE;
+            shapeType = ShapeType.TRIANGLE;
             this.btnShapePicker.Image = Properties.Resources.triangle;
             HideShapePickerPanel();
             btnShapePicker.Focus();
