@@ -1205,6 +1205,15 @@ namespace _2DDesigner
             SwitchToScaleState();
         }
 
+        private void btnChar_Click(object sender, EventArgs e)
+        {
+            shapeType = ShapeType.CHAR;
+            this.btnShapePicker.Image = Properties.Resources.char1;
+            HideShapePickerPanel();
+            btnShapePicker.Focus();
+            setCursor("pen.cur");
+        }
+
         private void gifShapeExport_Click(object sender, EventArgs e)
         {
             ExportShapeToImage(ImageFormat.Gif, "gif", "Export to GIF", "GIF file|*.gif", "export_shape_to_gif");
