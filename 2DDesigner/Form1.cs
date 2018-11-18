@@ -20,9 +20,10 @@ namespace _2DDesigner
         ShapeType shapeType;
         bool isMouseHold = false;
         bool isSaved = false;
+        TextBox label;
 
-        Stack<Controller> undoList = new Stack<Controller>();
-        Stack<Controller> redoList = new Stack<Controller>();
+        Stack<object> undoList = new Stack<object>();
+        Stack<object> redoList = new Stack<object>();
 
         string path_Save = null;
 
@@ -46,7 +47,7 @@ namespace _2DDesigner
             this.DoubleBuffered = true;
             this.FormClosing += Form_FormClosing;
             shape = null;
-
+            label = null;
         }
 
         private void Form_FormClosing(object sender, FormClosingEventArgs e)
@@ -141,29 +142,33 @@ namespace _2DDesigner
         
         private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!(shape is null))
-            {
-                controller.addShape(shape, controller.mSelectedShapeIndex);
-                shape = null;
-            }
-
-            //Push state into undo stack
-            undoList.Push((Controller)controller.Clone());
-            setSaveState(false);//unSaved
-            redoList.Clear();
-
             switch (state)
             {
                 case State.MOVE:
                 case State.ROTATE:
                 case State.SCALE:
                 case State.FILL:
+                    if (!(shape is null))
+                    {
+                        controller.addShape(shape, controller.mSelectedShapeIndex);
+                        shape = null;
+                    }
+                    SaveState();
                     break;
                 case State.DRAW:
+                    SaveState();
                     if (start.X == e.X && start.Y == e.Y)
+                    {
+                        if (shape != null && shapeType == ShapeType.BEZIER)
+                        {
+                            ((Bezier)shape).AddPoint(new Point(e.X, e.Y));
+                        }
                         break;
-                    Shape _shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
-                    controller.addShape(_shape);
+                    }
+                    shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
+                    controller.addShape(shape);
+                    if (shapeType != ShapeType.BEZIER)
+                        shape = null;
                     break;
                 default:
                     break;
@@ -172,6 +177,14 @@ namespace _2DDesigner
             controller.ShowBoundingBoxOfObject();
             UpdateUI();
             isMouseHold = false;
+        }
+
+        private void SaveState()
+        {
+            //Push state into undo stack
+            undoList.Push((Controller)controller.Clone());
+            setSaveState(false);//unSaved
+            redoList.Clear();
         }
 
         private void UnSelectedShape()
@@ -185,6 +198,9 @@ namespace _2DDesigner
 
             switch (state)
             {
+                case State.DRAW_LABEL:
+                    HandlingDrawLabelEvent(e.Location);
+                    break;
                 case State.MOVE:
                 case State.ROTATE:
                 case State.SCALE:
@@ -204,6 +220,50 @@ namespace _2DDesigner
             }
             isMouseHold = true;
             start = new Point(e.X, e.Y);
+        }
+
+        public static bool SetStyle(Control c, ControlStyles Style, bool value)
+        {
+            bool retval = false;
+            Type typeTB = typeof(Control);
+            System.Reflection.MethodInfo misSetStyle = typeTB.GetMethod("SetStyle", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            if (misSetStyle != null && c != null) { misSetStyle.Invoke(c, new object[] { Style, value }); retval = true; }
+            return retval;
+        }
+
+        private void HandlingDrawLabelEvent(Point e)
+        {
+            if (label is null)
+            {
+                label = new TextBox();
+                SetStyle(label, ControlStyles.SupportsTransparentBackColor, true);
+                label.Font = new Font(FontFamily.GenericSansSerif, 15F, FontStyle.Regular);
+                label.Visible = true;
+                label.TextChanged += Label_TextChange;
+                label.WordWrap = true;
+                label.Location = e;
+                pictureBox.Controls.Add(label);
+                undoList.Push(label);
+                redoList.Clear();
+            }
+            else
+            {
+                label.BorderStyle = System.Windows.Forms.BorderStyle.None;
+                label.Enabled = false;
+                label.BackColor = Color.Transparent;
+                label = null;
+            }
+        }
+
+        private void Label_TextChange(object sender, EventArgs e)
+        {
+            SizeF size = new SizeF();
+            using (Graphics g = this.CreateGraphics())
+            {
+                size = g.MeasureString(label.Text, label.Font);
+            }
+            label.Width = (int)Math.Round(size.Width, 0);
+            label.Height = (int)Math.Round(size.Height, 0);
         }
 
         private void setTextForLabel(Label lb, Point p)
@@ -295,6 +355,7 @@ namespace _2DDesigner
         {
             Bitmap bitmap = (Bitmap)controller.getBitmap().Clone();
             Graphics g = Graphics.FromImage(bitmap);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             shape.Fill(g);
             shape.Draw(g);
             if (isShowBoundingBox)
@@ -470,7 +531,7 @@ namespace _2DDesigner
 
         private void btnHyperbole_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_HYPERBOLE;
+            shapeType = ShapeType.BEZIER;
             this.btnShapePicker.Image = Properties.Resources.hyperbole;
             HideShapePickerPanel();
             btnShapePicker.Focus();
@@ -562,10 +623,26 @@ namespace _2DDesigner
             state = State.DRAW;
             if (undoList.Count > 0)
             {
-                redoList.Push(controller);
-                controller = undoList.Pop();
+                object _object = undoList.Pop();
+                try
+                {
+                    Controller tmp = (Controller)_object;
+
+                    redoList.Push(controller);
+                    controller = tmp;
+                    controller.DrawAll();
+                    UpdateUI();
+                }
+                catch (Exception)
+                {
+                    pictureBox.Controls.Remove((TextBox)_object);
+                    redoList.Push(_object);
+                }
+
+                /*redoList.Push(controller);
+                controller = (Controller)undoList.Pop();
                 controller.DrawAll();
-                UpdateUI();
+                UpdateUI();*/
             }
         }
 
@@ -579,10 +656,28 @@ namespace _2DDesigner
             state = State.DRAW;
             if (redoList.Count > 0)
             {
+                object _object = redoList.Pop();
+
+                try
+                {
+                    Controller tmp = (Controller)_object;
+
+                    undoList.Push(controller);
+                    controller = tmp;
+                    controller.DrawAll();
+                    UpdateUI();
+                }
+                catch (Exception)
+                {
+                    pictureBox.Controls.Add((TextBox)_object);
+                    undoList.Push(_object);
+                }
+                /*
                 undoList.Push(controller);
-                controller = redoList.Pop();
+                controller = (Controller)redoList.Pop();
                 controller.DrawAll();
                 UpdateUI();
+                */
             }
         }
 
@@ -1209,7 +1304,7 @@ namespace _2DDesigner
 
         private void btnChar_Click(object sender, EventArgs e)
         {
-            shapeType = ShapeType.CHAR;
+            state = State.DRAW_LABEL;
             this.btnShapePicker.Image = Properties.Resources.char1;
             HideShapePickerPanel();
             btnShapePicker.Focus();

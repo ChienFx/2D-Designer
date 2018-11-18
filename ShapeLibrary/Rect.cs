@@ -1,7 +1,9 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace ShapeLibrary
 {
+    [Serializable]
     public class Rect : Shape
     {
         public Rect() : base() { }

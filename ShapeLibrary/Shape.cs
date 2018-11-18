@@ -51,7 +51,7 @@ namespace ShapeLibrary
             TransformGraphic(graphics, mAngle);
 
             Pen pen = new Pen(Color.Black, 1);
-            pen.DashPattern = BorderStyle.BORDER_STYLE_1.getValues();
+            pen.DashPattern = BorderStyle.BORDER_STYLE_4.getValues();
             graphics.DrawRectangle(pen, CreateRectangleWithTwoPoint(mTopLeft, mBottomRight));
         }
 

@@ -14,7 +14,8 @@ namespace _2DDesigner
         RECTANGLE,
         SQUARE,
         CIRCLE,
-        CHAR
+        CHAR,
+        BEZIER
     }
 
     internal class ShapeFactory
@@ -39,6 +40,8 @@ namespace _2DDesigner
                 case ShapeType.CIRCLE:
                     bottomRight.Y = topLeft.Y + (bottomRight.X - topLeft.X);
                     return new Ellipse(topLeft, bottomRight);
+                case ShapeType.BEZIER:
+                    return new Bezier(topLeft, bottomRight);
                 default:
                     return new Line(topLeft, bottomRight);
             }

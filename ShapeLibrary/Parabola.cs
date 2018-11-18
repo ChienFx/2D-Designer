@@ -30,7 +30,6 @@ namespace ShapeLibrary
 
             result.mAngle = mAngle;
             result.mBorder = new Border(mBorder);
-            result.mFillPattern = mFillPattern;
             result.mTopLeft = new Point(mTopLeft.X, mTopLeft.Y);
             result.mBottomRight = new Point(mBottomRight.X, mBottomRight.Y);
 

@@ -14,6 +14,7 @@ namespace ControllerLibrary
     {
         List<Shape> mShapes;
         List<Group> mGroups;
+        List<TextBox> mLabels;
         public int mSelectedShapeIndex;
         int mSelectedGroupIndex;
         Shape copiedShape;
@@ -225,7 +226,9 @@ namespace ControllerLibrary
 
         private Graphics GetGraphics()
         {
-            return Graphics.FromImage(bitmap);
+            Graphics graphics = Graphics.FromImage(bitmap);
+            graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            return graphics;
         }
 
         public void ShowBoundingBoxOfObject()

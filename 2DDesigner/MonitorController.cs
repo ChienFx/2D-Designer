@@ -44,6 +44,8 @@ namespace _2DDesigner
         DRAW_TRIANGLE,
         ROTATE,
         HAND_VIEW,
+        DRAW_LABEL,
+        DRAW_BEZIER,
     }
 
     
