@@ -130,6 +130,8 @@ namespace _2DDesigner
             this.btnExportShapeToBMP = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExportToJPG = new System.Windows.Forms.ToolStripMenuItem();
             this.saveImgDialog = new System.Windows.Forms.SaveFileDialog();
+            this.pNGToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.gIFToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu.SuspendLayout();
             this.toolbarHolder.ContentPanel.SuspendLayout();
             this.toolbarHolder.SuspendLayout();
@@ -1685,7 +1687,7 @@ namespace _2DDesigner
             this.btnLayerItem,
             this.btnExportShape});
             this.rightClickMenu.Name = "rightClickMenu";
-            this.rightClickMenu.Size = new System.Drawing.Size(145, 136);
+            this.rightClickMenu.Size = new System.Drawing.Size(181, 158);
             this.rightClickMenu.Text = "2D Designer";
             this.rightClickMenu.Opening += new System.ComponentModel.CancelEventHandler(this.rightClickMenu_Opening);
             // 
@@ -1763,7 +1765,9 @@ namespace _2DDesigner
             // 
             this.btnExportShape.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnExportShapeToBMP,
-            this.btnExportToJPG});
+            this.btnExportToJPG,
+            this.pNGToolStripMenuItem1,
+            this.gIFToolStripMenuItem1});
             this.btnExportShape.Name = "btnExportShape";
             this.btnExportShape.Size = new System.Drawing.Size(180, 22);
             this.btnExportShape.Text = "Export";
@@ -1771,19 +1775,34 @@ namespace _2DDesigner
             // btnExportShapeToBMP
             // 
             this.btnExportShapeToBMP.Name = "btnExportShapeToBMP";
-            this.btnExportShapeToBMP.Size = new System.Drawing.Size(107, 22);
+            this.btnExportShapeToBMP.Size = new System.Drawing.Size(180, 22);
             this.btnExportShapeToBMP.Text = "*.BMP";
-            this.btnExportShapeToBMP.Click += new System.EventHandler(this.bitmapbmpToolStripMenuItem_Click);
+            this.btnExportShapeToBMP.Click += new System.EventHandler(this.bMPShapeExport_Click);
             // 
             // btnExportToJPG
             // 
             this.btnExportToJPG.Name = "btnExportToJPG";
-            this.btnExportToJPG.Size = new System.Drawing.Size(107, 22);
+            this.btnExportToJPG.Size = new System.Drawing.Size(180, 22);
             this.btnExportToJPG.Text = "*.JPG";
+            this.btnExportToJPG.Click += new System.EventHandler(this.iMGShapeExport_Click);
             // 
             // saveImgDialog
             // 
             this.saveImgDialog.FileName = "picture01";
+            // 
+            // pNGToolStripMenuItem1
+            // 
+            this.pNGToolStripMenuItem1.Name = "pNGToolStripMenuItem1";
+            this.pNGToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.pNGToolStripMenuItem1.Text = "*.PNG";
+            this.pNGToolStripMenuItem1.Click += new System.EventHandler(this.pNGShapeExport_Click);
+            // 
+            // gIFToolStripMenuItem1
+            // 
+            this.gIFToolStripMenuItem1.Name = "gIFToolStripMenuItem1";
+            this.gIFToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.gIFToolStripMenuItem1.Text = "*.GIF";
+            this.gIFToolStripMenuItem1.Click += new System.EventHandler(this.gifShapeExport_Click);
             // 
             // Form
             // 
@@ -1921,6 +1940,8 @@ namespace _2DDesigner
         private System.Windows.Forms.ToolStripMenuItem btnExportToJPG;
         private System.Windows.Forms.ToolStripMenuItem btnDelItem;
         private System.Windows.Forms.SaveFileDialog saveImgDialog;
+        private System.Windows.Forms.ToolStripMenuItem pNGToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem gIFToolStripMenuItem1;
     }
 }
 

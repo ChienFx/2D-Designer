@@ -70,6 +70,16 @@ namespace ShapeLibrary
             return new Rectangle(x, y, width, height);
         }
 
+        public Size getBoundingSize()
+        {
+            int x = Math.Min(mTopLeft.X, mBottomRight.X);
+            int y = Math.Min(mTopLeft.Y, mBottomRight.Y);
+            int width = Math.Abs(mBottomRight.X - mTopLeft.X);
+            int height = Math.Abs(mBottomRight.Y - mTopLeft.Y);
+
+            return new Size(width, height);
+        }
+
         public abstract void Fill(Graphics graphics);
 
         public virtual void Rotate(float angle)
@@ -169,6 +179,19 @@ namespace ShapeLibrary
         public void setBackgroundColor(Color color)
         {
             this.mFillPattern.setBackgroundColor(color);
+        }
+
+        public Bitmap ExportToImage()
+        {
+            Size size = this.getBoundingSize();
+            Bitmap bm = new Bitmap(size.Width, size.Height);
+            Graphics g = Graphics.FromImage(bm);
+            g.Clear(Color.White);
+            this.Shift(-mTopLeft.X, -mTopLeft.Y);
+            this.Fill(g);
+            this.Draw(g);
+            g.Dispose();
+            return bm;
         }
     }
 }

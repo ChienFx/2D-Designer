@@ -1072,7 +1072,6 @@ namespace _2DDesigner
                     MessageBox.Show(ex.Message);
                 }
             }
-            return;
         }
 
         private void bMPToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1143,7 +1142,62 @@ namespace _2DDesigner
             }
         }
 
+        void ExportShapeToImage(ImageFormat imgF, string defaultExt, string title, string filter, string defaultFileName)
+        {
+            saveImgDialog.AddExtension = true;
+            saveImgDialog.DefaultExt = defaultExt;
+            saveImgDialog.Title = title;
+            saveImgDialog.FileName = defaultFileName;
+            saveImgDialog.Filter = filter;
 
+
+            if (saveImgDialog.ShowDialog() == DialogResult.OK)
+            {
+                string pathImg = saveImgDialog.FileName;
+                try
+                {
+                    Shape curShape = controller.GetSelectedShape();
+                    if (curShape != null)
+                    {
+                        curShape = (Shape) curShape.Clone();
+                        Size size = curShape.getBoundingSize();
+                        
+                        Bitmap tmpBitmap = curShape.ExportToImage();
+                        
+                        tmpBitmap.Save(pathImg, imgF);
+
+                    }
+                    else
+                        return;
+                    //controller.getBitmap().Save(pathImg, imgF);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void bMPShapeExport_Click(object sender, EventArgs e)
+        {
+            ExportShapeToImage(ImageFormat.Bmp, "bmp", "Export to Bitmap", "Bitmap file|*.bmp", "export_shape_to_bitmap");
+        }
+
+        private void iMGShapeExport_Click(object sender, EventArgs e)
+        {
+            ExportShapeToImage(ImageFormat.Jpeg, "jpg", "Export to JPEG", "JPEG file|*.jpg", "export_shape_to_jpeg");
+
+        }
+
+        private void pNGShapeExport_Click(object sender, EventArgs e)
+        {
+            ExportShapeToImage(ImageFormat.Png, "png", "Export to PNG", "PNG file|*.png", "export_shape_to_png");
+        }
+
+        private void gifShapeExport_Click(object sender, EventArgs e)
+        {
+            ExportShapeToImage(ImageFormat.Gif, "gif", "Export to GIF", "GIF file|*.gif", "export_shape_to_gif");
+        }
     }
 }
 
