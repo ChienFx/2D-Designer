@@ -52,11 +52,5 @@
     <Compile Include="Line.cs" />
     <Compile Include="Style.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IOLibrary.cs\IOLibrary.csproj">
-      <Project>{8b7d0190-7714-4819-ad50-e2147fd2fbc4}</Project>
-      <Name>IOLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -50,10 +50,6 @@
     <Compile Include="Serializatier.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IOLibrary.cs\IOLibrary.csproj">
-      <Project>{8b7d0190-7714-4819-ad50-e2147fd2fbc4}</Project>
-      <Name>IOLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ShapeLibrary\ShapeLibrary.csproj">
       <Project>{fcb7ec77-a28e-4692-99f2-3ffe51398b35}</Project>
       <Name>ShapeLibrary</Name>

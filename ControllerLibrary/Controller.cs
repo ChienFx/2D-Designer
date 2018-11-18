@@ -1,5 +1,4 @@
-﻿using IOLibrary;
-using ShapeLibrary;
+﻿using ShapeLibrary;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +10,7 @@ using System.Windows.Forms;
 namespace ControllerLibrary
 {
     [Serializable]
-    public class Controller:IInputOutput, ICloneable//, ITransformer
+    public class Controller: ICloneable//, ITransformer
     {
         List<Shape> mShapes;
         List<Group> mGroups;
@@ -404,19 +403,9 @@ namespace ControllerLibrary
             }
         }
 
-        public bool SaveAs(string newName, string path, ulong offset)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CopyBitmapToClipboard()
         {
             Clipboard.SetImage(bitmap);
-        }
-
-        public Bitmap ExportToBitmap()
-        {
-            throw new NotImplementedException();
         }
 
         public object Clone()

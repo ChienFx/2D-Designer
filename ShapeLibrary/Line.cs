@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 
 namespace ShapeLibrary
 {
@@ -9,16 +8,6 @@ namespace ShapeLibrary
     {
         public Line() : base() { }
         public Line(Point topLeft, Point bottomRight) : base(topLeft, bottomRight) { }
-
-        public override bool Load(string path, ulong offset)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool Save(string path, ulong offset)
-        {
-            throw new NotImplementedException();
-        }
 
         public override void Draw(Graphics graphics)
         { 

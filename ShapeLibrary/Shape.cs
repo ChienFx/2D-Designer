@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using IOLibrary;
 
 namespace ShapeLibrary
 {
     [Serializable]
-    public abstract class Shape: ITransformer, IInputOutput, ICloneable
+    public abstract class Shape: ITransformer, ICloneable
     {
         public Point mTopLeft;
         public Point mBottomRight;
@@ -45,11 +44,6 @@ namespace ShapeLibrary
         }
 
         //ITransformer Implementation
-       
-        //IInputOutput Implementation
-        public abstract bool Load(string path, ulong offset);
-        public abstract bool Save(string path, ulong offset);
-
         public abstract void Draw(Graphics graphics);
 
         public virtual void ShowBoundingBox(Graphics graphics)

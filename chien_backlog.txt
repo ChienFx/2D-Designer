@@ -3,8 +3,9 @@
 - design border, bursh effect
 - save/load, new project
 - shortcut
-- not MDI, can be use in many instance (orther thread)
+- new project in other thread(not MDI, can be use in many instance (orther thread))
 - export project to image	
+- export shape
 - copy, cut, paste object
 - zoom
 - menu right click
@@ -12,7 +13,6 @@
 ------------To do------------
 
 - fix right click menu (dont show disable any thing)
-- fix export shape
 - check all hotkeys
 - characters
 - grid
