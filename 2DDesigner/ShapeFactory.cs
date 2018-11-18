@@ -13,7 +13,8 @@ namespace _2DDesigner
         TRIANGLE,
         RECTANGLE,
         SQUARE,
-        CIRCLE
+        CIRCLE,
+        CHAR
     }
 
     internal class ShapeFactory
