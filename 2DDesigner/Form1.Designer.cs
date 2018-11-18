@@ -103,9 +103,7 @@ namespace _2DDesigner
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnShapePicker = new System.Windows.Forms.Button();
-            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
             this.btnMove = new System.Windows.Forms.Button();
-            this.borderSelector = new _2DDesigner.BorderSelector();
             this.sliderBorderWeight = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.btnFillForePicker = new System.Windows.Forms.Button();
@@ -129,9 +127,15 @@ namespace _2DDesigner
             this.btnExportShape = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExportShapeToBMP = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExportToJPG = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveImgDialog = new System.Windows.Forms.SaveFileDialog();
             this.pNGToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gIFToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveImgDialog = new System.Windows.Forms.SaveFileDialog();
+            this.transformToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.scaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fillPatternSelection = new _2DDesigner.FillPatternSelection();
+            this.borderSelector = new _2DDesigner.BorderSelector();
             this.menu.SuspendLayout();
             this.toolbarHolder.ContentPanel.SuspendLayout();
             this.toolbarHolder.SuspendLayout();
@@ -448,7 +452,7 @@ namespace _2DDesigner
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnBorderColorPicker);
             this.toolbarHolder.ContentPanel.Controls.Add(this.btnZoom);
             this.toolbarHolder.ContentPanel.Controls.Add(this.label2);
-            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(804, 100);
+            this.toolbarHolder.ContentPanel.Size = new System.Drawing.Size(804, 75);
             this.toolbarHolder.ContentPanel.Load += new System.EventHandler(this.toolbarHolder_ContentPanel_Load);
             this.toolbarHolder.ContentPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.toolbarHolder_ContentPanel_MouseClick);
             this.toolbarHolder.ContentPanel.MouseLeave += new System.EventHandler(this.setMouseToMainBoard);
@@ -572,7 +576,7 @@ namespace _2DDesigner
             this.shapePickerPanel.Controls.Add(this.btnHyperbole);
             this.shapePickerPanel.Controls.Add(this.btnSquare);
             this.shapePickerPanel.Controls.Add(this.btnTriangle);
-            this.shapePickerPanel.Location = new System.Drawing.Point(113, 38);
+            this.shapePickerPanel.Location = new System.Drawing.Point(115, 9);
             this.shapePickerPanel.Name = "shapePickerPanel";
             this.shapePickerPanel.Padding = new System.Windows.Forms.Padding(5);
             this.shapePickerPanel.Size = new System.Drawing.Size(121, 65);
@@ -952,12 +956,302 @@ namespace _2DDesigner
             this.btnShapePicker.Click += new System.EventHandler(this.btnShapePicker_Click);
             this.btnShapePicker.MouseHover += new System.EventHandler(this.btnShapePicker_MouseHover);
             // 
+            // btnMove
+            // 
+            this.btnMove.BackColor = System.Drawing.Color.Transparent;
+            this.btnMove.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMove.BackgroundImage")));
+            this.btnMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMove.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnMove.Location = new System.Drawing.Point(43, 38);
+            this.btnMove.Margin = new System.Windows.Forms.Padding(1);
+            this.btnMove.Name = "btnMove";
+            this.btnMove.Size = new System.Drawing.Size(32, 32);
+            this.btnMove.TabIndex = 14;
+            this.btnMove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMove.UseVisualStyleBackColor = false;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
+            this.btnMove.MouseHover += new System.EventHandler(this.btnMove_MouseHover);
+            // 
+            // sliderBorderWeight
+            // 
+            this.sliderBorderWeight.LargeChange = 2;
+            this.sliderBorderWeight.Location = new System.Drawing.Point(423, 68);
+            this.sliderBorderWeight.Minimum = 1;
+            this.sliderBorderWeight.Name = "sliderBorderWeight";
+            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
+            this.sliderBorderWeight.TabIndex = 11;
+            this.sliderBorderWeight.Value = 2;
+            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(353, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Border Style";
+            // 
+            // btnFillForePicker
+            // 
+            this.btnFillForePicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnFillForePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFillForePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnFillForePicker.Location = new System.Drawing.Point(659, 35);
+            this.btnFillForePicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnFillForePicker.Name = "btnFillForePicker";
+            this.btnFillForePicker.Size = new System.Drawing.Size(103, 24);
+            this.btnFillForePicker.TabIndex = 7;
+            this.btnFillForePicker.Text = " ";
+            this.btnFillForePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnFillForePicker.UseVisualStyleBackColor = false;
+            this.btnFillForePicker.Click += new System.EventHandler(this.pickFillForeColor);
+            // 
+            // btnBorderColorPicker
+            // 
+            this.btnBorderColorPicker.BackColor = System.Drawing.Color.Transparent;
+            this.btnBorderColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBorderColorPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnBorderColorPicker.Location = new System.Drawing.Point(423, 37);
+            this.btnBorderColorPicker.Margin = new System.Windows.Forms.Padding(1);
+            this.btnBorderColorPicker.Name = "btnBorderColorPicker";
+            this.btnBorderColorPicker.Size = new System.Drawing.Size(121, 22);
+            this.btnBorderColorPicker.TabIndex = 2;
+            this.btnBorderColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnBorderColorPicker.UseVisualStyleBackColor = false;
+            this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
+            // 
+            // btnZoom
+            // 
+            this.btnZoom.BackgroundImage = global::_2DDesigner.Properties.Resources.zoom_in;
+            this.btnZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnZoom.Location = new System.Drawing.Point(262, 3);
+            this.btnZoom.Name = "btnZoom";
+            this.btnZoom.Size = new System.Drawing.Size(32, 32);
+            this.btnZoom.TabIndex = 31;
+            this.btnZoom.UseVisualStyleBackColor = true;
+            this.btnZoom.Click += new System.EventHandler(this.btnZoom_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(353, 72);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Weight";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "lc";
+            this.saveFileDialog.FileName = "project1";
+            this.saveFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
+            this.saveFileDialog.RestoreDirectory = true;
+            this.saveFileDialog.Title = "Save As";
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
+            this.openFileDialog.RestoreDirectory = true;
+            this.openFileDialog.Title = "Open project";
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.ContextMenuStrip = this.rightClickMenu;
+            this.pictureBox.Location = new System.Drawing.Point(3, 131);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(800, 426);
+            this.pictureBox.TabIndex = 3;
+            this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+            this.pictureBox.MouseEnter += new System.EventHandler(this.setMouseToMainBoard);
+            this.pictureBox.MouseLeave += new System.EventHandler(this.setMouseToToolbar);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
+            // 
+            // rightClickMenu
+            // 
+            this.rightClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.transformToolStripMenuItem,
+            this.btnCopy,
+            this.btnCut,
+            this.btnPaste,
+            this.btnDelItem,
+            this.btnLayerItem,
+            this.btnExportShape});
+            this.rightClickMenu.Name = "rightClickMenu";
+            this.rightClickMenu.Size = new System.Drawing.Size(145, 158);
+            this.rightClickMenu.Text = "2D Designer";
+            this.rightClickMenu.Opening += new System.ComponentModel.CancelEventHandler(this.rightClickMenu_Opening);
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.btnCopy.Size = new System.Drawing.Size(144, 22);
+            this.btnCopy.Text = "&Copy";
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
+            // btnCut
+            // 
+            this.btnCut.Name = "btnCut";
+            this.btnCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.btnCut.Size = new System.Drawing.Size(144, 22);
+            this.btnCut.Text = "Cu&t";
+            this.btnCut.Click += new System.EventHandler(this.btnCut_Click);
+            // 
+            // btnPaste
+            // 
+            this.btnPaste.Name = "btnPaste";
+            this.btnPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.btnPaste.Size = new System.Drawing.Size(144, 22);
+            this.btnPaste.Text = "P&aste";
+            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
+            // 
+            // btnDelItem
+            // 
+            this.btnDelItem.Name = "btnDelItem";
+            this.btnDelItem.Size = new System.Drawing.Size(144, 22);
+            this.btnDelItem.Text = "&Delete";
+            this.btnDelItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // btnLayerItem
+            // 
+            this.btnLayerItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bringFowardToolStripMenuItem,
+            this.bringToFrontToolStripMenuItem,
+            this.sendBackwardToolStripMenuItem,
+            this.sendToBackToolStripMenuItem1});
+            this.btnLayerItem.Name = "btnLayerItem";
+            this.btnLayerItem.Size = new System.Drawing.Size(144, 22);
+            this.btnLayerItem.Text = "Layer";
+            // 
+            // bringFowardToolStripMenuItem
+            // 
+            this.bringFowardToolStripMenuItem.Name = "bringFowardToolStripMenuItem";
+            this.bringFowardToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.bringFowardToolStripMenuItem.Text = "Bring to foward";
+            this.bringFowardToolStripMenuItem.Click += new System.EventHandler(this.btnSendForward_Click);
+            // 
+            // bringToFrontToolStripMenuItem
+            // 
+            this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
+            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.bringToFrontToolStripMenuItem.Text = "Bring to front";
+            this.bringToFrontToolStripMenuItem.Click += new System.EventHandler(this.btnSendFront_Click);
+            // 
+            // sendBackwardToolStripMenuItem
+            // 
+            this.sendBackwardToolStripMenuItem.Name = "sendBackwardToolStripMenuItem";
+            this.sendBackwardToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.sendBackwardToolStripMenuItem.Text = "Send backward";
+            this.sendBackwardToolStripMenuItem.Click += new System.EventHandler(this.btnSendBackward_Click);
+            // 
+            // sendToBackToolStripMenuItem1
+            // 
+            this.sendToBackToolStripMenuItem1.Name = "sendToBackToolStripMenuItem1";
+            this.sendToBackToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
+            this.sendToBackToolStripMenuItem1.Text = "Send to back";
+            this.sendToBackToolStripMenuItem1.Click += new System.EventHandler(this.btnSendBack_Click);
+            // 
+            // btnExportShape
+            // 
+            this.btnExportShape.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnExportShapeToBMP,
+            this.btnExportToJPG,
+            this.pNGToolStripMenuItem1,
+            this.gIFToolStripMenuItem1});
+            this.btnExportShape.Name = "btnExportShape";
+            this.btnExportShape.Size = new System.Drawing.Size(144, 22);
+            this.btnExportShape.Text = "Export";
+            // 
+            // btnExportShapeToBMP
+            // 
+            this.btnExportShapeToBMP.Name = "btnExportShapeToBMP";
+            this.btnExportShapeToBMP.Size = new System.Drawing.Size(107, 22);
+            this.btnExportShapeToBMP.Text = "*.BMP";
+            this.btnExportShapeToBMP.Click += new System.EventHandler(this.bMPShapeExport_Click);
+            // 
+            // btnExportToJPG
+            // 
+            this.btnExportToJPG.Name = "btnExportToJPG";
+            this.btnExportToJPG.Size = new System.Drawing.Size(107, 22);
+            this.btnExportToJPG.Text = "*.JPG";
+            this.btnExportToJPG.Click += new System.EventHandler(this.iMGShapeExport_Click);
+            // 
+            // pNGToolStripMenuItem1
+            // 
+            this.pNGToolStripMenuItem1.Name = "pNGToolStripMenuItem1";
+            this.pNGToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.pNGToolStripMenuItem1.Text = "*.PNG";
+            this.pNGToolStripMenuItem1.Click += new System.EventHandler(this.pNGShapeExport_Click);
+            // 
+            // gIFToolStripMenuItem1
+            // 
+            this.gIFToolStripMenuItem1.Name = "gIFToolStripMenuItem1";
+            this.gIFToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.gIFToolStripMenuItem1.Text = "*.GIF";
+            this.gIFToolStripMenuItem1.Click += new System.EventHandler(this.gifShapeExport_Click);
+            // 
+            // saveImgDialog
+            // 
+            this.saveImgDialog.FileName = "picture01";
+            // 
+            // transformToolStripMenuItem
+            // 
+            this.transformToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.moveToolStripMenuItem,
+            this.rotateToolStripMenuItem1,
+            this.scaleToolStripMenuItem});
+            this.transformToolStripMenuItem.Name = "transformToolStripMenuItem";
+            this.transformToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.transformToolStripMenuItem.Text = "Transform";
+            // 
+            // moveToolStripMenuItem
+            // 
+            this.moveToolStripMenuItem.Name = "moveToolStripMenuItem";
+            this.moveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.moveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.moveToolStripMenuItem.Text = "&Move";
+            this.moveToolStripMenuItem.Click += new System.EventHandler(this.moveToolStripMenuItem_Click);
+            // 
+            // rotateToolStripMenuItem1
+            // 
+            this.rotateToolStripMenuItem1.Name = "rotateToolStripMenuItem1";
+            this.rotateToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.rotateToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.rotateToolStripMenuItem1.Text = "&Rotate";
+            this.rotateToolStripMenuItem1.Click += new System.EventHandler(this.rotateToolStripMenuItem1_Click);
+            // 
+            // scaleToolStripMenuItem
+            // 
+            this.scaleToolStripMenuItem.Name = "scaleToolStripMenuItem";
+            this.scaleToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.scaleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.scaleToolStripMenuItem.Text = "&Scale";
+            this.scaleToolStripMenuItem.Click += new System.EventHandler(this.scaleToolStripMenuItem_Click);
+            // 
             // fillPatternSelection
             // 
             this.fillPatternSelection.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.fillPatternSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fillPatternSelection.FormattingEnabled = true;
             this.fillPatternSelection.Items.AddRange(new object[] {
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
             0,
             1,
             2,
@@ -1283,22 +1577,6 @@ namespace _2DDesigner
             this.fillPatternSelection.TabIndex = 15;
             this.fillPatternSelection.SelectedIndexChanged += new System.EventHandler(this.fillPatternSelection1_SelectedIndexChanged);
             // 
-            // btnMove
-            // 
-            this.btnMove.BackColor = System.Drawing.Color.Transparent;
-            this.btnMove.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMove.BackgroundImage")));
-            this.btnMove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnMove.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnMove.Location = new System.Drawing.Point(43, 38);
-            this.btnMove.Margin = new System.Windows.Forms.Padding(1);
-            this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(32, 32);
-            this.btnMove.TabIndex = 14;
-            this.btnMove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnMove.UseVisualStyleBackColor = false;
-            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
-            this.btnMove.MouseHover += new System.EventHandler(this.btnMove_MouseHover);
-            // 
             // borderSelector
             // 
             this.borderSelector.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
@@ -1569,240 +1847,20 @@ namespace _2DDesigner
             4,
             5,
             6,
+            7,
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
             7});
             this.borderSelector.Location = new System.Drawing.Point(423, 9);
             this.borderSelector.Name = "borderSelector";
             this.borderSelector.Size = new System.Drawing.Size(121, 21);
             this.borderSelector.TabIndex = 5;
             this.borderSelector.SelectedIndexChanged += new System.EventHandler(this.borderSelector_SelectedIndexChanged);
-            // 
-            // sliderBorderWeight
-            // 
-            this.sliderBorderWeight.LargeChange = 2;
-            this.sliderBorderWeight.Location = new System.Drawing.Point(423, 68);
-            this.sliderBorderWeight.Minimum = 1;
-            this.sliderBorderWeight.Name = "sliderBorderWeight";
-            this.sliderBorderWeight.Size = new System.Drawing.Size(114, 45);
-            this.sliderBorderWeight.TabIndex = 11;
-            this.sliderBorderWeight.Value = 2;
-            this.sliderBorderWeight.Scroll += new System.EventHandler(this.sliderBorderWeight_Scroll);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(353, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Border Style";
-            // 
-            // btnFillForePicker
-            // 
-            this.btnFillForePicker.BackColor = System.Drawing.Color.Transparent;
-            this.btnFillForePicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFillForePicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnFillForePicker.Location = new System.Drawing.Point(659, 35);
-            this.btnFillForePicker.Margin = new System.Windows.Forms.Padding(1);
-            this.btnFillForePicker.Name = "btnFillForePicker";
-            this.btnFillForePicker.Size = new System.Drawing.Size(103, 24);
-            this.btnFillForePicker.TabIndex = 7;
-            this.btnFillForePicker.Text = " ";
-            this.btnFillForePicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFillForePicker.UseVisualStyleBackColor = false;
-            this.btnFillForePicker.Click += new System.EventHandler(this.pickFillForeColor);
-            // 
-            // btnBorderColorPicker
-            // 
-            this.btnBorderColorPicker.BackColor = System.Drawing.Color.Transparent;
-            this.btnBorderColorPicker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnBorderColorPicker.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnBorderColorPicker.Location = new System.Drawing.Point(423, 37);
-            this.btnBorderColorPicker.Margin = new System.Windows.Forms.Padding(1);
-            this.btnBorderColorPicker.Name = "btnBorderColorPicker";
-            this.btnBorderColorPicker.Size = new System.Drawing.Size(121, 22);
-            this.btnBorderColorPicker.TabIndex = 2;
-            this.btnBorderColorPicker.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnBorderColorPicker.UseVisualStyleBackColor = false;
-            this.btnBorderColorPicker.Click += new System.EventHandler(this.pickBorderColor);
-            // 
-            // btnZoom
-            // 
-            this.btnZoom.BackgroundImage = global::_2DDesigner.Properties.Resources.zoom_in;
-            this.btnZoom.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnZoom.Location = new System.Drawing.Point(262, 3);
-            this.btnZoom.Name = "btnZoom";
-            this.btnZoom.Size = new System.Drawing.Size(32, 32);
-            this.btnZoom.TabIndex = 31;
-            this.btnZoom.UseVisualStyleBackColor = true;
-            this.btnZoom.Click += new System.EventHandler(this.btnZoom_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(353, 72);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Weight";
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.DefaultExt = "lc";
-            this.saveFileDialog.FileName = "project1";
-            this.saveFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
-            this.saveFileDialog.RestoreDirectory = true;
-            this.saveFileDialog.Title = "Save As";
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.Filter = "2D Designner file (*.lc)|*.lc";
-            this.openFileDialog.RestoreDirectory = true;
-            this.openFileDialog.Title = "Open project";
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.ContextMenuStrip = this.rightClickMenu;
-            this.pictureBox.Location = new System.Drawing.Point(3, 131);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(800, 426);
-            this.pictureBox.TabIndex = 3;
-            this.pictureBox.TabStop = false;
-            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
-            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
-            this.pictureBox.MouseEnter += new System.EventHandler(this.setMouseToMainBoard);
-            this.pictureBox.MouseLeave += new System.EventHandler(this.setMouseToToolbar);
-            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
-            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
-            // 
-            // rightClickMenu
-            // 
-            this.rightClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnCopy,
-            this.btnCut,
-            this.btnPaste,
-            this.btnDelItem,
-            this.btnLayerItem,
-            this.btnExportShape});
-            this.rightClickMenu.Name = "rightClickMenu";
-            this.rightClickMenu.Size = new System.Drawing.Size(181, 158);
-            this.rightClickMenu.Text = "2D Designer";
-            this.rightClickMenu.Opening += new System.ComponentModel.CancelEventHandler(this.rightClickMenu_Opening);
-            // 
-            // btnCopy
-            // 
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.btnCopy.Size = new System.Drawing.Size(180, 22);
-            this.btnCopy.Text = "&Copy";
-            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
-            // 
-            // btnCut
-            // 
-            this.btnCut.Name = "btnCut";
-            this.btnCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.btnCut.Size = new System.Drawing.Size(180, 22);
-            this.btnCut.Text = "Cu&t";
-            this.btnCut.Click += new System.EventHandler(this.btnCut_Click);
-            // 
-            // btnPaste
-            // 
-            this.btnPaste.Name = "btnPaste";
-            this.btnPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.btnPaste.Size = new System.Drawing.Size(180, 22);
-            this.btnPaste.Text = "P&aste";
-            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
-            // 
-            // btnDelItem
-            // 
-            this.btnDelItem.Name = "btnDelItem";
-            this.btnDelItem.Size = new System.Drawing.Size(180, 22);
-            this.btnDelItem.Text = "&Delete";
-            this.btnDelItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // btnLayerItem
-            // 
-            this.btnLayerItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bringFowardToolStripMenuItem,
-            this.bringToFrontToolStripMenuItem,
-            this.sendBackwardToolStripMenuItem,
-            this.sendToBackToolStripMenuItem1});
-            this.btnLayerItem.Name = "btnLayerItem";
-            this.btnLayerItem.Size = new System.Drawing.Size(144, 22);
-            this.btnLayerItem.Text = "Layer";
-            // 
-            // bringFowardToolStripMenuItem
-            // 
-            this.bringFowardToolStripMenuItem.Name = "bringFowardToolStripMenuItem";
-            this.bringFowardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.bringFowardToolStripMenuItem.Text = "Bring to foward";
-            this.bringFowardToolStripMenuItem.Click += new System.EventHandler(this.btnSendForward_Click);
-            // 
-            // bringToFrontToolStripMenuItem
-            // 
-            this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
-            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.bringToFrontToolStripMenuItem.Text = "Bring to front";
-            this.bringToFrontToolStripMenuItem.Click += new System.EventHandler(this.btnSendFront_Click);
-            // 
-            // sendBackwardToolStripMenuItem
-            // 
-            this.sendBackwardToolStripMenuItem.Name = "sendBackwardToolStripMenuItem";
-            this.sendBackwardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sendBackwardToolStripMenuItem.Text = "Send backward";
-            this.sendBackwardToolStripMenuItem.Click += new System.EventHandler(this.btnSendBackward_Click);
-            // 
-            // sendToBackToolStripMenuItem1
-            // 
-            this.sendToBackToolStripMenuItem1.Name = "sendToBackToolStripMenuItem1";
-            this.sendToBackToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.sendToBackToolStripMenuItem1.Text = "Send to back";
-            this.sendToBackToolStripMenuItem1.Click += new System.EventHandler(this.btnSendBack_Click);
-            // 
-            // btnExportShape
-            // 
-            this.btnExportShape.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnExportShapeToBMP,
-            this.btnExportToJPG,
-            this.pNGToolStripMenuItem1,
-            this.gIFToolStripMenuItem1});
-            this.btnExportShape.Name = "btnExportShape";
-            this.btnExportShape.Size = new System.Drawing.Size(180, 22);
-            this.btnExportShape.Text = "Export";
-            // 
-            // btnExportShapeToBMP
-            // 
-            this.btnExportShapeToBMP.Name = "btnExportShapeToBMP";
-            this.btnExportShapeToBMP.Size = new System.Drawing.Size(180, 22);
-            this.btnExportShapeToBMP.Text = "*.BMP";
-            this.btnExportShapeToBMP.Click += new System.EventHandler(this.bMPShapeExport_Click);
-            // 
-            // btnExportToJPG
-            // 
-            this.btnExportToJPG.Name = "btnExportToJPG";
-            this.btnExportToJPG.Size = new System.Drawing.Size(180, 22);
-            this.btnExportToJPG.Text = "*.JPG";
-            this.btnExportToJPG.Click += new System.EventHandler(this.iMGShapeExport_Click);
-            // 
-            // saveImgDialog
-            // 
-            this.saveImgDialog.FileName = "picture01";
-            // 
-            // pNGToolStripMenuItem1
-            // 
-            this.pNGToolStripMenuItem1.Name = "pNGToolStripMenuItem1";
-            this.pNGToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.pNGToolStripMenuItem1.Text = "*.PNG";
-            this.pNGToolStripMenuItem1.Click += new System.EventHandler(this.pNGShapeExport_Click);
-            // 
-            // gIFToolStripMenuItem1
-            // 
-            this.gIFToolStripMenuItem1.Name = "gIFToolStripMenuItem1";
-            this.gIFToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.gIFToolStripMenuItem1.Text = "*.GIF";
-            this.gIFToolStripMenuItem1.Click += new System.EventHandler(this.gifShapeExport_Click);
             // 
             // Form
             // 
@@ -1942,6 +2000,10 @@ namespace _2DDesigner
         private System.Windows.Forms.SaveFileDialog saveImgDialog;
         private System.Windows.Forms.ToolStripMenuItem pNGToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem gIFToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem transformToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem scaleToolStripMenuItem;
     }
 }
 

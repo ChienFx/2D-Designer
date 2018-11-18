@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 
 namespace ShapeLibrary
 {
     [Serializable]
     public class Line : Shape
     {
+        private Border border;
+        private FillPattern fillPattern;
+
         public Line() : base() { }
         public Line(Point topLeft, Point bottomRight) : base(topLeft, bottomRight) { }
 

@@ -44,11 +44,6 @@ namespace ShapeLibrary
         }
 
         //ITransformer Implementation
-       
-        //IInputOutput Implementation
-        public abstract bool Load(string path, ulong offset);
-        public abstract bool Save(string path, ulong offset);
-
         public abstract void Draw(Graphics graphics);
 
         public virtual void ShowBoundingBox(Graphics graphics)

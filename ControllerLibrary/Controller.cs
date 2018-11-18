@@ -319,6 +319,16 @@ namespace ControllerLibrary
             return true;
         }
 
+        public FillPattern getFillPattern()
+        {
+            return new FillPattern(this.fillPattern);
+        }
+
+        public Border getBorder()
+        {
+            return new Border(this.border);
+        }
+
         //Shift the selected shape/group
         public bool ShiftObject(int dx, int dy)
         {

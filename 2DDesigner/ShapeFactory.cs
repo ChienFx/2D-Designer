@@ -11,7 +11,9 @@ namespace _2DDesigner
         ELLIPSE,
         PARABOLA,
         TRIANGLE,
-        RECTANGLE
+        RECTANGLE,
+        SQUARE,
+        CIRCLE
     }
 
     internal class ShapeFactory
@@ -30,6 +32,12 @@ namespace _2DDesigner
                     return new Triangle(topLeft, bottomRight);
                 case ShapeType.RECTANGLE:
                     return new Rect(topLeft, bottomRight);
+                case ShapeType.SQUARE:
+                    bottomRight.Y = topLeft.Y + (bottomRight.X - topLeft.X); 
+                    return new Rect(topLeft, bottomRight);
+                case ShapeType.CIRCLE:
+                    bottomRight.Y = topLeft.Y + (bottomRight.X - topLeft.X);
+                    return new Ellipse(topLeft, bottomRight);
                 default:
                     return new Line(topLeft, bottomRight);
             }

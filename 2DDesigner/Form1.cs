@@ -259,11 +259,7 @@ namespace _2DDesigner
             start = end;
         }
 
-        private double Distance(PointF a, PointF b)
-        {
-            return Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
-        }
-
+        
         private void HandlingScaleObjectEvent(Point e)
         {
             if (shape is null)
@@ -337,7 +333,6 @@ namespace _2DDesigner
 
                 if (controller.setFillForeground(color))
                 {
-                    //controller.DrawAll();
                     UpdateUI();
                 }
             }
@@ -455,7 +450,7 @@ namespace _2DDesigner
 
         private void btnCircle_Click(object sender, EventArgs e)
         {
-            shapeType = ShapeType.ELLIPSE;
+            shapeType = ShapeType.CIRCLE;
             this.btnShapePicker.Image = Properties.Resources.circle;
             HideShapePickerPanel();
             btnShapePicker.Focus();
@@ -482,7 +477,7 @@ namespace _2DDesigner
 
         private void btnSquare_Click(object sender, EventArgs e)
         {
-            shapeType = ShapeType.RECTANGLE;
+            shapeType = ShapeType.SQUARE;
             this.btnShapePicker.Image = Properties.Resources.square;
             HideShapePickerPanel();
             btnShapePicker.Focus();
@@ -787,11 +782,12 @@ namespace _2DDesigner
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                if (controller.DeleteSelectedObject() != null)
-                {
-                    controller.DrawAll();
-                    UpdateUI();
-                }
+                if (controller.GetSelectedShape() != null)
+                    if(controller.DeleteSelectedObject() != null)
+                    {
+                        controller.DrawAll();
+                        UpdateUI();
+                    }
             }
             else if (e.KeyCode == Keys.D3 && e.Modifiers == Keys.Alt){
                 SwitchToHandViewState();
@@ -1192,6 +1188,21 @@ namespace _2DDesigner
         private void pNGShapeExport_Click(object sender, EventArgs e)
         {
             ExportShapeToImage(ImageFormat.Png, "png", "Export to PNG", "PNG file|*.png", "export_shape_to_png");
+        }
+
+        private void moveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SwitchToMoveState();
+        }
+
+        private void rotateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SwitchToRotateState();
+        }
+
+        private void scaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SwitchToScaleState();
         }
 
         private void gifShapeExport_Click(object sender, EventArgs e)

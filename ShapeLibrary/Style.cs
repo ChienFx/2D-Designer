@@ -103,6 +103,7 @@ namespace ShapeLibrary
 
         private EBrushType mBrushType;
         public static int mAmount = 11;
+        private FillPattern fillPattern;
 
         public void setFillPattern(int index)
         {
@@ -129,6 +130,11 @@ namespace ShapeLibrary
             mBackground = Color.Transparent;
             mForeground = black;
             mBrushType = EBrushType.Solid;
+        }
+
+        public FillPattern(FillPattern fillPattern)
+        {
+            this.fillPattern = fillPattern;
         }
 
         public void setBackgroundColor(Color color)
