@@ -187,5 +187,12 @@ namespace ShapeLibrary
             g.Dispose();
             return bm;
         }
+
+        public bool CheckScaleOk(Point a)
+        {
+            if (CreateRectangleWithTwoPoint(mTopLeft, mBottomRight).Contains(a))
+                return true;
+            return false;
+        }
     }
 }

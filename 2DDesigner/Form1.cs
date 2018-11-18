@@ -259,13 +259,13 @@ namespace _2DDesigner
             start = end;
         }
 
-        
+
         private void HandlingScaleObjectEvent(Point e)
         {
-            if (shape is null)
+            if (shape is null || !tempShape.CheckScaleOk(start) || !tempShape.CheckScaleOk(e))
                 return;
             shape = (Shape)tempShape.Clone();
-            PointF center = shape.GetCenterOfBoundingBox();
+            PointF center = shape.mTopLeft;
             float Sx = Math.Abs(e.X - center.X) / Math.Abs(start.X - center.X);
             float Sy = Math.Abs(e.Y - center.Y) / Math.Abs(start.Y - center.Y);
             shape.Scale(Sx, Sy);
@@ -275,6 +275,8 @@ namespace _2DDesigner
         private void HandlingDrawObjectEven(Point e)
         {
             Shape shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
+            shape.setBorder(controller.GetBorder());
+            shape.setFillPattern(controller.GetFillPattern());
             DrawOnCloneGraphics(shape);
         }
 

@@ -129,7 +129,17 @@ namespace ControllerLibrary
             
         }
 
-       
+        public FillPattern GetFillPattern()
+        {
+            return fillPattern;
+        }
+
+        public Border GetBorder()
+        {
+            return new Border(border);
+        }
+
+
 
         //Send selected shape/group to back
         public void SendObjectToBack()
@@ -317,16 +327,6 @@ namespace ControllerLibrary
                 return false;
             shape.Scale(xRatio, yRatio);
             return true;
-        }
-
-        public FillPattern getFillPattern()
-        {
-            return new FillPattern(this.fillPattern);
-        }
-
-        public Border getBorder()
-        {
-            return new Border(this.border);
         }
 
         //Shift the selected shape/group
