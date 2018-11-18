@@ -437,8 +437,15 @@ namespace ControllerLibrary
         public void copySelectedShape()
         {
             Shape tmp = GetSelectedShape();
-            if (tmp != null)
-                copiedShape = (Shape)tmp.Clone();
+            if (tmp != null) {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    copiedShape = (Shape)tmp.Clone();
+                    Bitmap bm = copiedShape.renderToBitmap();
+                    Clipboard.SetImage(bm);
+                }
+            }
+                
         }
 
         public bool pasteCopiedShape()

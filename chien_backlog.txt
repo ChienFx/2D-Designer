@@ -4,16 +4,16 @@
 - save/load, new project
 - shortcut
 - new project in other thread(not MDI, can be use in many instance (orther thread))
-- export project to image	
+- export project to image
 - export shape
 - copy, cut, paste object
 - zoom
 - menu right click
-
+- copy to clipboard
 ------------To do------------
 
-- fix right click menu (dont show disable any thing)
 - check all hotkeys
 - characters
 - grid
+- delete hand btn
 
