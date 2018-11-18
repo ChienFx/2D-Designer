@@ -1065,12 +1065,6 @@ namespace _2DDesigner
             SwitchToHandViewState();
         }
 
-        private void btnHandView_MouseHover(object sender, EventArgs e)
-        {
-            showToolTipButton(btnHandView, "View");
-            
-        }
-
         private void zoomSlider_Scroll(object sender, EventArgs e)
         {
             if(zoomSlider.Value > 0)
@@ -1255,7 +1249,7 @@ namespace _2DDesigner
                         curShape = (Shape) curShape.Clone();
                         Size size = curShape.getBoundingSize();
                         
-                        Bitmap tmpBitmap = curShape.ExportToImage();
+                        Bitmap tmpBitmap = curShape.renderToBitmap();
                         
                         tmpBitmap.Save(pathImg, imgF);
 
@@ -1309,6 +1303,16 @@ namespace _2DDesigner
             HideShapePickerPanel();
             btnShapePicker.Focus();
             setCursor("pen.cur");
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Undo();
+        }
+
+        private void copyToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            controller.CopyBitmapToClipboard();
         }
 
         private void gifShapeExport_Click(object sender, EventArgs e)

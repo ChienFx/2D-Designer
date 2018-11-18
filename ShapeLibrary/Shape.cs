@@ -175,7 +175,7 @@ namespace ShapeLibrary
             this.mFillPattern.setBackgroundColor(color);
         }
 
-        public Bitmap ExportToImage()
+        public Bitmap renderToBitmap()
         {
             Size size = this.getBoundingSize();
             Bitmap bm = new Bitmap(size.Width, size.Height);
