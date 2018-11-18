@@ -35,7 +35,6 @@ namespace ShapeLibrary
         {
             TransformGraphic(graphics, mAngle);
 
-            //Brush brush = mFillPattern.createBrush();
             Pen pen = mBorder.createPen();
 
             int i = 0;

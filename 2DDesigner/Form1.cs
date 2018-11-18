@@ -157,18 +157,36 @@ namespace _2DDesigner
                     break;
                 case State.DRAW:
                     SaveState();
-                    if (start.X == e.X && start.Y == e.Y)
+                    switch (shapeType)
                     {
-                        if (shape != null && shapeType == ShapeType.BEZIER)
-                        {
-                            ((Bezier)shape).AddPoint(new Point(e.X, e.Y));
-                        }
-                        break;
+                        case ShapeType.BEZIER:
+                            if (!(shape is null))
+                                ((Bezier)shape).AddPoint(new Point(e.X, e.Y));
+                            else
+                            {
+                                shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
+                                controller.addShape(shape);
+                            }
+                            break;
+                        case ShapeType.CHAR:
+                            if (label is null)
+                                label = CreateTextBoxOnPictureBox(e.Location);
+                            else
+                            {
+                                if (label.Text != "")
+                                    controller.addShape(new ShapeLibrary.Char(label.Location, label.Text));
+                                pictureBox.Controls.Remove(label);
+                                label = null;
+                            }
+                            break;
+                        default:
+                            if (start.X == e.X && start.Y == e.Y)
+                            {
+                                break;
+                            }
+                            controller.addShape(ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y)));
+                            break;
                     }
-                    shape = ShapeFactory.CreateShape(shapeType, start, new Point(e.X, e.Y));
-                    controller.addShape(shape);
-                    if (shapeType != ShapeType.BEZIER)
-                        shape = null;
                     break;
                 default:
                     break;
@@ -199,8 +217,6 @@ namespace _2DDesigner
             switch (state)
             {
                 case State.DRAW_LABEL:
-                    HandlingDrawLabelEvent(e.Location);
-                    break;
                 case State.MOVE:
                 case State.ROTATE:
                 case State.SCALE:
@@ -222,48 +238,15 @@ namespace _2DDesigner
             start = new Point(e.X, e.Y);
         }
 
-        public static bool SetStyle(Control c, ControlStyles Style, bool value)
+        private TextBox CreateTextBoxOnPictureBox(Point e)
         {
-            bool retval = false;
-            Type typeTB = typeof(Control);
-            System.Reflection.MethodInfo misSetStyle = typeTB.GetMethod("SetStyle", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            if (misSetStyle != null && c != null) { misSetStyle.Invoke(c, new object[] { Style, value }); retval = true; }
-            return retval;
-        }
-
-        private void HandlingDrawLabelEvent(Point e)
-        {
-            if (label is null)
-            {
-                label = new TextBox();
-                SetStyle(label, ControlStyles.SupportsTransparentBackColor, true);
-                label.Font = new Font(FontFamily.GenericSansSerif, 15F, FontStyle.Regular);
-                label.Visible = true;
-                label.TextChanged += Label_TextChange;
-                label.WordWrap = true;
-                label.Location = e;
-                pictureBox.Controls.Add(label);
-                undoList.Push(label);
-                redoList.Clear();
-            }
-            else
-            {
-                label.BorderStyle = System.Windows.Forms.BorderStyle.None;
-                label.Enabled = false;
-                label.BackColor = Color.Transparent;
-                label = null;
-            }
-        }
-
-        private void Label_TextChange(object sender, EventArgs e)
-        {
-            SizeF size = new SizeF();
-            using (Graphics g = this.CreateGraphics())
-            {
-                size = g.MeasureString(label.Text, label.Font);
-            }
-            label.Width = (int)Math.Round(size.Width, 0);
-            label.Height = (int)Math.Round(size.Height, 0);
+            label = new TextBox();
+            label.Font = new Font("Arial", 16);
+            label.Visible = true;
+            label.WordWrap = true;
+            label.Location = e;
+            pictureBox.Controls.Add(label);
+            return label;
         }
 
         private void setTextForLabel(Label lb, Point p)
@@ -623,26 +606,11 @@ namespace _2DDesigner
             state = State.DRAW;
             if (undoList.Count > 0)
             {
-                object _object = undoList.Pop();
-                try
-                {
-                    Controller tmp = (Controller)_object;
 
-                    redoList.Push(controller);
-                    controller = tmp;
-                    controller.DrawAll();
-                    UpdateUI();
-                }
-                catch (Exception)
-                {
-                    pictureBox.Controls.Remove((TextBox)_object);
-                    redoList.Push(_object);
-                }
-
-                /*redoList.Push(controller);
+                redoList.Push(controller);
                 controller = (Controller)undoList.Pop();
                 controller.DrawAll();
-                UpdateUI();*/
+                UpdateUI();
             }
         }
 
@@ -656,28 +624,10 @@ namespace _2DDesigner
             state = State.DRAW;
             if (redoList.Count > 0)
             {
-                object _object = redoList.Pop();
-
-                try
-                {
-                    Controller tmp = (Controller)_object;
-
-                    undoList.Push(controller);
-                    controller = tmp;
-                    controller.DrawAll();
-                    UpdateUI();
-                }
-                catch (Exception)
-                {
-                    pictureBox.Controls.Add((TextBox)_object);
-                    undoList.Push(_object);
-                }
-                /*
                 undoList.Push(controller);
                 controller = (Controller)redoList.Pop();
                 controller.DrawAll();
                 UpdateUI();
-                */
             }
         }
 
@@ -1298,7 +1248,7 @@ namespace _2DDesigner
 
         private void btnChar_Click(object sender, EventArgs e)
         {
-            state = State.DRAW_LABEL;
+            shapeType = ShapeType.CHAR;
             this.btnShapePicker.Image = Properties.Resources.char1;
             HideShapePickerPanel();
             btnShapePicker.Focus();

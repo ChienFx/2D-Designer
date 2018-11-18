@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bezier.cs" />
+    <Compile Include="Char.cs" />
     <Compile Include="Definition.cs" />
     <Compile Include="Ellipse.cs" />
     <Compile Include="EnumHolder.cs" />
